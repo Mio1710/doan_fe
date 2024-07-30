@@ -1,0 +1,135 @@
+// Tables
+.v-data-table {
+  table {
+    th {
+      white-space: nowrap;
+    }
+  }
+}
+
+// Tabs
+.v-tabs-items {
+  background-color: transparent !important;
+}
+
+// Checkbox
+.v-simple-checkbox .v-input--selection-controls__input {
+  margin-right: 0 !important;
+}
+
+.v-simple-checkbox .v-icon {
+  font-size: 20px !important;
+}
+
+// Rows
+.row {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+// Navigation Drawer
+.v-navigation-drawer--fixed {
+  z-index: 13 !important;
+}
+
+.v-btn-toggle .v-btn--active .v-icon {
+  color: white !important;
+}
+
+.v-btn-toggle .v-btn {
+  border: 1px solid #dcdcde !important;
+  background: #fbfafd !important;
+  border-radius: 4px !important;
+}
+
+.v-btn:not(.v-btn--outlined).primary,
+.v-btn:not(.v-btn--outlined).secondary,
+.v-btn:not(.v-btn--outlined).accent,
+.v-btn:not(.v-btn--outlined).success,
+.v-btn:not(.v-btn--outlined).error,
+.v-btn:not(.v-btn--outlined).warning,
+.v-btn:not(.v-btn--outlined).info {
+  color: #fff;
+}
+
+.v-btn--outlined {
+  border: 1px solid #bfbfc3;
+}
+
+.v-date-picker-table {
+  .v-btn--active .v-btn__content {
+    &:not(.v-btn--disabled) {
+      color: var(--v-primary-base);
+    }
+  }
+}
+
+.v-btn:not(.v-btn--round).v-size--small {
+  min-width: 40px;
+}
+
+.v-btn.v-size--small {
+  font-size: 13px;
+}
+
+.v-item--active {
+  .v-btn__content {
+    color: #fff;
+  }
+}
+
+// customize input
+.v-input__append-inner {
+  .v-icon {
+    font-size: 14px !important;
+  }
+}
+
+.v-text-field--outlined.v-input--dense .v-label {
+  font-weight: 400;
+  top: 5px !important;
+}
+
+.theme--dark.v-text-field--outlined > .v-input__control > .v-input__slot fieldset {
+  border: 1px solid #fff;
+}
+
+.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
+  > .v-input__control
+  > .v-input__slot {
+  fieldset {
+    border: 1px solid #bfbfc3;
+  }
+
+  .v-input__append-inner {
+    .v-icon {
+      color: #626168;
+    }
+  }
+}
+
+.v-input input {
+  padding: 4px 0 4px !important;
+}
+
+.v-text-field--outlined.v-input--dense .v-label--active {
+  transform: translateY(-12px) scale(0.75) !important;
+}
+
+// customize select
+.v-text-field .v-input__append-inner {
+  margin-top: 7.4px !important;
+}
+
+.v-select.v-input--dense .v-chip {
+  height: 20px !important;
+}
+
+.target-container .v-window__container,
+.target-container .v-window__container .v-window-item {
+  height: 100%;
+}
+
+.target-container .v-tabs-items {
+  width: 100%;
+}

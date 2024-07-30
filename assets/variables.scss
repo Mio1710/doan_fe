@@ -1,0 +1,34 @@
+@import '~vuetify/src/styles/styles.sass';
+
+// Inputs and labels
+$label-font-size: 13px;
+$input-font-size: 13px;
+$input-max-height: 30px;
+$input-top-spacing: 16px;
+$input-icon-height: 16px;
+$input-icon-min-width: 16px;
+$input-icon-width: 16px;
+$text-field-active-label-height: 12px;
+$text-field-border-radius: 4px;
+$text-field-filled-full-width-outlined-dense-slot-min-height: 30px;
+$text-field-filled-full-width-outlined-single-line-slot-min-height: 30px;
+$text-field-enclosed-details-padding: 0 4px 0 12px;
+
+$text-field-solo-control-min-height: 30px;
+$text-field-filled-full-width-outlined-slot-min-height: 30px;
+$text-field-filled-full-width-outlined-single-line-slot-min-height: 30px;
+$text-field-filled-full-width-outlined-dense-slot-min-height: 30px;
+
+// Select
+$select-chips-dense-selections-min-height: 28px;
+$select-small-chips-dense-selections-min-height: 28px;
+$select-outlined-dense-selections-padding-top: 0;
+$select-outlined-selections-padding-top: 4px 0;
+$select-selections-min-height: 6px !default;
+
+//color
+$colors: (
+  'a': (
+    'base': #000000
+  )
+);
