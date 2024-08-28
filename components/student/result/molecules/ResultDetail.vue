@@ -1,9 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import FirstResult from '~/components/student/result/molecules/FirstResult.vue'
+</script>
 
 <template>
-  <v-btn rounded variant="text">
-    <v-icon color="success">mdi-eye</v-icon>
-  </v-btn>
+  <div>
+    <first-result />
+  </div>
 </template>
 
 <style scoped></style>
