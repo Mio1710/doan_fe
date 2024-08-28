@@ -7,7 +7,7 @@ console.log('data use auth', status, data)
 </script>
 
 <template>
-  <div>Đây là trang index</div>
+  <div>Đây là trang admin</div>
 </template>
 
 <style scoped></style>

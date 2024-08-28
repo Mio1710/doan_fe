@@ -45,6 +45,7 @@ export default defineNuxtConfig({
   },
   auth: {
     isEnabled: true,
+    globalAppMiddleware: true,
     disableServerSideAuth: false,
     baseURL: process.env.BASE_API_URL,
     provider: {
@@ -63,6 +64,18 @@ export default defineNuxtConfig({
       },
       pages: {
         login: '/login',
+      },
+    },
+  },
+  vuetify: {
+    /* vuetify options */
+    vuetifyOptions: {
+      // @TODO: list all vuetify options
+    },
+
+    moduleOptions: {
+      styles: {
+        configFile: '~/assets/scss/_variables.scss',
       },
     },
   },

@@ -17,15 +17,17 @@ const value = defineModel()
 </script>
 
 <template>
-  <VeeField v-slot="{ errorMessage }" v-model="value" :name="props.name" :rules="props.rules">
-    <v-text-field
-      v-model="value"
-      :error-messages="errorMessage"
-      :label="props.name"
-      :name="props.name"
-      :type="props.type"
-    />
-  </VeeField>
+  <div>
+    <VeeField v-slot="{ errorMessage }" v-model="value" :name="props.name" :rules="props.rules">
+      <v-text-field
+          v-model="value"
+          :error-messages="errorMessage"
+          :label="props.name"
+          :name="props.name"
+          :type="props.type"
+      />
+    </VeeField>
+  </div>
 </template>
 
 <style scoped></style>

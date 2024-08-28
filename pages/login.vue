@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import AppForm from '~/components/common/molecules/AppForm.vue'
-import AppPassword from "~/components/common/atoms/AppPassword.vue";
+import AppPassword from '~/components/common/atoms/AppPassword.vue'
 const form = reactive({
   maso: '',
   matkhau: '',
+  type: null,
 })
 const loading = ref(false)
 const { signIn } = useAuth()
@@ -26,17 +27,11 @@ const onSubmit = () => {
 <template>
   <v-card class="m-auto w-100 px-6 py-8" max-width="500" min-width="344">
     <app-form v-slot="{ handleSubmit }">
-      <app-text-field v-model="form.maso" name="Mã số" rules="required" />
+      <app-text-field v-model="form.maso" class="mb-5" name="Mã số" rules="required" />
+
       <app-password v-model="form.matkhau" name="Mật khẩu" rules="required" type="password" />
-      <v-btn
-        block
-        class="mt-4"
-        color="success"
-        :loading="loading"
-        size="large"
-        variant="elevated"
-        @click="handleSubmit(onSubmit)"
-      >
+      <v-checkbox v-model="form.type" label="Bạn là giáo viên" value="teacher" />
+      <v-btn block color="success" :loading="loading" size="large" variant="elevated" @click="handleSubmit(onSubmit)">
         Sign In
       </v-btn>
     </app-form>

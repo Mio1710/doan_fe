@@ -1,28 +1,39 @@
 <script lang="ts" setup>
-const drawer = ref(false)
+import { StudentMenu } from '~/configs/navigation'
+import Navigation from '~/components/layout/molecules/navigation.vue'
+
+definePageMeta({
+  middleware: 'auth',
+})
+const drawer = ref(true)
 const rail = ref(false)
 </script>
 <template>
   <v-card>
     <v-layout>
+      <v-app-bar color="black" flat height="50" title="Trung tâm quản trị" />
       <v-navigation-drawer v-model="drawer" permanent :rail="rail" @click="rail = false">
         <v-list-item nav prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg" title="John Leider">
           <template #append>
             <v-btn icon="mdi-chevron-left" variant="text" @click.stop="rail = !rail" />
           </template>
         </v-list-item>
-
         <v-divider />
-
-        <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-home-city" title="Home" value="home" />
-          <v-list-item prepend-icon="mdi-account" title="My Account" value="account" />
-          <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users" />
-        </v-list>
+        <navigation />
       </v-navigation-drawer>
-      <v-main style="height: 100vh">
-        <router-view />
+      <v-main class="bg-grey-lighten-4">
+        <v-container class="pa-3 h-[calc(100vh_-_50px)]" fluid>
+          <div class="flex gap-1 h-full">
+            <router-view class="overflow-y-auto" />
+          </div>
+        </v-container>
       </v-main>
     </v-layout>
   </v-card>
 </template>
+<style lang="scss">
+* {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+</style>
