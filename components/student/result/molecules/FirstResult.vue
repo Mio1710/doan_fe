@@ -80,7 +80,7 @@ const headers = [
     align: 'start',
     sortable: false,
     value: 'index',
-    width: '5%',
+    width: '2%',
     minWidth: 20,
   },
   { title: 'Nội dung', value: 'object', width: '70%', minWidth: 700 },

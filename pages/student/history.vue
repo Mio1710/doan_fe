@@ -4,8 +4,6 @@ import ResultDetail from "~/components/student/result/molecules/ResultDetail.vue
 definePageMeta({
   layout: 'auth',
 })
-const { status, data, lastRefreshedAt, token, getSession, signUp, signIn, signOut } = useAuth()
-console.log('data use auth', status, data)
 </script>
 
 <template>

@@ -4,8 +4,6 @@ import Notice from "~/components/student/project/molecules/Notice.vue";
 definePageMeta({
   layout: 'auth',
 })
-const { status, data, lastRefreshedAt, token, getSession, signUp, signIn, signOut } = useAuth()
-console.log('data use auth', status, data)
 </script>
 
 <template>

@@ -7,14 +7,12 @@ defineProps({
     default: '70%',
   },
 })
+const modelValue = defineModel()
+const dialog = computed(() => modelValue.value)
 </script>
 
 <template>
-  <v-dialog :width="width">
-    <form-card>
-      <slot />
-    </form-card>
-  </v-dialog>
+  <v-dialog :v-model="dialog" :width="width" />
 </template>
 
 <style scoped></style>

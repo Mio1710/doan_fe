@@ -5,7 +5,9 @@ definePageMeta({
 </script>
 
 <template>
-  <div>Đây là trang index</div>
+  <div>Reset password sv</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -1,14 +1,23 @@
 <script setup lang="ts">
-import { StudentMenu } from '~/configs/navigation'
+import { StudentMenu, TeacherMenu } from '~/configs/navigation'
+import type { menu } from '~/types/config'
 
 const opened = ref<number[]>([])
+const { data } = useAuth()
+const navigation = ref<menu[]>([])
 onMounted(() => {
-  opened.value = StudentMenu.map((group) => group.id ?? 0)
+  if (data.value?.role === 'admin') {
+    navigation.value = TeacherMenu
+    opened.value = navigation.value.map((group) => group.id ?? 0)
+  } else if (data.value?.role === 'student') {
+    navigation.value = StudentMenu
+    opened.value = navigation.value.map((group) => group.id ?? 0)
+  }
 })
 </script>
 <template>
-  <v-list nav :opened="opened">
-    <v-list-group v-for="group in StudentMenu" :key="group.id" class="navigation" :value="group.id">
+  <v-list v-if="navigation" nav :opened="opened">
+    <v-list-group v-for="group in navigation" :key="group.id" class="navigation" :value="group.id">
       <template #activator="{ props }">
         <v-list-item v-bind="props" :prepend-icon="group.icon" :title="group.title" />
       </template>

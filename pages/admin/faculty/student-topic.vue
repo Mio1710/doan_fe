@@ -5,7 +5,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div>Đây là trang index</div>
+  <div>Import SV làm khóa luận</div>
 </template>
 
 <style scoped></style>

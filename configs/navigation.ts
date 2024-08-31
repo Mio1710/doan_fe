@@ -69,74 +69,125 @@ export const StudentMenu: menu[] = [
 
 export const TeacherMenu: menu[] = [
   {
-    title: 'Người dùng',
+    title: 'Giảng viên',
     icon: 'mdi-account',
     children: [
       {
-        title: 'Danh sách sinh viên',
-        icon: 'mdi-view-dashboard',
-        to: '/student',
+        title: 'Danh sách đăng ký',
+        icon: 'mdi-list-box-outline',
+        to: '/admin',
       },
       {
-        title: 'Đăng ký đề tài (đồ án)',
+        title: 'Nhập điểm hướng dẫn',
         icon: 'mdi-view-dashboard',
-        to: '/doan',
+        to: '/admin/guide-point',
       },
       {
-        title: 'Đăng ký công ty thực tập',
+        title: 'Nhập điểm phản biện',
         icon: 'mdi-account',
-        to: '/student/company',
+        to: '/admin/review-point',
       },
       {
-        title: 'Kết quả chấm từ GVHD',
+        title: 'Cập nhật đề tài',
         icon: 'mdi-book',
-        to: '/student/result',
-      },
-      {
-        title: 'Xem ghi chú từ GVHD',
-        icon: 'mdi-clipboard-list',
-        to: '/student/note',
-      },
-      {
-        title: 'Xem lịch sử làm K.luận',
-        icon: 'mdi-clipboard-list-check',
-        to: '/student/history',
+        to: '/admin/topic',
       },
     ],
   },
   {
-    title: 'Người dùng',
+    title: 'Bộ môn',
     icon: 'mdi-account',
     children: [
       {
-        title: 'Danh sách sinh viên',
+        title: 'Toàn danh sách đăng ký',
         icon: 'mdi-view-dashboard',
-        to: '/student',
+        to: 'admin/subject/student',
       },
       {
-        title: 'Đăng ký đề tài (đồ án)',
+        title: 'Duyệt đề tài',
         icon: 'mdi-view-dashboard',
-        to: '/doan',
+        to: '/admin/subject/topic',
       },
       {
-        title: 'Đăng ký công ty thực tập',
+        title: 'Phân GV phản biện',
         icon: 'mdi-account',
-        to: '/student/company',
+        to: '/admin/subject/teacher',
       },
       {
-        title: 'Kết quả chấm từ GVHD',
+        title: 'Danh sách đăng ký thực tập',
         icon: 'mdi-book',
-        to: '/student/result',
+        to: '/admin/subject/company',
+      },
+    ],
+  },
+  {
+    title: 'Khoa',
+    icon: 'mdi-account',
+    children: [
+      {
+        title: 'Bảng điều khiển',
+        icon: 'mdi-view-dashboard',
+        to: '/admin/faculty',
       },
       {
-        title: 'Xem ghi chú từ GVHD',
+        title: 'Toàn DS đăng ký',
+        icon: 'mdi-view-dashboard',
+        to: '/admin/faculty/students',
+      },
+      {
+        title: 'Xuất file excel',
+        icon: 'mdi-account',
+        to: '/admin/faculty/excel',
+      },
+      {
+        title: 'Tạo đợt đăng ký mới',
+        icon: 'mdi-book',
+        to: '/admin/faculty/term',
+      },
+      {
+        title: 'Import SV làm khóa luận',
         icon: 'mdi-clipboard-list',
-        to: '/student/note',
+        to: '/admin/faculty/student-topic',
       },
       {
-        title: 'Xem lịch sử làm K.luận',
+        title: 'Import SV thực tập',
         icon: 'mdi-clipboard-list-check',
-        to: '/student/history',
+        to: '/admin/faculty/student-company',
+      },
+      {
+        title: 'Reset đề tài',
+        icon: 'mdi-clock-edit-outline',
+        to: '/admin/faculty/reset-topic',
+      },
+      {
+        title: 'Reset công ty',
+        icon: 'mdi-clock-end',
+        to: '/admin/faculty/reset-company',
+      },
+      {
+        title: 'Reset password sv',
+        icon: 'mdi-clock-fast',
+        to: '/admin/faculty/reset-password',
+      },
+      {
+        title: 'Phân quyền',
+        icon: 'mdi-clock-in',
+        to: '/admin/faculty/permission',
+      },
+      {
+        title: 'Chỉnh sửa LO',
+        icon: 'mdi-clock-out',
+        to: '/admin/faculty/lo',
+      },
+      {
+        title: 'Xóa điểm cho SV',
+        icon: 'mdi-clock-start',
+        to: '/admin/faculty/delete-point',
+      },
+      {
+        title: 'Chuyển GVHD',
+        icon: 'mdi-clock-time-nine',
+        to: '/admin/faculty/move-teacher',
       },
     ],
   },

@@ -5,8 +5,6 @@ import TopicRegistedSuccess from '~/components/student/project/organisms/TopicRe
 definePageMeta({
   layout: 'auth',
 })
-const { status, data } = useAuth()
-console.log('data use auth', status, data)
 const registed = ref(false)
 </script>
 

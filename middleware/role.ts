@@ -1,19 +1,12 @@
+const { data } = useAuth()
 export default defineNuxtRouteMiddleware((to, from) => {
-  if (to.fullPath === '/dashboard') return
+  console.log('middleware/role', data.value)
   console.log('middleware/auth.global')
   console.log('to', to)
   console.log('from', from)
-  const auth = useState('auth')
-  console.log('auth defineNuxtRouteMiddleware', auth)
+  if (data.value?.role === 'admin') {
+    return navigateTo('/admin')
+  } else {
+    return navigateTo('/student')
+  }
 })
-// export default defineNuxtRouteMiddleware((to, from) => {
-//   if (to.params.id === '1') {
-//     return abortNavigation()
-//   }
-//   // In a real app you would probably not redirect every route to `/`
-//   // however it is important to check `to.path` before redirecting or you
-//   // might get an infinite redirect loop
-//   if (to.path !== '/') {
-//     return navigateTo('/')
-//   }
-// })

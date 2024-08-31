@@ -4,8 +4,6 @@ import TeacherResult from "~/components/student/result/organisms/TeacherResult.v
 definePageMeta({
   layout: 'auth',
 })
-const { status, data, lastRefreshedAt, token, getSession, signUp, signIn, signOut } = useAuth()
-console.log('data use auth', status, data)
 </script>
 
 <template>

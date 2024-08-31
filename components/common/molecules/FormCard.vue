@@ -80,7 +80,7 @@ const submit = () => {
       </v-card-title>
 
       <v-divider />
-      <v-card-text>
+      <v-card-text class="max-h-[calc(100vh_-_170px)] overflow-y-scroll custom-scroll">
         <slot />
       </v-card-text>
 
@@ -113,4 +113,3 @@ const submit = () => {
   </v-card>
 </template>
 
-<style scoped></style>
