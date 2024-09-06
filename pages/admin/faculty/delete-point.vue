@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'auth',
+  middleware: ['is-admin'],
 })
 </script>
 
@@ -8,6 +9,4 @@ definePageMeta({
   <div>Xóa điểm cho sinh viên</div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

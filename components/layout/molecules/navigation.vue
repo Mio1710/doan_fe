@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { StudentMenu, TeacherMenu } from '~/configs/navigation'
+import { StudentMenu, TeacherMenu, SuperTeacherMenu, AdminMenu } from '~/configs/navigation'
 import type { menu } from '~/types/config'
 
 const opened = ref<number[]>([])
 const { data } = useAuth()
 const navigation = ref<menu[]>([])
 onMounted(() => {
-  if (data.value?.role === 'admin') {
-    navigation.value = TeacherMenu
+  if (data.value?.roles.includes('teacher')) {
+    navigation.value.push(TeacherMenu)
     opened.value = navigation.value.map((group) => group.id ?? 0)
-  } else if (data.value?.role === 'student') {
+  }
+  if (data.value?.roles.includes('super_teacher')) {
+    navigation.value.push(SuperTeacherMenu)
+    opened.value = navigation.value.map((group) => group.id ?? 0)
+  }
+  if (data.value?.roles.includes('admin')) {
+    navigation.value.push(AdminMenu)
+    opened.value = navigation.value.map((group) => group.id ?? 0)
+  }
+  if (data.value?.roles.includes('student')) {
     navigation.value = StudentMenu
     opened.value = navigation.value.map((group) => group.id ?? 0)
   }

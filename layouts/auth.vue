@@ -1,14 +1,6 @@
 <script lang="ts" setup>
 import Navigation from '~/components/layout/molecules/navigation.vue'
 
-definePageMeta({
-  middleware: [
-    function (to, from) {
-      console.log('middleware', to, from)
-    },
-    'role',
-  ],
-})
 const drawer = ref(true)
 const rail = ref(false)
 </script>

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'auth',
+  middleware: ['is-teacher'],
 })
 </script>
 
 <template>
-  <div>Cập nhật đề tài</div>
+  <div>Nhập điểm phản biện</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
