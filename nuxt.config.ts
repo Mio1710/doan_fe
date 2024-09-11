@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     '@vee-validate/nuxt',
   ],
+  plugins: ['~/plugins/axios.ts'],
   veeValidate: {
     // disable or enable auto imports
     autoImports: true,

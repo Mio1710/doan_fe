@@ -142,10 +142,10 @@ export const AdminMenu: menu = {
     {
       title: 'Tạo đợt đăng ký mới',
       icon: 'mdi-book',
-      to: '/admin/faculty/term',
+      to: '/admin/faculty/semester',
     },
     {
-      title: 'Import SV làm khóa luận',
+      title: 'Import dữ liệu',
       icon: 'mdi-clipboard-list',
       to: '/admin/faculty/student-topic',
     },
