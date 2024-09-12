@@ -12,16 +12,11 @@ export default defineNuxtPlugin((nuxtApp) => {
   })
 
   client.interceptors.request.use((config) => {
-    const { data } = useAuth()
-    console.log('check data interceptors', data.value)
-    const token = data.value?.token
-    if (token) {
+    const { token } = useAuth()
+    if (token.value) {
       // @ts-ignore
-      config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = token.value
     }
-
-    // config.paramsSerializer = (params) => stringify(params, { encode: false, arrayFormat: 'comma' })
-
     return config
   })
 
@@ -34,7 +29,11 @@ export default defineNuxtPlugin((nuxtApp) => {
 
       const code = error.response?.status
       if (code === 401) {
-        signOut({ callbackUrl: '/auth/login' })
+        navigateTo('/login')
+      }
+
+      if (code === 403) {
+        navigateTo('/error')
       }
 
       throw error
