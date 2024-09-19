@@ -51,6 +51,12 @@ export default defineNuxtPlugin((app) => {
       VTooltip: {
         location: 'top',
       },
+      VDialog: {
+        persistent: true,
+      },
+      VFileInput: {
+        density: 'compact',
+      },
     },
   })
   app.vueApp.use(vuetify)

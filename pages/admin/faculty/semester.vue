@@ -2,6 +2,7 @@
 import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
+import UpdateSemester from '~/components/admin/semester/molecules/UpdateSemester.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -19,9 +20,10 @@ const headers = [
   },
   { title: 'Tên kỳ đăng ký', key: 'ten', width: '35%', minWidth: 250 },
   { title: 'Trạng thái', key: 'status', width: '15%', minWidth: 150 },
-  { title: 'Ghi chú', key: 'carbs', width: '35%', minWidth: 300 },
+  { title: 'Ghi chú', key: 'note', width: '25%', minWidth: 200 },
   { title: 'Người tạo', key: 'name', width: '20%', minWidth: 200 },
   { title: 'Ngày tạo', key: 'created_at', width: '15%', minWidth: 100 },
+  { title: '', key: 'action', width: 30 },
 ]
 const serverOptions = ref({
   page: 1,
@@ -68,19 +70,19 @@ const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
     <div class="text-lg font-bold text-uppercase">Tạo đợt đăng ký mới</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
-        <v-btn color="success" size="small" @click="isCreate = true">
+        <v-btn color="success" size="small" @click="isCreate = true" class="mb-4">
           <v-icon>mdi-plus</v-icon>
           <span>Tạo mới</span>
         </v-btn>
         <div v-if="isCreate" class="d-flex w-full px-4 gap-4 items-center">
           <app-text-field v-model="semester" class="min-w-[250px]" name="Tên đợt đăng ký" />
-          <v-btn color="success" :disabled="!semester" size="small" @click="createSemester">
+          <v-btn color="success" :disabled="!semester" size="small" @click="createSemester" class="mb-4">
             <v-icon>mdi-check</v-icon>
             <span>Lưu</span>
           </v-btn>
         </div>
       </div>
-      <div class="mt-4">
+      <div class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
@@ -93,6 +95,23 @@ const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
           </template>
           <template #item.name="{ item }">
             <span>{{ item.createdBy?.hodem + ' ' + item.createdBy?.ten }}</span>
+          </template>
+          <template #item.action="{ item }">
+            <v-dialog min-width="400" width="40%">
+              <template #activator="{ props: activatorProps }">
+                <v-btn ref="btn" rounded variant="text" v-bind="activatorProps">
+                  <v-icon color="success">mdi-pencil</v-icon>
+                </v-btn>
+              </template>
+              <template #default="{ isActive }">
+                <update-semester
+                  :semester="item"
+                  @cancel="isActive.value = false"
+                  @delete="refetch"
+                  @update="refetch"
+                />
+              </template>
+            </v-dialog>
           </template>
         </v-data-table>
       </div>

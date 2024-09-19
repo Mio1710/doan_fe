@@ -130,9 +130,14 @@ export const AdminMenu: menu = {
       to: '/admin/faculty',
     },
     {
-      title: 'Toàn DS đăng ký',
+      title: 'Quản lý sinh viên thực tập',
       icon: 'mdi-view-dashboard',
-      to: '/admin/faculty/students',
+      to: '/admin/faculty/student-company',
+    },
+    {
+      title: 'Quản lý sinh viên khóa luận',
+      icon: 'mdi-view-dashboard',
+      to: '/admin/faculty/student-topic',
     },
     {
       title: 'Xuất file excel',
@@ -147,12 +152,7 @@ export const AdminMenu: menu = {
     {
       title: 'Import dữ liệu',
       icon: 'mdi-clipboard-list',
-      to: '/admin/faculty/student-topic',
-    },
-    {
-      title: 'Import SV thực tập',
-      icon: 'mdi-clipboard-list-check',
-      to: '/admin/faculty/student-company',
+      to: '/admin/faculty/student',
     },
     {
       title: 'Reset đề tài',

@@ -67,8 +67,9 @@ const props = defineProps({
     default: false,
   },
 })
+const emit = defineEmits(['close', 'cancel', 'submit'])
 const submit = () => {
-  console.log('start submit')
+  emit('submit')
 }
 </script>
 
@@ -87,9 +88,6 @@ const submit = () => {
       <template v-if="!hideAction">
         <v-divider />
         <v-card-actions>
-          <v-btn v-if="canDelete" class="px-2" color="error" :disabled="loading" small @click="$emit('delete')">
-            {{ deleteText }}
-          </v-btn>
           <v-spacer />
           <v-btn v-if="canCancel" class="px-2 mr-1" :disabled="loading" small variant="text" @click="$emit('cancel')">
             {{ cancelText }}
@@ -100,6 +98,7 @@ const submit = () => {
             color="primary"
             :loading="loading"
             small
+            variant="elevated"
             @click="handleSubmit(submit)"
           >
             <span v-if="submitText">{{ submitText }}</span>
@@ -112,4 +111,3 @@ const submit = () => {
     </app-form>
   </v-card>
 </template>
-

@@ -17,7 +17,7 @@ const value = defineModel()
 </script>
 
 <template>
-  <div>
+  <div class="mb-4">
     <VeeField v-slot="{ errorMessage }" v-model="value" :name="props.name" :rules="props.rules">
       <v-text-field
         v-model="value"

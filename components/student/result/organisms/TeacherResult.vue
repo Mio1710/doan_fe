@@ -61,7 +61,7 @@ const chooseGroup = (item) => {
       <template #item.result="">
         <v-dialog width="80%" min-width="800">
           <template #activator="{ props: activatorProps }">
-            <v-btn ref="btn" rounded variant="text" v-bind="activatorProps">
+            <v-btn rounded variant="text" v-bind="activatorProps">
               <v-icon color="success">mdi-eye</v-icon>
             </v-btn>
           </template>
