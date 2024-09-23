@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import { stringify } from 'qs'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const runtimeConfig = useRuntimeConfig()
@@ -8,7 +7,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   const client = axios.create({
     baseURL: baseUrl,
     timeout: 10000, // 10s
-    // withCredentials: true,
   })
 
   client.interceptors.request.use((config) => {

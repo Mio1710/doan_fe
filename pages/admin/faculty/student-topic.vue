@@ -2,8 +2,6 @@
 import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import UpdateSemester from '~/components/admin/semester/molecules/UpdateSemester.vue'
-import useGetStudentTopics from '~/composables/use-get-student-topic'
 import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
 
 definePageMeta({
@@ -64,12 +62,12 @@ const createSemester = () => {
   }
 }
 
-const { items, totalItems, isLoading, refetch } = useGetStudentTopics(queryBuilder)
+const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilder)
 </script>
 
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
-    <div class="text-lg font-bold text-uppercase">Tạo đợt đăng ký mới</div>
+    <div class="text-lg font-bold text-uppercase">Quản lý sinh viên khóa luận</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
         <v-dialog min-width="400" width="40%">
@@ -102,8 +100,8 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopics(queryBuild
           <template #item.created_at="{ item }">
             <span>{{ format(new Date(item?.created_at), 'dd/MM/yyyy') }}</span>
           </template>
-          <template #item.name="{ item }">
-            <span>{{ item.createdBy?.hodem + ' ' + item.createdBy?.ten }}</span>
+          <template #item.ten="{ item }">
+            <span>{{ item.hodem + ' ' + item.ten }}</span>
           </template>
         </v-data-table>
       </div>

@@ -35,7 +35,7 @@ export const StudentMenu: menu[] = [
   },
   {
     id: 2,
-    title: 'Sinh viên 2',
+    title: 'Menu 2',
     icon: 'mdi-account',
     children: [
       {

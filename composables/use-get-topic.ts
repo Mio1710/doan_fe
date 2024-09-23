@@ -17,12 +17,12 @@ function sortsParser(sortBy: string | [], sortType: string | []) {
   return [sortType === 'desc' ? `-${sortBy}` : sortBy]
 }
 
-export default function useGetStudentTopics(params?: UnwrapRef<any>, options?: any) {
+export default function useGetTopics(params?: UnwrapRef<any>, options?: any) {
   const { $api } = useNuxtApp()
   console.log('params $api', $api)
 
   const query = useQuery(
-    ['student-topic', params],
+    ['topic', params],
     () => {
       const { sortBy, sortType } = params.value
       const sorts = sortsParser(sortBy, sortType)
@@ -39,7 +39,7 @@ export default function useGetStudentTopics(params?: UnwrapRef<any>, options?: a
         ...params.value,
       }).query()
 
-      return $api.studentTopic.getStudentTopics(query)
+      return $api.topic.getTopics(query)
     },
     {
       refetchOnWindowFocus: false,

@@ -9,7 +9,7 @@ const rail = ref(false)
     <v-layout>
       <v-app-bar color="black" flat height="50" title="Trung tâm quản trị" />
       <v-navigation-drawer v-model="drawer" permanent :rail="rail" @click="rail = false">
-        <v-list-item nav prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg" title="John Leider">
+        <v-list-item nav prepend-avatar="/image/logo.jpg" title="Trang chủ">
           <template #append>
             <v-btn icon="mdi-chevron-left" variant="text" @click.stop="rail = !rail" />
           </template>
