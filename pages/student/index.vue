@@ -7,16 +7,15 @@ definePageMeta({
   layout: 'auth',
 })
 
-const { items } = useGetRegistedTopics()
+const { items, isLoading } = useGetRegistedTopics()
 </script>
 
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Đăng ký đề tài đồ án</div>
-    <v-card class="pa-3 h-full" color="white" variant="flat">
-      <topic-register v-if="!items.topic" />
-
-      <topic-registed-success v-else :items />
+    <v-card class="pa-3 h-full" color="white" :loading="isLoading" variant="flat">
+      <topic-registed-success v-if="items.topic[0]" :items />
+      <topic-register v-else />
     </v-card>
   </div>
 </template>

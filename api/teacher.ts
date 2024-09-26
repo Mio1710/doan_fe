@@ -27,4 +27,8 @@ export class TeacherApi extends BaseApi {
   importUser(data) {
     return this.post('/teachers/import', data)
   }
+
+  createSuperTeacher(data) {
+    return this.post('/super-admin/super-teacher', data)
+  }
 }

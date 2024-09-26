@@ -20,6 +20,7 @@ export class BaseApi {
     try {
       return (await this.axios.post(endpoint, data, config)).data
     } catch (error) {
+      console.log('error checkkkk', error)
       await this.toastError(error)
     }
   }
@@ -55,7 +56,7 @@ export class BaseApi {
 
         const { $toast } = useNuxtApp()
         if (axiosError.response?.data.error) {
-          $toast.error(axiosError.response.data.error.message)
+          $toast.error(axiosError.response.data.error.message ?? axiosError.response.data.error)
 
           if (axiosError.response.data.error.fields) {
             throw axiosError.response.data.error.fields

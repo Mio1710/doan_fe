@@ -1,5 +1,15 @@
 import type { menu } from '~/types/config'
-
+export const SuperAdminMenu: menu = {
+  title: 'Quản trị hệ thống',
+  icon: 'mdi-account',
+  children: [
+    {
+      title: 'Quản lý khoa',
+      icon: 'mdi-list-box-outline',
+      to: '/admin/super/faculty',
+    },
+  ],
+}
 export const StudentMenu: menu[] = [
   {
     id: 1,
@@ -150,9 +160,9 @@ export const AdminMenu: menu = {
       to: '/admin/faculty/semester',
     },
     {
-      title: 'Import dữ liệu',
+      title: 'Quản lý giảng viên',
       icon: 'mdi-clipboard-list',
-      to: '/admin/faculty/student',
+      to: '/admin/faculty/teacher',
     },
     {
       title: 'Reset đề tài',

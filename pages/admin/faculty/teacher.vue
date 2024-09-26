@@ -2,13 +2,13 @@
 import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import CreateTopic from '~/components/teacher/topic/molecules/CreateTopic.vue'
-import topicStatus from '~/plugins/filters/topic-status'
-import UpdateTopic from '~/components/teacher/topic/molecules/UpdateTopic.vue'
+import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
+import UpdateFaculty from "~/components/admin/super/molecules/UpdateFaculty.vue";
+import ImportTeacher from "~/components/admin/super/molecules/ImportTeacher.vue";
 
 definePageMeta({
   layout: 'auth',
-  middleware: ['is-teacher'],
+  middleware: ['is-admin'],
 })
 const isCreate = ref(false)
 const semester = ref('')
@@ -20,11 +20,10 @@ const headers = [
     key: 'index',
     width: 50,
   },
-  { title: 'Tên đề tài', key: 'ten', width: '25%', minWidth: 250 },
-  { title: 'Mô tả', key: 'description', width: '30%', minWidth: 350 },
-  { title: 'Yêu cầu', key: 'requirement', width: '20%', minWidth: 200 },
-  { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 200 },
-  { title: 'Trạng thái', key: 'status', width: '15%', minWidth: 100, align: 'center' },
+  { title: 'Họ giảng viên', key: 'ten', width: '25%', minWidth: 250 },
+  { title: 'Tên giảng viên', key: 'hodem', width: '15%', minWidth: 150 },
+  { title: 'Mã số', key: 'khoa', width: '100%', minWidth: 200 },
+  { title: 'Ngày tạo', key: 'created_at', width: '15%', minWidth: 100 },
   { title: '', key: 'action', width: 30 },
 ]
 const serverOptions = ref({
@@ -40,6 +39,16 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 
 const queryClient = useQueryClient()
+const handleActive = (item) => {
+  try {
+    $api.teacher.importUser.then(() => {
+      queryClient.invalidateQueries('semester')
+      $toast.success('Đã cập nhật trạng thái thành công')
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const createSemester = () => {
   try {
@@ -54,25 +63,32 @@ const createSemester = () => {
   }
 }
 
-const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
+const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilder)
 </script>
 
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
-    <div class="text-lg font-bold text-uppercase">Quản lý đề tài</div>
+    <div class="text-lg font-bold text-uppercase">Quản lý giảng viên</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
         <v-dialog min-width="400" width="40%">
           <template #activator="{ props: activatorProps }">
             <v-btn color="success" size="small" v-bind="activatorProps">
               <v-icon>mdi-plus</v-icon>
-              <span>Thêm mới đề tài</span>
+              <span>Import</span>
             </v-btn>
           </template>
           <template #default="{ isActive }">
-            <create-topic @cancel="isActive.value = false" />
+            <import-teacher @cancel="isActive.value = false" />
           </template>
         </v-dialog>
+        <div v-if="isCreate" class="d-flex w-full px-4 gap-4 items-center">
+          <app-text-field v-model="semester" class="min-w-[250px]" name="Tên đợt đăng ký" />
+          <v-btn class="mb-4" color="success" :disabled="!semester" size="small" @click="createSemester">
+            <v-icon>mdi-check</v-icon>
+            <span>Lưu</span>
+          </v-btn>
+        </div>
       </div>
       <div class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items">
@@ -80,26 +96,23 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
             <span>{{ index + 1 }}</span>
           </template>
           <template #item.status="{ item }">
-            <v-chip :color="topicStatus.statusColor(item.status)" size="small" variant="flat">
-              {{ topicStatus.statusType(item.status) }}
-            </v-chip>
+            <v-switch v-model="item.status" color="success" hide-details @click="handleActive(item)" />
+          </template>
+          <template #item.created_at="{ item }">
+            <span>{{ format(new Date(item?.created_at), 'dd/MM/yyyy') }}</span>
+          </template>
+          <template #item.ten="{ item }">
+            <span>{{ item.hodem + ' ' + item.ten }}</span>
           </template>
           <template #item.action="{ item }">
             <v-dialog min-width="400" width="40%">
               <template #activator="{ props: activatorProps }">
-                <v-btn
-                  v-bind="activatorProps"
-                  color="success"
-                  :disabled="item.status == 'approved' || !item.status"
-                  icon
-                  size="small"
-                  variant="text"
-                >
+                <v-btn v-bind="activatorProps" color="success" icon size="small" variant="text">
                   <v-icon>mdi-pencil</v-icon>
                 </v-btn>
               </template>
               <template #default="{ isActive }">
-                <update-topic :topic="item" @cancel="isActive.value = false" />
+                <update-faculty :topic="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
           </template>

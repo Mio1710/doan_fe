@@ -1,0 +1,45 @@
+<script setup lang="ts">
+import FormCard from '~/components/common/molecules/FormCard.vue'
+import AppTextField from '~/components/common/atoms/AppTextField.vue'
+import useGetFaculties from '~/composables/admin/use-get-faculty'
+
+const props = defineProps({
+  faculty: {
+    type: Object,
+    required: true,
+  },
+})
+
+const form = reactive({
+  hodem: '',
+  ten: '',
+  maso: '',
+  email: '',
+  khoa_id: props.faculty.id,
+})
+
+const { $api, $toast } = useNuxtApp()
+const emit = defineEmits(['cancel'])
+const { items } = useGetFaculties()
+const createFaculty = () => {
+  $api.teacher.createSuperTeacher(form).then(() => {
+    $toast.success('Tạo cán bộ khoa thành công')
+    emit('cancel')
+  })
+}
+</script>
+
+<template>
+  <form-card
+    can-cancel
+    cancel-text="Hủy"
+    :title="`Tạo cán bộ ${faculty.ten}`"
+    @cancel="emit('cancel')"
+    @submit="createFaculty"
+  >
+    <app-text-field v-model="form.hodem" name="Họ đệm" rules="required" />
+    <app-text-field v-model="form.ten" name="Tên" rules="required" />
+    <app-text-field v-model="form.email" name="Email" rules="required|email" />
+    <app-text-field v-model="form.maso" name="Mã số" rules="required" />
+  </form-card>
+</template>
