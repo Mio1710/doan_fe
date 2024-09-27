@@ -3,8 +3,9 @@ import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
-import UpdateFaculty from "~/components/admin/super/molecules/UpdateFaculty.vue";
-import ImportTeacher from "~/components/admin/super/molecules/ImportTeacher.vue";
+import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
+import ImportTeacher from '~/components/admin/super/molecules/ImportTeacher.vue'
+import useGetTeachers from '~/composables/admin/use-get-teachers'
 
 definePageMeta({
   layout: 'auth',
@@ -15,14 +16,15 @@ const semester = ref('')
 const headers = [
   {
     title: 'STT',
-    align: 'start',
+    align: 'center',
     sortable: false,
     key: 'index',
     width: 50,
   },
-  { title: 'Họ giảng viên', key: 'ten', width: '25%', minWidth: 250 },
-  { title: 'Tên giảng viên', key: 'hodem', width: '15%', minWidth: 150 },
-  { title: 'Mã số', key: 'khoa', width: '100%', minWidth: 200 },
+  { title: 'Giảng viên', key: 'ten', width: '20%', minWidth: 200 },
+  { title: 'Mã số', key: 'maso', minWidth: 200 },
+  { title: 'Cán bộ môn', key: 'is_super_teacher', width: '15%', minWidth: 100, align: 'center' },
+  { title: 'Cán bộ khoa', key: 'is_admin', width: '15%', minWidth: 100, align: 'center' },
   { title: 'Ngày tạo', key: 'created_at', width: '15%', minWidth: 100 },
   { title: '', key: 'action', width: 30 },
 ]
@@ -63,7 +65,7 @@ const createSemester = () => {
   }
 }
 
-const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilder)
+const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
 </script>
 
 <template>
@@ -79,7 +81,7 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
             </v-btn>
           </template>
           <template #default="{ isActive }">
-            <import-teacher @cancel="isActive.value = false" />
+            <import-teacher @cancel="isActive.value = false" @success="refetch" />
           </template>
         </v-dialog>
         <div v-if="isCreate" class="d-flex w-full px-4 gap-4 items-center">
@@ -95,8 +97,11 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>
-          <template #item.status="{ item }">
-            <v-switch v-model="item.status" color="success" hide-details @click="handleActive(item)" />
+          <template #item.is_super_teacher="{ item }">
+            <v-switch v-model="item.types" color="success" hide-details @click="handleActive(item)" />
+          </template>
+          <template #item.is_admin="{ item }">
+            <v-switch v-model="item.types" color="success" hide-details @click="handleActive(item)" />
           </template>
           <template #item.created_at="{ item }">
             <span>{{ format(new Date(item?.created_at), 'dd/MM/yyyy') }}</span>

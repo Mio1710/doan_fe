@@ -5,11 +5,12 @@ import AppTextField from '~/components/common/atoms/AppTextField.vue'
 
 const file = ref(null)
 const { $api, $toast } = useNuxtApp()
-const emit = defineEmits(['cancel'])
+const emit = defineEmits(['cancel', 'success'])
 const importTeacher = () => {
   $api.teacher.importUser(serialize({ file: file.value })).then(() => {
     $toast.success('Import giảng viên thành công')
     emit('cancel')
+    emit('success')
   })
 }
 
