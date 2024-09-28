@@ -57,6 +57,10 @@ export default defineNuxtPlugin((app) => {
       VFileInput: {
         density: 'compact',
       },
+      VTable: {
+        fixHeader: true,
+        noDataText: 'Không có dữ liệu',
+      },
     },
   })
   app.vueApp.use(vuetify)

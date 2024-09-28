@@ -92,8 +92,15 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
           </v-btn>
         </div>
       </div>
-      <div class="mt-2">
-        <v-data-table :headers="headers" hide-default-footer :items="items">
+      <div class="mt-2 h-[calc(100%_-_45px)] overflow-y-hidden">
+        <v-data-table
+          class="h-full"
+          fixed-header
+          :headers="headers"
+          hide-default-footer
+          :items="items"
+          :loading="isLoading"
+        >
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>
@@ -127,4 +134,4 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
   </div>
 </template>
 
-<style scoped></style>
+<style></style>
