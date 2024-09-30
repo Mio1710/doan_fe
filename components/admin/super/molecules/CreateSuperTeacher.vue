@@ -16,6 +16,7 @@ const form = reactive({
   maso: '',
   email: '',
   khoa_id: props.faculty.id,
+  type: 'teacher',
 })
 
 const { $api, $toast } = useNuxtApp()

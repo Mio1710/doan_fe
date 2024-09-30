@@ -3,11 +3,19 @@ import Navigation from '~/components/layout/molecules/navigation.vue'
 
 const drawer = ref(true)
 const rail = ref(false)
+const { signOut } = useAuth()
+const logout = () => {
+  signOut()
+  navigateTo('/login')
+}
 </script>
 <template>
   <v-card>
     <v-layout>
-      <v-app-bar color="black" flat height="50" title="Trung tâm quản trị" />
+      <v-app-bar color="black" flat height="50" title="Trung tâm quản trị">
+        <v-spacer />
+        <v-btn variant="outlined" @click="logout">Logout</v-btn>
+      </v-app-bar>
       <v-navigation-drawer v-model="drawer" permanent :rail="rail" @click="rail = false">
         <v-list-item nav prepend-avatar="/image/logo.jpg" title="Trang chủ">
           <template #append>
