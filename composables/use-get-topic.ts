@@ -27,6 +27,8 @@ export default function useGetTopics(params?: UnwrapRef<any>, options?: any) {
       const { sortBy, sortType } = params.value
       const sorts = sortsParser(sortBy, sortType)
 
+      console.log('params', params.value)
+
       const query = new Parser({
         includes: [],
         appends: [],
@@ -38,6 +40,8 @@ export default function useGetTopics(params?: UnwrapRef<any>, options?: any) {
         payload: null,
         ...params.value,
       }).query()
+
+      console.log('query', query)
 
       return $api.topic.getTopics(query)
     },

@@ -20,11 +20,12 @@ const headers = [
     key: 'index',
     width: 50,
   },
-  { title: 'Tên đề tài', key: 'ten', width: '25%', minWidth: 250 },
+  { title: 'Tên đề tài', key: 'ten', width: '20%', minWidth: 250 },
   { title: 'Mô tả', key: 'description', width: '30%', minWidth: 350 },
-  { title: 'Yêu cầu', key: 'requirement', width: '20%', minWidth: 200 },
+  { title: 'Yêu cầu', key: 'requirement', width: '15%', minWidth: 200 },
   { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 200 },
-  { title: 'Trạng thái', key: 'status', width: '15%', minWidth: 100, align: 'center' },
+  { title: 'GVHD', key: 'gv', width: '10%', minWidth: 100 },
+  { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100, align: 'center' },
   { title: '', key: 'action', width: 30 },
 ]
 const serverOptions = ref({
@@ -33,26 +34,15 @@ const serverOptions = ref({
   sortBy: '-created_at',
   sortType: 'asc',
 })
+const filters = ref({
+  viewAll: false,
+})
 const queryBuilder = computed(() => ({
   ...serverOptions.value,
+  filters: filters.value,
 }))
 
 const { $api, $toast } = useNuxtApp()
-
-const queryClient = useQueryClient()
-
-const createSemester = () => {
-  try {
-    $api.semester.createSemester({ ten: semester.value }).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Tạo mới thành công')
-      isCreate.value = false
-      semester.value = ''
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
 </script>
@@ -73,11 +63,16 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
             <create-topic @cancel="isActive.value = false" />
           </template>
         </v-dialog>
+        <v-spacer />
+        <v-checkbox v-model="filters.viewAll" density="compact" hide-details label="Xem tất cả" />
       </div>
       <div class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
+          </template>
+          <template #item.gv="{ item }">
+            <span>{{ item.createdBy?.hodem }} {{ item.createdBy?.ten }}</span>
           </template>
           <template #item.status="{ item }">
             <v-chip :color="topicStatus.statusColor(item.status)" size="small" variant="flat">

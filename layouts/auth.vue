@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Navigation from '~/components/layout/molecules/navigation.vue'
+import ToolbarUser from '~/components/layout/molecules/toolbar-user.vue'
 
 const drawer = ref(true)
 const rail = ref(false)
@@ -14,10 +15,10 @@ const logout = () => {
     <v-layout>
       <v-app-bar color="black" flat height="50" title="Trung tâm quản trị">
         <v-spacer />
-        <v-btn variant="outlined" @click="logout">Logout</v-btn>
+        <toolbar-user />
       </v-app-bar>
       <v-navigation-drawer v-model="drawer" permanent :rail="rail" @click="rail = false">
-        <v-list-item nav prepend-avatar="/image/logo.jpg" title="Trang chủ">
+        <v-list-item nav prepend-avatar="/images/logo.jpg" title="Trang chủ">
           <template #append>
             <v-btn icon="mdi-chevron-left" variant="text" @click.stop="rail = !rail" />
           </template>
