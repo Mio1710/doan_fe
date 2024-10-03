@@ -41,10 +41,12 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 
 const queryClient = useQueryClient()
-const handleActive = (item) => {
+const handleActive = (item, role) => {
   try {
-    $api.teacher.importUser.then(() => {
-      queryClient.invalidateQueries('semester')
+    console.log('item', item)
+    const roles = item.types.includes(role) ? item.types.filter((r) => r !== role) : [...item.types, role]
+    $api.teacher.activeTeacher(item.id, roles).then(() => {
+      queryClient.invalidateQueries('teacher')
       $toast.success('Đã cập nhật trạng thái thành công')
     })
   } catch (error) {
@@ -84,13 +86,6 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
             <import-teacher @cancel="isActive.value = false" @success="refetch" />
           </template>
         </v-dialog>
-        <div v-if="isCreate" class="d-flex w-full px-4 gap-4 items-center">
-          <app-text-field v-model="semester" class="min-w-[250px]" name="Tên đợt đăng ký" />
-          <v-btn class="mb-4" color="success" :disabled="!semester" size="small" @click="createSemester">
-            <v-icon>mdi-check</v-icon>
-            <span>Lưu</span>
-          </v-btn>
-        </div>
       </div>
       <div class="mt-2 h-[calc(100%_-_45px)] overflow-y-hidden">
         <v-data-table
@@ -105,10 +100,22 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
             <span>{{ index + 1 }}</span>
           </template>
           <template #item.is_super_teacher="{ item }">
-            <v-switch v-model="item.types" color="success" hide-details @click="handleActive(item)" />
+            <v-switch
+              color="success"
+              hide-details
+              :model-value="item.types"
+              value="super_teacher"
+              @click="handleActive(item, 'super_teacher')"
+            />
           </template>
           <template #item.is_admin="{ item }">
-            <v-switch v-model="item.types" color="success" hide-details @click="handleActive(item)" />
+            <v-switch
+              color="success"
+              hide-details
+              :model-value="item.types"
+              value="admin"
+              @click="handleActive(item, 'admin')"
+            />
           </template>
           <template #item.created_at="{ item }">
             <span>{{ format(new Date(item?.created_at), 'dd/MM/yyyy') }}</span>
