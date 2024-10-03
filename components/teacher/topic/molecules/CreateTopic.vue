@@ -14,7 +14,7 @@ const { $api, $toast } = useNuxtApp()
 const emit = defineEmits(['cancel'])
 const queryClient = useQueryClient()
 
-const importStudentTopic = () => {
+const createStudentTopic = () => {
   $api.topic.createTopic(form).then(() => {
     $toast.success('Tạo đề tài thành công')
     queryClient.invalidateQueries('topic')
@@ -28,7 +28,7 @@ const preview = () => {
 </script>
 
 <template>
-  <form-card can-cancel cancel-text="Hủy" title="Tạo đề tài" @cancel="emit('cancel')" @submit="importStudentTopic">
+  <form-card can-cancel cancel-text="Hủy" title="Tạo đề tài" @cancel="emit('cancel')" @submit="createStudentTopic">
     <app-text-field v-model="form.ten" name="Tên đề tài" rules="required" />
     <app-text-field v-model="form.description" name="Mô tả" type="textarea" />
     <app-text-field v-model="form.requirement" name="Yêu cầu" />
