@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Navigation from '~/components/layout/molecules/navigation.vue'
 import ToolbarUser from '~/components/layout/molecules/toolbar-user.vue'
+import useGetActiveSemester from '~/composables/use-get-active-semester'
 
 const drawer = ref(true)
 const rail = ref(false)
@@ -9,11 +10,13 @@ const logout = () => {
   signOut()
   navigateTo('/login')
 }
+const { activeSemester } = useGetActiveSemester()
 </script>
 <template>
   <v-card>
     <v-layout>
-      <v-app-bar color="black" flat height="50" title="Trung tâm quản trị">
+      <v-app-bar color="#91DDCF" flat height="50" title="Trung tâm quản trị">
+        <div class="text-uppercase font-weight-bold">{{ activeSemester?.ten }}</div>
         <v-spacer />
         <toolbar-user />
       </v-app-bar>
