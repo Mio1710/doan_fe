@@ -43,6 +43,7 @@ const queryBuilder = computed(() => ({
 }))
 
 const { $api, $toast } = useNuxtApp()
+const { data } = useAuth()
 
 const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
 </script>
@@ -66,8 +67,8 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
         <v-spacer />
         <v-checkbox v-model="filters.viewAll" density="compact" hide-details label="Xem tất cả" />
       </div>
-      <div class="mt-2">
-        <v-data-table :headers="headers" hide-default-footer :items="items">
+      <div class="mt-2 h-[calc(100%_-_45px)] overflow-y-hidden">
+        <v-data-table class="h-full" :headers="headers" hide-default-footer :items="items">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>
@@ -83,6 +84,7 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
             <v-dialog min-width="400" width="40%">
               <template #activator="{ props: activatorProps }">
                 <v-btn
+                  v-if="data?.id == item.createdBy.id"
                   v-bind="activatorProps"
                   color="success"
                   :disabled="item.status == 'approved' || !item.status"

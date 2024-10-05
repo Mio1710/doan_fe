@@ -10,7 +10,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <topic-registed :items="items.topic" />
+  <topic-registed :items="[items.topic.topic]" />
   <student-registed class="mt-6" :items="items.students" />
 </template>
 
