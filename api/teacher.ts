@@ -20,8 +20,8 @@ export class TeacherApi extends BaseApi {
     return this.delete(`/teachers/${id}`)
   }
 
-  activeTeacher(id) {
-    return this.post(`/teachers/active/${id}`)
+  activeTeacher(id, data) {
+    return this.post(`/teachers/${id}/update-role`, { data })
   }
 
   importUser(data) {

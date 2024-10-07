@@ -9,11 +9,14 @@ const logout = () => {
 <template>
   <v-menu left offset-y transition="slide-y-transition">
     <template #activator="{ props }">
-      <v-badge bordered color="success" dot v-bind="props">
-        <v-avatar>
-          <v-img alt="John" src="/images/logo.jpg" />
-        </v-avatar>
-      </v-badge>
+      <div v-bind="props" class="cursor-pointer d-flex items-center">
+        <v-badge bordered color="success" dot>
+          <v-avatar size="40">
+            <v-img alt="John" src="/images/avatars/default.png" />
+          </v-avatar>
+        </v-badge>
+        <span class="mx-2 font-weight-bold">{{ data?.hodem }} {{ data?.ten }}</span>
+      </div>
     </template>
 
     <!-- user menu list -->

@@ -20,8 +20,8 @@ export class StudentTopicAPI extends BaseApi {
     return this.delete(`/student-topic/${id}`)
   }
 
-  activeStudentTopic(id) {
-    return this.post(`/student-topic/active/${id}`)
+  registerTopic(topic_id) {
+    return this.post(`/student-topic/register`, { topic_id })
   }
 
   importStudentTopic(data) {

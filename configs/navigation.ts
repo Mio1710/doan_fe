@@ -180,11 +180,6 @@ export const AdminMenu: menu = {
       to: '/admin/faculty/reset-password',
     },
     {
-      title: 'Phân quyền',
-      icon: 'mdi-clock-in',
-      to: '/admin/faculty/permission',
-    },
-    {
       title: 'Chỉnh sửa LO',
       icon: 'mdi-clock-out',
       to: '/admin/faculty/lo',

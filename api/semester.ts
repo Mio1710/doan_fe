@@ -23,4 +23,8 @@ export class SemesterAPI extends BaseApi {
   activeSemester(id) {
     return this.post(`/semesters/active/${id}`)
   }
+
+  getActiveSemester() {
+    return this.get('/semesters/active')
+  }
 }
