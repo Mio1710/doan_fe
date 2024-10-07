@@ -1,4 +1,10 @@
 <script setup lang="ts">
+const props = defineProps({
+  topicId: {
+    type: Number,
+    default: null,
+  },
+})
 const serverOptions = ref({
   page: 1,
   rowsPerPage: 25,
@@ -26,11 +32,12 @@ const headers = [
   { title: 'Yêu cầu', key: 'requirement', width: '15%', minWidth: 200 },
   { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 200 },
   { title: 'GVHD', key: 'gv', width: '10%', minWidth: 100 },
-  { title: '', key: 'action', width: 30 },
+  { title: '', key: 'action', width: 30, align: 'center' },
 ]
-
+const emit = defineEmits(['success', 'viewAll'])
 const registerTopic = (item) => {
   $api.studentTopic.registerTopic(item.id).then(() => {
+    emit('success')
     $toast.success('Đăng ký đề tài thành công')
   })
 }
@@ -49,7 +56,8 @@ const registerTopic = (item) => {
       <span>{{ item?.createdBy.hodem }} {{ item?.createdBy.ten }}</span>
     </template>
     <template #item.action="{ item }">
-      <v-btn color="success" size="x-small" @click="registerTopic(item)">Đăng ký</v-btn>
+      <v-btn v-if="item.id == topicId" color="primary" size="x-small" @click="emit('viewAll')">Xem</v-btn>
+      <v-btn v-else color="success" size="x-small" @click="registerTopic(item)">Đăng ký</v-btn>
     </template>
   </v-data-table>
 </template>

@@ -23,7 +23,7 @@ const headers = [
   { title: 'Mô tả', key: 'description', width: '30%', minWidth: 350 },
   { title: 'Yêu cầu', key: 'requirement', width: '20%', minWidth: 200 },
   { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 200 },
-  { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100 }
+  { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100 },
 ]
 const serverOptions = ref({
   page: 1,
@@ -56,8 +56,8 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Duyệt đề tài</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
-      <div class="mt-2">
-        <v-data-table :headers="headers" hide-default-footer :items="items">
+      <div class="mt-2 h-[calc(100%_-_30px)] overflow-y-hidden">
+        <v-data-table class="h-full" :headers="headers" hide-default-footer fixed-header :items="items">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>

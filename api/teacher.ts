@@ -31,4 +31,8 @@ export class TeacherApi extends BaseApi {
   createSuperTeacher(data) {
     return this.post('/super-admin/super-teacher', data)
   }
+
+  getStudentTopics(params) {
+    return this.get('/teachers/student-topic', { params })
+  }
 }
