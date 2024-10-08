@@ -27,13 +27,12 @@ const headers = [
 const parten = ref(null)
 const auth = useAuth()
 const { $api, $toast } = useNuxtApp()
-const chooseGroup = (item) => {
-  parten.value = item.id
-}
+const emit = defineEmits(['refetch'])
 
-const createGroup = () => {
-  $api.studentTopic.updateTopic({ partner_id: parten.value, topic_id: props.topicId }).then(() => {
-    parten.value = null
+const cancelGroup = () => {
+  const user_ids = props.items.map((item) => item.student_id)
+  $api.studentTopic.cancelTopic({ user_ids }).then(() => {
+    emit('refetch')
     $toast.success('Tạo nhóm thành công')
   })
 }
@@ -44,7 +43,7 @@ const createGroup = () => {
     <div class="d-flex py-2 bottom-border">
       <div class="text-lg">Danh sách sinh viên nhóm {{ parten }}</div>
       <v-spacer />
-      <v-btn size="small" color="error">Hủy nhóm</v-btn>
+      <v-btn color="error" size="small" @click="cancelGroup">Hủy nhóm</v-btn>
     </div>
     <v-data-table class="mt-2" :headers="headers" hide-default-footer :items="items">
       <template #item.index="{ index }">

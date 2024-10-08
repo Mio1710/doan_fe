@@ -57,7 +57,7 @@ const registerTopic = (item) => {
     </template>
     <template #item.action="{ item }">
       <v-btn v-if="item.id == topicId" color="primary" size="x-small" @click="emit('viewAll')">Xem</v-btn>
-      <v-btn v-else color="success" size="x-small" @click="registerTopic(item)">Đăng ký</v-btn>
+      <v-btn v-else color="success" :disabled="topicId" size="x-small" @click="registerTopic(item)">Đăng ký</v-btn>
     </template>
   </v-data-table>
 </template>

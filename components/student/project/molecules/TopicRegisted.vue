@@ -7,6 +7,10 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  partner: {
+    type: Array,
+    default: () => [],
+  },
 })
 
 const { $api, $toast } = useNuxtApp()
@@ -37,7 +41,7 @@ const headers = [
         <v-btn color="error" size="small" v-bind="activatorProps">Hủy đề tài</v-btn>
       </template>
       <template #default="{ isActive }">
-        <cancel-topic @cancel="isActive.value = false" @success="emit('refetch')" />
+        <cancel-topic @cancel="isActive.value = false" @success="emit('refetch')" :partner />
       </template>
     </v-dialog>
     <v-btn class="ml-2" color="primary" size="small" @click="emit('viewAll')">Xem tất cả đề tài</v-btn>

@@ -29,6 +29,7 @@ const headers = [
 const parten = ref(null)
 const auth = useAuth()
 const { $api, $toast } = useNuxtApp()
+const emit = defineEmits(['refetch'])
 const chooseGroup = (item) => {
   parten.value = item.id
 }
@@ -36,6 +37,7 @@ const chooseGroup = (item) => {
 const createGroup = () => {
   $api.studentTopic.updateTopic({ partner_id: parten.value, topic_id: props.topicId }).then(() => {
     parten.value = null
+    emit('refetch')
     $toast.success('Tạo nhóm thành công')
   })
 }
@@ -60,7 +62,6 @@ const createGroup = () => {
           :value="item.id"
           @click="chooseGroup(item)"
         />
-        <v-btn v-else-if="item.id == parten" size="small">Hủy nhóm</v-btn>
         <div v-else />
       </template>
     </v-data-table>
