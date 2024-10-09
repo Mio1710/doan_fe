@@ -1,10 +1,21 @@
 <script setup lang="ts">
+import FormCard from '~/components/common/molecules/FormCard.vue'
+import CancelTopic from '~/components/student/project/molecules/CancelTopic.vue'
+
 const props = defineProps({
   items: {
     type: Array,
     required: true,
   },
+  partner: {
+    type: Array,
+    default: () => [],
+  },
 })
+
+const { $api, $toast } = useNuxtApp()
+const emit = defineEmits(['refetch', 'viewAll'])
+
 const headers = [
   {
     title: 'STT',
@@ -22,7 +33,19 @@ const headers = [
 </script>
 
 <template>
-  <div class="text-lg py-2 bottom-border">Đề tài đã đăng ký thành công</div>
+  <div class="d-flex py-2 bottom-border">
+    <div class="text-lg">Đề tài đã đăng ký thành công</div>
+    <v-spacer />
+    <v-dialog min-width="400" width="40%">
+      <template #activator="{ props: activatorProps }">
+        <v-btn color="error" size="small" v-bind="activatorProps">Hủy đề tài</v-btn>
+      </template>
+      <template #default="{ isActive }">
+        <cancel-topic @cancel="isActive.value = false" @success="emit('refetch')" :partner />
+      </template>
+    </v-dialog>
+    <v-btn class="ml-2" color="primary" size="small" @click="emit('viewAll')">Xem tất cả đề tài</v-btn>
+  </div>
   <v-data-table class="mt-2" :headers="headers" hide-default-footer :items="items">
     <template #item.index="{ index }">
       <span>{{ index + 1 }}</span>
@@ -30,7 +53,7 @@ const headers = [
     <template #item.name="{ item }">
       <span v-html="item.name" />
     </template>
-    <template #item.gvhd="{ item }">{{ item.createdBy.hodem }} {{ item.createdBy.ten }}</template>
+    <template #item.gvhd="{ item }">{{ item?.createdBy.hodem }} {{ item?.createdBy.ten }}</template>
   </v-data-table>
 </template>
 

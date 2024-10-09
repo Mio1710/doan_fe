@@ -2,15 +2,16 @@
 import TopicRegister from '~/components/student/project/organisms/TopicRegister.vue'
 import TopicRegistedSuccess from '~/components/student/project/organisms/TopicRegistedSuccess.vue'
 import useGetRegistedTopics from '~/composables/student/use-get-registed-topic'
-import topicStatus from "~/plugins/filters/topic-status";
-import UpdateTopic from "~/components/teacher/topic/molecules/UpdateTopic.vue";
-import CreateTopic from "~/components/teacher/topic/molecules/CreateTopic.vue";
+import topicStatus from '~/plugins/filters/topic-status'
+import UpdateTopic from '~/components/teacher/topic/molecules/UpdateTopic.vue'
+import CreateTopic from '~/components/teacher/topic/molecules/CreateTopic.vue'
 
 definePageMeta({
   layout: 'auth',
 })
 
-const { items, isLoading } = useGetRegistedTopics()
+const { items, isLoading, refetch } = useGetRegistedTopics()
+const viewAll = ref(false)
 </script>
 
 <template>
@@ -18,8 +19,13 @@ const { items, isLoading } = useGetRegistedTopics()
     <div class="text-lg font-bold text-uppercase">Đăng ký đề tài đồ án</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div v-if="items.topic" class="h-full">
-        <topic-registed-success v-if="items.topic.id" :items />
-        <topic-register v-else />
+        <topic-register
+          v-if="!items.topic.topic_id || viewAll"
+          :topic-id="items.topic.topic_id"
+          @success="refetch()"
+          @view-all="viewAll = false"
+        />
+        <topic-registed-success v-else :items @refetch="refetch()" @view-all="viewAll = true" />
       </div>
     </v-card>
   </div>

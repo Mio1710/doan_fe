@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ResultDetail from '~/components/student/result/molecules/ResultDetail.vue'
+import FormCard from '~/components/common/molecules/FormCard.vue'
 
 const items = [
   {
@@ -30,7 +31,7 @@ const headers = [
   { title: 'GVHD', key: 'gv', width: '8%', minWidth: 80, sortable: false },
   { title: 'Bộ môn', key: 'subject', width: '6%', minWidth: 60, sortable: false },
 ]
-
+const emit = defineEmits(['cancel'])
 const parten = ref(null)
 const chooseGroup = (item) => {
   parten.value = item.mssv
@@ -39,7 +40,7 @@ const chooseGroup = (item) => {
 </script>
 
 <template>
-  <div>
+  <form-card can-cancel cancel-text="Hủy" title="Cập nhật đề tài" @cancel="emit('cancel')" @submit="chooseGroup">
     <div class="text-lg py-2 bottom-border">Kết quả đánh giá khóa luận từ giảng viên hướng dẫn</div>
     <v-data-table class="mt-2" :headers="headers" hide-default-footer :items="items">
       <template #item.index="{ index }">
@@ -59,7 +60,7 @@ const chooseGroup = (item) => {
         </v-progress-linear>
       </template>
       <template #item.result="">
-        <v-dialog width="80%" min-width="800">
+        <v-dialog min-width="800" width="80%">
           <template #activator="{ props: activatorProps }">
             <v-btn rounded variant="text" v-bind="activatorProps">
               <v-icon color="success">mdi-eye</v-icon>
@@ -69,7 +70,7 @@ const chooseGroup = (item) => {
         </v-dialog>
       </template>
     </v-data-table>
-  </div>
+  </form-card>
 </template>
 
 <style scoped></style>

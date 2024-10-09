@@ -27,7 +27,7 @@ const importStudentTopic = () => {
 </script>
 
 <template>
-  <form-card can-cancel cancel-text="Hủy" title="Tạo đề tài" @cancel="emit('cancel')" @submit="importStudentTopic">
+  <form-card can-cancel cancel-text="Hủy" title="Cập nhật đề tài" @cancel="emit('cancel')" @submit="importStudentTopic">
     <app-text-field v-model="form.ten" name="Tên đề tài" rules="required" />
     <app-text-field v-model="form.description" name="Mô tả" type="textarea" />
     <app-text-field v-model="form.requirement" name="Yêu cầu" />

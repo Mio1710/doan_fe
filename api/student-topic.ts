@@ -21,7 +21,7 @@ export class StudentTopicAPI extends BaseApi {
   }
 
   registerTopic(topic_id) {
-    return this.post(`/student-topic/register`, { topic_id })
+    return this.post('/student-topic/register', { topic_id })
   }
 
   importStudentTopic(data) {
@@ -30,5 +30,13 @@ export class StudentTopicAPI extends BaseApi {
 
   getRegistedTopic() {
     return this.get('/student-topic/registed')
+  }
+
+  updateTopic(data) {
+    return this.post('/student-topic/topic', data)
+  }
+
+  cancelTopic(user_ids) {
+    return this.post('/student-topic/cancel-group', user_ids)
   }
 }

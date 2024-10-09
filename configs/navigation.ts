@@ -87,12 +87,12 @@ export const TeacherMenu: menu = {
       to: '/admin/teacher',
     },
     {
-      title: 'Nhập điểm hướng dẫn',
+      title: 'Sinh viên thực tập',
       icon: 'mdi-view-dashboard',
       to: '/admin/teacher/guide-point',
     },
     {
-      title: 'Nhập điểm phản biện',
+      title: 'Sinh viên khóa luận',
       icon: 'mdi-account',
       to: '/admin/teacher/review-point',
     },
