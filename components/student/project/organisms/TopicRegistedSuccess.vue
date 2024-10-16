@@ -13,9 +13,14 @@ const emit = defineEmits(['refetch', 'viewAll'])
 </script>
 
 <template>
-  <topic-registed :items="[items.topic.topic]" @refetch="emit('refetch')" @view-all="emit('viewAll')" :partner="items.partner" />
+  <topic-registed
+    :items="[items.topic.topic]"
+    :partner="items.partner"
+    @refetch="emit('refetch')"
+    @view-all="emit('viewAll')"
+  />
   <partner-registed
-    v-if="items.partner.length > 1"
+    v-if="items.partner?.length > 1"
     class="mt-6"
     :items="items.partner"
     :topic-id="items.topic.topic_id"

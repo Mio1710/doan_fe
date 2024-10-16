@@ -30,7 +30,7 @@ const { $api, $toast } = useNuxtApp()
 const emit = defineEmits(['refetch'])
 
 const cancelGroup = () => {
-  const user_ids = props.items.map((item) => item.student_id)
+  const user_ids = props.items.map((item) => item.id)
   $api.studentTopic.cancelTopic({ user_ids }).then(() => {
     emit('refetch')
     $toast.success('Tạo nhóm thành công')
@@ -48,18 +48,6 @@ const cancelGroup = () => {
     <v-data-table class="mt-2" :headers="headers" hide-default-footer :items="items">
       <template #item.index="{ index }">
         <span>{{ index + 1 }}</span>
-      </template>
-      <template #item.maso="{ item }">
-        <span>{{ item.student.maso }}</span>
-      </template>
-      <template #item.hodem="{ item }">
-        <span>{{ item.student.hodem }}</span>
-      </template>
-      <template #item.ten="{ item }">
-        <span>{{ item.student.ten }}</span>
-      </template>
-      <template #item.lop="{ item }">
-        <span>{{ item.student.lop }}</span>
       </template>
     </v-data-table>
   </div>
