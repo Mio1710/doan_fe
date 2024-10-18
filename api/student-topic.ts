@@ -36,7 +36,11 @@ export class StudentTopicAPI extends BaseApi {
     return this.post('/student-topic/topic', data)
   }
 
-  cancelTopic(user_ids) {
-    return this.post('/student-topic/cancel-group', user_ids)
+  cancelGroup(user_ids) {
+    return this.post('/student-topic/cancel-group')
+  }
+
+  createGroup(data) {
+    return this.post('/student-topic/create-group', data)
   }
 }

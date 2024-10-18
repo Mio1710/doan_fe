@@ -35,7 +35,7 @@ const chooseGroup = (item) => {
 }
 
 const createGroup = () => {
-  $api.studentTopic.updateTopic({ partner_id: parten.value, topic_id: props.topicId }).then(() => {
+  $api.studentTopic.createGroup({ partner_id: parten.value, topic_id: props.topicId }).then(() => {
     parten.value = null
     emit('refetch')
     $toast.success('Tạo nhóm thành công')

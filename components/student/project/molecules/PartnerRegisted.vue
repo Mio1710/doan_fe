@@ -30,8 +30,7 @@ const { $api, $toast } = useNuxtApp()
 const emit = defineEmits(['refetch'])
 
 const cancelGroup = () => {
-  const user_ids = props.items.map((item) => item.id)
-  $api.studentTopic.cancelTopic({ user_ids }).then(() => {
+  $api.studentTopic.cancelGroup().then(() => {
     emit('refetch')
     $toast.success('Tạo nhóm thành công')
   })
