@@ -12,6 +12,10 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  placeholder: {
+    type: String,
+    default: '',
+  },
 })
 const value = defineModel()
 </script>
@@ -25,6 +29,7 @@ const value = defineModel()
         :error-messages="errorMessage"
         :label="props.name"
         :name="props.name"
+        :placeholder="props.placeholder"
         :type="props.type"
       />
       <v-text-field
@@ -33,6 +38,7 @@ const value = defineModel()
         :error-messages="errorMessage"
         :label="props.name"
         :name="props.name"
+        :placeholder="props.placeholder"
         :type="props.type"
       />
     </VeeField>
