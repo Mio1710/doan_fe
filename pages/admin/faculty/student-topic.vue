@@ -21,8 +21,7 @@ const headers = [
   { title: 'Tên sinh viên', key: 'ten' },
   { title: 'Lớp', key: 'lop', width: '15%', minWidth: 150 },
   { title: 'Nhóm', key: 'nhom', width: '5%', minWidth: 50 },
-  { title: 'Giảng viên hướng dẫn', key: 'name', width: '20%', minWidth: 200 },
-  { title: 'Ngày tạo', key: 'created_at', width: '15%', minWidth: 100 },
+  { title: 'Giảng viên hướng dẫn', key: 'gv', width: '20%', minWidth: 200 },
   { title: '', key: 'action', width: 30 },
 ]
 const serverOptions = ref({
@@ -81,27 +80,23 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
             <import-student-topic @cancel="isActive.value = false" />
           </template>
         </v-dialog>
-        <div v-if="isCreate" class="d-flex w-full px-4 gap-4 items-center">
-          <app-text-field v-model="semester" class="min-w-[250px]" name="Tên đợt đăng ký" />
-          <v-btn class="mb-4" color="success" :disabled="!semester" size="small" @click="createSemester">
-            <v-icon>mdi-check</v-icon>
-            <span>Lưu</span>
-          </v-btn>
-        </div>
+        <v-spacer />
+        <v-btn icon size="x-small" variant="text" @click="refetch()">
+          <v-icon>mdi-refresh</v-icon>
+        </v-btn>
       </div>
       <div class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items" :loading="isLoading">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>
-          <template #item.nhom="{ index }">
-            <span>{{ index + 1 }}</span>
+          <template #item.nhom="{ item }">
+            <span>{{ item.studentTopic[0]?.group_id }}</span>
           </template>
-          <template #item.status="{ item }">
-            <v-switch v-model="item.status" color="success" hide-details @click="handleActive(item)" />
-          </template>
-          <template #item.created_at="{ item }">
-            <span>{{ format(new Date(item?.created_at), 'dd/MM/yyyy') }}</span>
+          <template #item.gv="{ item }">
+            <span>
+              {{ item.studentTopic[0]?.topic.teacher.hodem }} {{ item.studentTopic[0]?.topic.teacher.ten }}
+            </span>
           </template>
           <template #item.ten="{ item }">
             <span>{{ item.hodem + ' ' + item.ten }}</span>

@@ -25,7 +25,7 @@ const headers = [
   { title: 'Tên sinh viên', key: 'ten', width: '15%', minWidth: 150 },
   { title: 'MSSV', key: 'maso', width: '10%', minWidth: 100 },
   { title: 'Lớp', key: 'lop', width: '15%', minWidth: 150 },
-  { title: 'Nhóm', key: 'note', width: '5%', minWidth: 50 },
+  { title: 'Nhóm', key: 'nhom', width: '5%', minWidth: 50 },
   { title: 'Đề tài', key: 'topic' },
   { title: 'Nhập điểm', key: 'action', width: 100, sortable: false, align: 'center' },
 ]
@@ -59,8 +59,13 @@ const { items, totalItems, isLoading, refetch } = useTeacherGetStudentTopics(que
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Sinh viên khóa luận</div>
-    <v-card class="pa-3 h-full" color="white" variant="flat">
+    <v-card class="pa-3 pt-0 h-full" color="white" variant="flat">
       <div class="mt-2">
+        <div>
+          <v-btn icon size="x-small" variant="text" @click="refetch()">
+            <v-icon>mdi-refresh</v-icon>
+          </v-btn>
+        </div>
         <v-data-table :headers="headers" hide-default-footer :items="items">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
@@ -69,7 +74,15 @@ const { items, totalItems, isLoading, refetch } = useTeacherGetStudentTopics(que
             <span>{{ item.hodem + ' ' + item.ten }}</span>
           </template>
 
-          <template #item.action="{}">
+          <template #item.nhom="{ item }">
+            <span>{{ item.studentTopic[0]?.group_id }}</span>
+          </template>
+
+          <template #item.topic="{ item }">
+            <span>{{ item.studentTopic[0]?.topic.ten }}</span>
+          </template>
+
+          <template #item.action="{ item }">
             <v-dialog min-width="800" width="80%">
               <template #activator="{ props: activatorProps }">
                 <v-btn rounded variant="text" v-bind="activatorProps">
@@ -77,7 +90,7 @@ const { items, totalItems, isLoading, refetch } = useTeacherGetStudentTopics(que
                 </v-btn>
               </template>
               <template #default="{ isActive }">
-                <result-detail @cancel="isActive.value = false" />
+                <result-detail :item="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
           </template>
