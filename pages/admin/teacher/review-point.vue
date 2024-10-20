@@ -1,10 +1,5 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
-import { format } from 'date-fns'
-import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
-import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
-import TeacherResult from '~/components/student/result/organisms/TeacherResult.vue'
 import ResultDetail from '~/components/student/result/molecules/ResultDetail.vue'
 import useTeacherGetStudentTopics from '~/composables/teacher/use-teacher-get-student-topic'
 

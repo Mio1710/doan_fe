@@ -71,13 +71,19 @@ const { items, totalItems, isLoading, refetch } = useGetAllStudentTopics(queryBu
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Quản lý sinh viên khóa luận</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
+      <div class="d-flex">
+        <v-spacer />
+        <v-btn icon size="x-small" variant="text" @click="refetch()">
+          <v-icon>mdi-refresh</v-icon>
+        </v-btn>
+      </div>
       <div class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items" :loading="isLoading">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>
-          <template #item.nhom="{ index }">
-            <span>{{ index + 1 }}</span>
+          <template #item.nhom="{ item }">
+            <span>{{ item.studentTopic[0]?.group_id }}</span>
           </template>
           <template #item.ten="{ item }">
             <span>{{ item.hodem + ' ' + item.ten }}</span>
