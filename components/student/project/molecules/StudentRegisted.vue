@@ -35,11 +35,13 @@ const chooseGroup = (item) => {
 }
 
 const createGroup = () => {
-  $api.studentTopic.updateTopic({ partner_id: parten.value, topic_id: props.topicId }).then(() => {
-    parten.value = null
-    emit('refetch')
-    $toast.success('Tạo nhóm thành công')
-  })
+  $api.studentTopic
+    .createGroup({ partner_id: parten.value, topic_id: props.topicId })
+    .then(() => {
+      emit('refetch')
+      $toast.success('Tạo nhóm thành công')
+    })
+    .finally(() => emit('refetch'))
 }
 </script>
 
@@ -54,9 +56,12 @@ const createGroup = () => {
       <template #item.index="{ index }">
         <span>{{ index + 1 }}</span>
       </template>
+      <template #item.nhom="{ item }">
+        <span>{{ item.studentTopic[0]?.group_id }}</span>
+      </template>
       <template #item.action="{ item }">
         <v-radio
-          v-if="!item.nhom && auth.data?.value.id != item.id"
+          v-if="!item.nhom && auth.data?.value.id != item.id && !item.studentTopic[0]?.group_id"
           v-model="parten"
           :false-value="!parten"
           :value="item.id"

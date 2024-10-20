@@ -109,9 +109,9 @@ export const SuperTeacherMenu: menu = {
   icon: 'mdi-account',
   children: [
     {
-      title: 'Toàn danh sách đăng ký',
+      title: 'Danh sách đăng ký khóa luận',
       icon: 'mdi-view-dashboard',
-      to: 'admin/subject/student',
+      to: '/admin/subject/student-topic',
     },
     {
       title: 'Duyệt đề tài',

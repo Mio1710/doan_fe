@@ -4,6 +4,8 @@ import { TeacherApi } from '~/api/teacher'
 import { StudentTopicAPI } from '~/api/student-topic'
 import { TopicAPI } from '~/api/topic'
 import { FacultyAPI } from '~/api/faculty'
+import { SuperTeacherAPI } from '~/api/super-teacher'
+import { LOAPI } from '~/api/lo'
 
 export class Api {
   public readonly semester: SemesterAPI
@@ -11,6 +13,8 @@ export class Api {
   public readonly studentTopic: StudentTopicAPI
   public readonly topic: TopicAPI
   public readonly faculty: FacultyAPI
+  public readonly superTeacher: SuperTeacherAPI
+  public readonly lo: LOAPI
 
   constructor(axios: AxiosInstance) {
     this.semester = new SemesterAPI(axios)
@@ -18,5 +22,7 @@ export class Api {
     this.studentTopic = new StudentTopicAPI(axios)
     this.topic = new TopicAPI(axios)
     this.faculty = new FacultyAPI(axios)
+    this.superTeacher = new SuperTeacherAPI(axios)
+    this.lo = new LOAPI(axios)
   }
 }
