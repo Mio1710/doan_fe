@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ResultDetail from '~/components/student/result/molecules/ResultDetail.vue'
 import useGetStudentResultTopics from '~/composables/student/use-get-result-topic'
+import MyResultDetail from "~/components/student/result/molecules/MyResultDetail.vue";
 
 definePageMeta({
   layout: 'auth',
@@ -74,7 +74,7 @@ const { items, totalItems, isLoading, refetch } = useGetStudentResultTopics()
               </v-btn>
             </template>
             <template #default="{ isActive }">
-              <result-detail :item="item.student" @cancel="isActive.value = false" />
+              <my-result-detail :item="item.student" @cancel="isActive.value = false" />
             </template>
           </v-dialog>
         </template>

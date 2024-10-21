@@ -1,0 +1,48 @@
+<script setup lang="ts">
+import FormCard from '~/components/common/molecules/FormCard.vue'
+import useGetStudentResultTopicLOs from '~/composables/student/use-get-my-result-topic-lo'
+
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true,
+  },
+})
+const studentId = ref(props.item.id)
+const { items, isLoading, error, refetch } = useGetStudentResultTopicLOs(
+  { studentId: studentId.value },
+  {
+    enabled: !!studentId.value,
+  }
+)
+const headers = [
+  {
+    title: 'STT',
+    align: 'center',
+    sortable: false,
+    value: 'index',
+    width: 20,
+  },
+  { title: 'Tiêu chí đánh giá', value: 'main_criteria', width: '50%', minWidth: 500 },
+  { title: 'Tiêu chí phụ', value: 'sub_criteria', width: '30%', minWidth: 100 },
+  { title: 'Hệ số', value: 'cof', width: '7%', minWidth: 50 },
+  { title: 'Điểm', value: 'score', width: '7%', minWidth: 50 },
+]
+</script>
+
+<template>
+  <form-card
+    can-cancel
+    cancel-text="Đóng"
+    hide-submit
+    :title="`Điểm quá trình của sinh viên: ${item?.hodem} ${item?.ten}`"
+  >
+    <v-data-table class="elevation-1" :headers="headers" hide-default-footer hover :items="items" :items-per-page="100">
+      <template #item.index="{ index }">
+        {{ index + 1 }}
+      </template>
+    </v-data-table>
+
+    <div class="text-center font-weight-bold text-error py-2"><span>Điểm tổng:</span></div>
+  </form-card>
+</template>

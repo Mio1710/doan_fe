@@ -38,7 +38,7 @@ export default function useGetTeachers(params?: UnwrapRef<any>, options?: any) {
         ...params.value,
       }).query()
 
-      return $api.teacher.getTeachers(query)
+      return $api.admin.getTeachers(query)
     },
     {
       refetchOnWindowFocus: false,

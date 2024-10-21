@@ -6,6 +6,7 @@ import ImportStudentTopic from '~/components/admin/student-topic/molecules/Impor
 import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
 import ImportTeacher from '~/components/admin/super/molecules/ImportTeacher.vue'
 import useGetTeachers from '~/composables/admin/use-get-teachers'
+import UpdateTeacher from "~/components/teacher/topic/molecules/UpdateTeacher.vue";
 
 definePageMeta({
   layout: 'auth',
@@ -25,7 +26,6 @@ const headers = [
   { title: 'Mã số', key: 'maso', minWidth: 200 },
   { title: 'Cán bộ môn', key: 'is_super_teacher', width: '15%', minWidth: 100, align: 'center' },
   { title: 'Cán bộ khoa', key: 'is_admin', width: '15%', minWidth: 100, align: 'center' },
-  { title: 'Ngày tạo', key: 'created_at', width: '15%', minWidth: 100 },
   { title: '', key: 'action', width: 30 },
 ]
 const serverOptions = ref({
@@ -88,7 +88,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
         </v-dialog>
       </div>
       <div class="mt-2 h-[calc(100%_-_45px)] overflow-y-hidden">
-        <v-data-table
+        <v-data-table-virtual
           class="h-full"
           fixed-header
           :headers="headers"
@@ -103,7 +103,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
             <v-switch
               color="success"
               hide-details
-              :model-value="item.types"
+              :model-value="item.roles"
               value="super_teacher"
               @click="handleActive(item, 'super_teacher')"
             />
@@ -112,13 +112,10 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
             <v-switch
               color="success"
               hide-details
-              :model-value="item.types"
+              :model-value="item.roles"
               value="admin"
               @click="handleActive(item, 'admin')"
             />
-          </template>
-          <template #item.created_at="{ item }">
-            <span>{{ format(new Date(item?.created_at), 'dd/MM/yyyy') }}</span>
           </template>
           <template #item.ten="{ item }">
             <span>{{ item.hodem + ' ' + item.ten }}</span>
@@ -131,11 +128,11 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
                 </v-btn>
               </template>
               <template #default="{ isActive }">
-                <update-faculty :topic="item" @cancel="isActive.value = false" />
+                <update-teacher :teacher="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
           </template>
-        </v-data-table>
+        </v-data-table-virtual>
       </div>
     </v-card>
   </div>

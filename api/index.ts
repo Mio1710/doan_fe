@@ -1,12 +1,13 @@
 import type { AxiosInstance } from 'axios'
 import { SemesterAPI } from '~/api/semester'
-import { TeacherApi } from '~/api/teacher'
+import { AdminApi } from '~/api/admin'
 import { StudentTopicAPI } from '~/api/student-topic'
 import { TopicAPI } from '~/api/topic'
 import { FacultyAPI } from '~/api/faculty'
 import { SuperTeacherAPI } from '~/api/super-teacher'
 import { LOAPI } from '~/api/lo'
 import { ResultsAPI } from '~/api/results'
+import { TeacherApi } from '~/api/teacher'
 export class Api {
   public readonly semester: SemesterAPI
   public readonly teacher: TeacherApi
@@ -16,6 +17,7 @@ export class Api {
   public readonly superTeacher: SuperTeacherAPI
   public readonly lo: LOAPI
   public readonly results: ResultsAPI
+  public readonly admin: AdminApi
 
   constructor(axios: AxiosInstance) {
     this.semester = new SemesterAPI(axios)
@@ -26,5 +28,6 @@ export class Api {
     this.superTeacher = new SuperTeacherAPI(axios)
     this.lo = new LOAPI(axios)
     this.results = new ResultsAPI(axios)
+    this.admin = new AdminApi(axios)
   }
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
-import ResultDetail from '~/components/student/result/molecules/ResultDetail.vue'
 import useTeacherGetStudentTopics from '~/composables/teacher/use-teacher-get-student-topic'
+import ResultDetail from "~/components/teacher/student/organism/ResultDetail.vue";
 
 definePageMeta({
   layout: 'auth',

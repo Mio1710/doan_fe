@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ResultDetail from "~/components/student/result/molecules/ResultDetail.vue";
+import ResultDetail from "~/components/student/result/molecules/MyResultDetail.vue";
 
 definePageMeta({
   layout: 'auth',
