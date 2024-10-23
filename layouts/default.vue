@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <router-view />
+    <NuxtPage />
   </v-app>
 </template>
 <script setup lang="ts"></script>

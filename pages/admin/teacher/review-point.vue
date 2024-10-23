@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
 import useTeacherGetStudentTopics from '~/composables/teacher/use-teacher-get-student-topic'
-import ResultDetail from "~/components/teacher/student/organism/ResultDetail.vue";
+import ResultDetail from '~/components/teacher/student/organism/ResultDetail.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -85,7 +85,7 @@ const { items, totalItems, isLoading, refetch } = useTeacherGetStudentTopics(que
                 </v-btn>
               </template>
               <template #default="{ isActive }">
-                <result-detail :item="item" @cancel="isActive.value = false" />
+                <result-detail :item="item" @cancel="isActive.value = false" @success="refetch" />
               </template>
             </v-dialog>
           </template>

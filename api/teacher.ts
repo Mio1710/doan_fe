@@ -7,4 +7,8 @@ export class TeacherApi extends BaseApi {
   getStudentResultLOs(params) {
     return this.get('/teachers/student-results-lo', { params })
   }
+
+  updateStudentResultLOs(data) {
+    return this.put('/teachers/student-results-lo', data)
+  }
 }
