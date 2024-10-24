@@ -12,7 +12,7 @@ const semester = ref('')
 const headers = [
   {
     title: 'STT',
-    align: 'start',
+    align: 'center',
     sortable: false,
     key: 'index',
     width: 50,
@@ -56,7 +56,8 @@ const { items, totalItems, isLoading, refetch } = useTeacherGetStudentTopics(que
     <div class="text-lg font-bold text-uppercase">Sinh viên khóa luận</div>
     <v-card class="pa-3 pt-0 h-full" color="white" variant="flat">
       <div class="mt-2">
-        <div>
+        <div class="d-flex">
+          <v-spacer />
           <v-btn icon size="x-small" variant="text" @click="refetch()">
             <v-icon>mdi-refresh</v-icon>
           </v-btn>

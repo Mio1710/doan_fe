@@ -82,8 +82,8 @@ export const TeacherMenu: menu = {
   icon: 'mdi-account',
   children: [
     {
-      title: 'Danh sách đăng ký',
-      icon: 'mdi-list-box-outline',
+      title: 'Cập nhật đề tài',
+      icon: 'mdi-book',
       to: '/admin/teacher',
     },
     {
@@ -95,11 +95,6 @@ export const TeacherMenu: menu = {
       title: 'Sinh viên khóa luận',
       icon: 'mdi-account',
       to: '/admin/teacher/review-point',
-    },
-    {
-      title: 'Cập nhật đề tài',
-      icon: 'mdi-book',
-      to: '/admin/teacher/topic',
     },
   ],
 }

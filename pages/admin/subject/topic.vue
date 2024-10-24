@@ -49,15 +49,33 @@ const handleCheck = (item, status) => {
   }
 }
 
-const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
+const { items, totalItems, isLoading, refetch, isFetching } = useGetTopic(queryBuilder)
 </script>
 
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Duyệt đề tài</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
+      <div class="d-flex">
+        <div class="d-flex">
+          <v-checkbox class="mr-4" color="warning" density="compact" hide-details label=" Chờ duyệt" />
+          <v-checkbox class="mr-4" color="success" density="compact" hide-details label=" Đã duyệt" />
+          <v-checkbox class="mr-4" color="error" density="compact" hide-details label=" Từ chối" />
+        </div>
+        <v-spacer />
+        <v-btn color="success" :loading="isFetching" size="small" @click="refetch">
+          <v-icon>mdi-refresh</v-icon>
+        </v-btn>
+      </div>
       <div class="mt-2 h-[calc(100%_-_30px)] overflow-y-hidden">
-        <v-data-table class="h-full" :headers="headers" hide-default-footer fixed-header :items="items">
+        <v-data-table
+          class="h-full"
+          fixed-header
+          :headers="headers"
+          hide-default-footer
+          :items="items"
+          :loading="isFetching"
+        >
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>
