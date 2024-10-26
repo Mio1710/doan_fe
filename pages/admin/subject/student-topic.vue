@@ -3,8 +3,8 @@ import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
-import useGetAlStudentTopics from "~/composables/super-teachers/use-get-all-student-topic";
-import useGetAllStudentTopics from "~/composables/super-teachers/use-get-all-student-topic";
+import useGetAlStudentTopics from '~/composables/super-teachers/use-get-all-student-topic'
+import useGetAllStudentTopics from '~/composables/super-teachers/use-get-all-student-topic'
 
 definePageMeta({
   layout: 'auth',
@@ -92,7 +92,9 @@ const { items, totalItems, isLoading, refetch } = useGetAllStudentTopics(queryBu
             <span>{{ item?.studentTopic[0]?.topic?.ten }}</span>
           </template>
           <template #item.gv="{ item }">
-            <span>{{ item?.studentTopic[0]?.topic?.teacher.hodem }} {{ item?.studentTopic[0]?.topic?.teacher.ten }}</span>
+            <span>
+              {{ item?.studentTopic[0]?.topic?.teacher.hodem }} {{ item?.studentTopic[0]?.topic?.teacher.ten }}
+            </span>
           </template>
         </v-data-table>
       </div>

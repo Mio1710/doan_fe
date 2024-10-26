@@ -14,15 +14,16 @@ const semester = ref('')
 const headers = [
   {
     title: 'STT',
-    align: 'start',
+    align: 'center',
     sortable: false,
     key: 'index',
     width: 50,
   },
-  { title: 'Tên đề tài', key: 'ten', width: '25%', minWidth: 250 },
-  { title: 'Mô tả', key: 'description', width: '30%', minWidth: 350 },
+  { title: 'Giảng viên', key: 'gv', width: '10%', minWidth: 100 },
+  { title: 'Tên đề tài', key: 'ten', width: '20%', minWidth: 250 },
+  { title: 'Mô tả', key: 'description', width: '35%', minWidth: 350 },
   { title: 'Yêu cầu', key: 'requirement', width: '20%', minWidth: 200 },
-  { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 200 },
+  { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 150 },
   { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100 },
 ]
 const serverOptions = ref({
@@ -31,8 +32,14 @@ const serverOptions = ref({
   sortBy: '-created_at',
   sortType: 'asc',
 })
+
+const filters = ref({
+  status: [],
+})
+
 const queryBuilder = computed(() => ({
   ...serverOptions.value,
+  filters: { viewAll: true, ...filters.value },
 }))
 
 const { $api, $toast } = useNuxtApp()
@@ -58,9 +65,33 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetTopic(queryB
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex">
         <div class="d-flex">
-          <v-checkbox class="mr-4" color="warning" density="compact" hide-details label=" Chờ duyệt" />
-          <v-checkbox class="mr-4" color="success" density="compact" hide-details label=" Đã duyệt" />
-          <v-checkbox class="mr-4" color="error" density="compact" hide-details label=" Từ chối" />
+          <v-checkbox
+            v-model="filters.status"
+            class="mr-4"
+            color="warning"
+            density="compact"
+            hide-details
+            label=" Chờ duyệt"
+            value="pending"
+          />
+          <v-checkbox
+            v-model="filters.status"
+            class="mr-4"
+            color="success"
+            density="compact"
+            hide-details
+            label=" Đã duyệt"
+            value="approved"
+          />
+          <v-checkbox
+            v-model="filters.status"
+            class="mr-4"
+            color="error"
+            density="compact"
+            hide-details
+            label=" Từ chối"
+            value="rejected"
+          />
         </div>
         <v-spacer />
         <v-btn color="success" :loading="isFetching" size="small" @click="refetch">
@@ -78,6 +109,9 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetTopic(queryB
         >
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
+          </template>
+          <template #item.gv="{ item }">
+            <span>{{ item.teacher?.hodem }} {{ item.teacher?.ten }}</span>
           </template>
           <template #item.status="{ item }">
             <div class="ma-2 text-center">

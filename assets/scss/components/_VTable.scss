@@ -1,6 +1,8 @@
 .v-table > .v-table__wrapper > table > tbody > tr > td, th {
   padding: 0 8px !important;
   border: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
+}
+.v-table > .v-table__wrapper > table > tbody > tr > th {
   // To set the height of the table header
   height: 40px !important;
 }
