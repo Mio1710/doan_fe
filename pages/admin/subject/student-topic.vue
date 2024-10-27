@@ -40,31 +40,22 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 
 const queryClient = useQueryClient()
-const handleActive = (item) => {
-  try {
-    $api.semester.activeSemester(item.id).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Đã cập nhật trạng thái thành công')
+const loading = ref(false)
+
+const lockGroup = () => {
+  loading.value = true
+  $api.superTeacher
+    .lockStudentGroup()
+    .then(() => {
+      queryClient.invalidateQueries('all-student-topic')
+      $toast.success('Đã khóa nhóm thành công')
     })
-  } catch (error) {
-    console.log(error)
-  }
+    .finally(() => {
+      loading.value = false
+    })
 }
 
-const createSemester = () => {
-  try {
-    $api.semester.createSemester({ ten: semester.value }).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Tạo mới thành công')
-      isCreate.value = false
-      semester.value = ''
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-const { items, totalItems, isLoading, refetch } = useGetAllStudentTopics(queryBuilder)
+const { items, isLoading, refetch } = useGetAllStudentTopics(queryBuilder)
 </script>
 
 <template>
@@ -72,6 +63,10 @@ const { items, totalItems, isLoading, refetch } = useGetAllStudentTopics(queryBu
     <div class="text-lg font-bold text-uppercase">Quản lý sinh viên khóa luận</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex">
+        <v-btn color="success" :loading="loading" size="small" @click="lockGroup">
+          <v-icon class="mr-2">mdi-lock</v-icon>
+          <span>Khóa nhóm</span>
+        </v-btn>
         <v-spacer />
         <v-btn icon size="x-small" variant="text" @click="refetch()">
           <v-icon>mdi-refresh</v-icon>
