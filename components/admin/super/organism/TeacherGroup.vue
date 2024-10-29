@@ -2,6 +2,7 @@
 import { useQueryClient } from 'vue-query'
 import CreateTeacherGroup from '~/components/admin/super/molecules/CreateTeacherGroup.vue'
 import useGetListTeacherGroups from '~/composables/super-teachers/use-get-list-teacher-group'
+import UpdateTeacherGroup from '~/components/admin/super/molecules/UpdateTeacherGroup.vue'
 
 const headers = [
   {
@@ -12,8 +13,8 @@ const headers = [
     width: 50,
   },
   { title: 'Nhóm phản biện', key: 'name', width: '20%', minWidth: 200 },
-  { title: 'Giảng viên', key: 'gv', minWidth: 450 },
-  { title: '', key: 'action', width: '10%', minWidth: 100 },
+  { title: 'Giảng viên', key: 'gv', minWidth: 350 },
+  { title: '', key: 'action', width: '20%', minWidth: 200 },
 ]
 const serverOptions = ref({
   page: 1,
@@ -29,6 +30,12 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 
 const queryClient = useQueryClient()
+const deleteGroup = (id) => {
+  $api.teacherGroup.deleteTeacherGroup(id).then(() => {
+    queryClient.invalidateQueries('teacher-group')
+    $toast.success('Xóa nhóm thành công')
+  })
+}
 
 const { items, totalItems, isLoading, refetch, isFetching } = useGetListTeacherGroups(queryBuilder)
 </script>
@@ -58,7 +65,7 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetListTeacherG
       :headers="headers"
       hide-default-footer
       :items="items"
-      :loading="isFetching"
+      :loading="isLoading"
     >
       <template #item.index="{ index }">
         <span>{{ index + 1 }}</span>
@@ -68,8 +75,18 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetListTeacherG
           {{ teacher.teacher?.maso }} - {{ teacher.teacher?.hodem }} {{ teacher.teacher?.ten }}
         </div>
       </template>
-      <template #item.action="">
-        <v-btn color="success" small>Chỉnh sửa</v-btn>
+      <template #item.action="{ item }">
+        <v-dialog min-width="400" width="40%">
+          <template #activator="{ props: activatorProps }">
+            <v-btn color="success" size="small" v-bind="activatorProps">
+              <span>Chỉnh sửa</span>
+            </v-btn>
+          </template>
+          <template #default="{ isActive }">
+            <update-teacher-group :item="item" @cancel="isActive.value = false" />
+          </template>
+        </v-dialog>
+        <v-btn class="ml-2" color="error" size="small" @click="deleteGroup(item.id)">Xóa</v-btn>
       </template>
     </v-data-table>
   </div>

@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import useGetListTeacherGroups from "~/composables/super-teachers/use-get-list-teacher-group";
+import useGetListTeacherGroups from '~/composables/super-teachers/use-get-list-teacher-group'
 
 const props = defineProps({
   multiple: {
     type: Boolean,
     default: false,
   },
+  name: {
+    type: String,
+    default: 'Nhóm giảng viên phản biện',
+  },
+  rules: {
+    type: String,
+    default: '',
+  },
 })
 const model = defineModel()
-const search = ref('')
 const serverOptions = ref({
   page: 1,
   rowsPerPage: 100,
@@ -23,19 +30,21 @@ const { items, isLoading } = useGetListTeacherGroups(queryBuilder)
 </script>
 
 <template>
-  <div>
+  <VeeField v-slot="{ errorMessage }" v-model="model" :name="props.name" :rules="props.rules">
     <v-autocomplete
       v-model="model"
       chips
+      class="mb-4"
       closable-chips
+      :error-messages="errorMessage"
       item-title="name"
       item-value="id"
       :items="items"
-      label="Nhóm giảng viên phản biện"
+      :label="props.name"
       :loading="isLoading"
       :multiple="multiple"
     />
-  </div>
+  </VeeField>
 </template>
 
 <style scoped></style>

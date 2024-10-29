@@ -13,6 +13,7 @@ export class TeacherGroupAPI extends BaseApi {
   }
 
   updateTeacherGroup(id, data) {
+    console.log('darta', data)
     return this.put(`/teacher-groups/${id}`, data)
   }
 

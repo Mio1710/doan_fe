@@ -5,8 +5,8 @@ export class SuperTeacherAPI extends BaseApi {
     return this.get('/super-teacher/student-topic')
   }
 
-  getAllStudentGroups() {
-    return this.get('/super-teacher/student-groups')
+  getAllStudentGroups(params) {
+    return this.get('/super-teacher/student-groups', { params })
   }
 
   lockStudentGroup() {

@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
 import FormCard from '~/components/common/molecules/FormCard.vue'
-import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import TeacherAutocomplete from '~/components/common/atoms/TeacherAutocomplete.vue'
 import StudentGroupAutocomplete from '~/components/common/atoms/StudentGroupAutocomplete.vue'
 import TeacherGroupAutocomplete from '~/components/common/atoms/TeacherGroupAutocomplete.vue'
 
+const props = defineProps({
+  teacherGroupId: {
+    type: Number,
+    default: null,
+  },
+  studentGroupIds: {
+    type: Array,
+    default: () => [],
+  },
+})
 const form = reactive({
-  teacher_group_id: null,
-  student_group_ids: [],
+  teacher_group_id: props.teacherGroupId,
+  student_group_ids: props.studentGroupIds,
 })
 
 const { $api, $toast } = useNuxtApp()
@@ -29,6 +37,7 @@ const createFaculty = () => {
     <teacher-group-autocomplete v-model="form.teacher_group_id" name="Nhóm giảng viên phản biện" rules="required" />
     <student-group-autocomplete
       v-model="form.student_group_ids"
+      :is-null-group-teacher="true"
       :multiple="true"
       name="Nhóm sinh viên"
       rules="required"
