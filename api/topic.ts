@@ -23,4 +23,8 @@ export class TopicAPI extends BaseApi {
   checkTopic(id, status) {
     return this.post(`/topics/${id}/${status}`)
   }
+
+  resetTopic() {
+    return this.put('/super-teacher/reset-topic')
+  }
 }

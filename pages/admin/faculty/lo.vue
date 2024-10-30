@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { useQueryClient } from 'vue-query'
-import UpdateSemester from '~/components/admin/semester/molecules/UpdateSemester.vue'
 import useGetListLOs from '~/composables/super-teachers/use-get-list-lo-topic'
-import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
 import UpdateLO from "~/components/admin/organisms/UpdateLO.vue";
 
 definePageMeta({
   layout: 'auth',
   middleware: ['is-admin'],
 })
-const isCreate = ref(false)
-const semester = ref('')
 const headers = [
   {
     title: 'STT',
@@ -36,8 +31,6 @@ const queryBuilder = computed(() => ({
 
 const { $api, $toast } = useNuxtApp()
 
-const queryClient = useQueryClient()
-
 const { items, totalItems, isLoading, refetch, isRefetching } = useGetListLOs(queryBuilder)
 </script>
 
@@ -48,7 +41,7 @@ const { items, totalItems, isLoading, refetch, isRefetching } = useGetListLOs(qu
       <div class="d-flex items-center">
         <v-dialog min-width="500" width="50%">
           <template #activator="{ props: activatorProps }">
-            <v-btn color="success" size="x-small" v-bind="activatorProps">
+            <v-btn color="success" size="small" v-bind="activatorProps">
               <v-icon>mdi-plus</v-icon>
               <span>Thêm</span>
             </v-btn>

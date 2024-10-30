@@ -31,7 +31,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
 
       if (code === 403) {
-        navigateTo('/error')
+        navigateTo('/invalid-page')
       }
 
       throw error

@@ -123,6 +123,11 @@ export const SuperTeacherMenu: menu = {
       icon: 'mdi-book',
       to: '/admin/subject/company',
     },
+    {
+      title: 'Chuyển GVHD TTDN',
+      icon: 'mdi-clock-time-nine',
+      to: '/admin/subject/move-teacher',
+    },
   ],
 }
 export const AdminMenu: menu = {
@@ -170,24 +175,9 @@ export const AdminMenu: menu = {
       to: '/admin/faculty/reset-company',
     },
     {
-      title: 'Reset password sv',
-      icon: 'mdi-clock-fast',
-      to: '/admin/faculty/reset-password',
-    },
-    {
       title: 'Chỉnh sửa LO',
       icon: 'mdi-clock-out',
       to: '/admin/faculty/lo',
-    },
-    {
-      title: 'Xóa điểm cho SV',
-      icon: 'mdi-clock-start',
-      to: '/admin/faculty/delete-point',
-    },
-    {
-      title: 'Chuyển GVHD',
-      icon: 'mdi-clock-time-nine',
-      to: '/admin/faculty/move-teacher',
     },
   ],
 }

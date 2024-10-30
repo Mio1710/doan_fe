@@ -95,7 +95,7 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
           </template>
           <template #item.gv="{ item }">
             <span>
-              {{ item.studentTopic[0]?.topic.teacher.hodem }} {{ item.studentTopic[0]?.topic.teacher.ten }}
+              {{ item.studentTopic[0]?.topic?.teacher.hodem }} {{ item.studentTopic[0]?.topic?.teacher.ten }}
             </span>
           </template>
           <template #item.ten="{ item }">
