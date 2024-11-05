@@ -2,8 +2,9 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
-  app: {
-    baseURL: '/',
+  devServer: {
+    host: process.env.BASE_URL,
+    port: 4000,  
   },
   devtools: { enabled: true },
   runtimeConfig: {
