@@ -23,7 +23,7 @@ const { $api, $toast } = useNuxtApp()
 const emit = defineEmits(['cancel'])
 const { items } = useGetFaculties()
 const createFaculty = () => {
-  $api.teacher.createSuperTeacher(form).then(() => {
+  $api.admin.createSuperTeacher(form).then(() => {
     $toast.success('Tạo cán bộ khoa thành công')
     emit('cancel')
   })
