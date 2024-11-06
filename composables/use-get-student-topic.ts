@@ -19,7 +19,6 @@ function sortsParser(sortBy: string | [], sortType: string | []) {
 
 export default function useGetStudentTopics(params?: UnwrapRef<any>, options?: any) {
   const { $api } = useNuxtApp()
-  console.log('params $api', $api)
 
   const query = useQuery(
     ['student-topic', params],
