@@ -29,7 +29,7 @@ export class AdminApi extends BaseApi {
   }
 
   createSuperTeacher(data) {
-    return this.post('/admin/super-admin/super-teacher', data)
+    return this.post('/super-admin/super-teacher', data)
   }
 
   getStudentTopics(params) {
