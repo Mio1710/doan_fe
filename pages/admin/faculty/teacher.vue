@@ -43,10 +43,10 @@ const { $api, $toast } = useNuxtApp()
 const queryClient = useQueryClient()
 const handleActive = (item, role) => {
   try {
-    const roles = item.types?.includes(role) ? item.types.filter((r) => r !== role) : [...item.types, role]
+    const roles = item.roles?.includes(role) ? item.roles.filter((r) => r !== role) : [...item.roles, role]
     $api.admin.activeTeacher(item.id, roles).then(() => {
       queryClient.invalidateQueries('teacher')
-      $toast.success('Đã cập nhật trạng thái thành công')
+      $toast.success('Đã cập nhật quyền thành công')
     })
   } catch (error) {
     console.log(error)

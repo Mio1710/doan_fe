@@ -8,8 +8,7 @@ definePageMeta({
   layout: 'auth',
   middleware: ['is-admin'],
 })
-const isCreate = ref(false)
-const semester = ref('')
+
 const headers = [
   {
     title: 'STT',
@@ -36,30 +35,6 @@ const queryBuilder = computed(() => ({
 
 const { $api, $toast } = useNuxtApp()
 
-const queryClient = useQueryClient()
-const handleActive = (item) => {
-  try {
-    $api.semester.activeSemester(item.id).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Đã cập nhật trạng thái thành công')
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-const createSemester = () => {
-  try {
-    $api.semester.createSemester({ ten: semester.value }).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Tạo mới thành công')
-      isCreate.value = false
-      semester.value = ''
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilder)
 </script>

@@ -2,12 +2,16 @@
 import { serialize } from 'object-to-formdata'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from "~/components/common/atoms/AppTextField.vue";
+import {useQueryClient} from "vue-query";
 
 const file = ref(null)
 const { $api, $toast } = useNuxtApp()
 const emit = defineEmits(['cancel'])
+const queryClient = useQueryClient()
+
 const importStudentTopic = () => {
   $api.studentTopic.importStudentTopic(serialize({ file: file.value })).then(() => {
+    queryClient.invalidateQueries('student-topic')
     $toast.success('Import sinh viên khóa luận thành công')
     emit('cancel')
   })
