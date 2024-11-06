@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ChangePasswordDialog from '~/components/common/organisms/ChangePasswordDialog.vue'
+
 const { signOut, data } = useAuth()
 const logout = () => {
   signOut()
@@ -21,7 +23,7 @@ const logout = () => {
 
     <!-- user menu list -->
     <v-list>
-      <v-list-item to="/profile">
+      <v-list-item  @click="console.log('Xem trang cá nhân')">
         <template #prepend>
           <v-icon small>mdi-account</v-icon>
         </template>
@@ -29,11 +31,13 @@ const logout = () => {
       </v-list-item>
       <v-divider class="my-1" />
 
-      <v-list-item to="/change-password">
+      <v-list-item @click="console.log('Đổi mật khẩu')">
         <template #prepend>
           <v-icon small>mdi-account-key-outline</v-icon>
         </template>
-        <v-list-item-title>Đổi mật khẩu</v-list-item-title>
+        <v-list-item-title>
+          <change-password-dialog :user="data" />
+        </v-list-item-title>
       </v-list-item>
 
       <v-divider class="my-1" />
