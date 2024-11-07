@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { UnwrapRef } from 'vue-demi'
 import { useQuery } from 'vue-query'
-import { map, zip } from 'lodash'
+import _ from 'lodash'
 import Parser from '~/utils/parser'
 
 function sortsParser(sortBy: string | [], sortType: string | []) {
@@ -10,7 +10,7 @@ function sortsParser(sortBy: string | [], sortType: string | []) {
   }
 
   if (Array.isArray(sortBy)) {
-    return map(zip(sortBy, sortType), ([sortBy, sortType]) => {
+    return _.map(_.zip(sortBy, sortType), ([sortBy, sortType]) => {
       return sortType === 'desc' ? `-${sortBy}` : sortBy
     })
   }
