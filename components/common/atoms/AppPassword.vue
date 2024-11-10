@@ -2,11 +2,11 @@
 const props = defineProps({
   name: {
     type: String,
-    default: 'text',
+    default: null,
   },
   label: {
     type: String,
-    default: 'text',
+    default: null,
   },
   rules: {
     type: String,
@@ -20,14 +20,14 @@ const isRequired = props.rules.includes('required')
 
 <template>
   <div class="mb-4">
-    <VeeField v-slot="{ errorMessage }" v-model="value" :label="label" :name="name" :rules="props.rules">
+    <VeeField v-slot="{ errorMessage }" v-model="value" :label="label || name" :name="name || label" :rules="props.rules">
       <v-text-field
         v-model="value"
         :append-inner-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-        :error-messages="errorMessage"
         aria-autocomplete="new-password"
-        :label="props.label || props.name"
-        :name="props.name || props.label"
+        :error-messages="errorMessage"
+        :label="label || name"
+        :name="name || label"
         :type="show ? 'text' : 'password'"
         @click:append-inner="show = !show"
       >
