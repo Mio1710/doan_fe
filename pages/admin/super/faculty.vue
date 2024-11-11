@@ -7,7 +7,7 @@ import CreateTopic from '~/components/teacher/topic/molecules/CreateTopic.vue'
 import useGetFaculties from '~/composables/admin/use-get-faculty'
 import CreateFaculty from '~/components/admin/super/molecules/CreateFaculty.vue'
 import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
-import CreateSuperTeacher from "~/components/admin/super/molecules/CreateSuperTeacher.vue";
+import CreateSuperTeacher from '~/components/admin/super/molecules/CreateSuperTeacher.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -41,35 +41,38 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 
 const queryClient = useQueryClient()
-const handleCheck = (item, status) => {
-  try {
-    $api.topic.checkTopic(item.id, status).then(() => {
-      queryClient.invalidateQueries('topic')
-      $toast.success('Đã cập nhật thành công')
-    })
-  } catch (error) {
-    console.log(error)
-  }
+
+const deleteFaculty = (item) => {
+  $api.faculty.deleteFaculty(item.id).then(() => {
+    $toast.success('Xóa khoa thành công')
+    queryClient.invalidateQueries('faculty')
+  })
 }
 
-const { items, totalItems, isLoading, refetch } = useGetFaculties(queryBuilder)
+const { items, refetch } = useGetFaculties(queryBuilder)
 </script>
 
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Quản lý khoa</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
-      <v-dialog min-width="400" width="40%">
-        <template #activator="{ props: activatorProps }">
-          <v-btn color="success" size="small" v-bind="activatorProps">
-            <v-icon>mdi-plus</v-icon>
-            <span>Thêm mới Khoa</span>
-          </v-btn>
-        </template>
-        <template #default="{ isActive }">
-          <create-faculty @cancel="isActive.value = false" />
-        </template>
-      </v-dialog>
+      <div class="d-flex items-center">
+        <v-dialog min-width="400" width="40%">
+          <template #activator="{ props: activatorProps }">
+            <v-btn color="success" size="small" v-bind="activatorProps">
+              <v-icon>mdi-plus</v-icon>
+              <span>Thêm mới Khoa</span>
+            </v-btn>
+          </template>
+          <template #default="{ isActive }">
+            <create-faculty @cancel="isActive.value = false" />
+          </template>
+        </v-dialog>
+        <v-spacer />
+        <v-btn icon size="x-small" variant="text" @click="refetch()">
+          <v-icon>mdi-refresh</v-icon>
+        </v-btn>
+      </div>
       <div class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items">
           <template #item.index="{ index }">
@@ -81,7 +84,7 @@ const { items, totalItems, isLoading, refetch } = useGetFaculties(queryBuilder)
                 <v-btn v-bind="activatorProps" color="success" size="small">Tạo cán bộ khoa</v-btn>
               </template>
               <template #default="{ isActive }">
-                <create-super-teacher @cancel="isActive.value = false" :faculty="item" />
+                <create-super-teacher :faculty="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
           </template>
@@ -96,6 +99,9 @@ const { items, totalItems, isLoading, refetch } = useGetFaculties(queryBuilder)
                 <update-faculty :topic="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
+            <v-btn color="error" icon size="small" variant="text" @click="deleteFaculty(item)">
+              <v-icon>mdi-trash-can</v-icon>
+            </v-btn>
           </template>
         </v-data-table>
       </div>
