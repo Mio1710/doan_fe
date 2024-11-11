@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import ChangePasswordDialog from '~/components/common/organisms/ChangePasswordDialog.vue'
-import LogoutConfirmDialog from "~/components/common/organisms/LogoutConfirmDialog.vue";
+import LogoutConfirmDialog from '~/components/common/organisms/LogoutConfirmDialog.vue'
 
 const { data } = useAuth()
-
 </script>
 
 <template>
@@ -21,7 +20,7 @@ const { data } = useAuth()
 
     <!-- user menu list -->
     <v-list>
-      <v-list-item  @click="console.log('Xem trang cá nhân')">
+      <v-list-item to="/profile">
         <template #prepend>
           <v-icon small>mdi-account</v-icon>
         </template>
@@ -45,7 +44,7 @@ const { data } = useAuth()
           <v-icon small>mdi-logout-variant</v-icon>
         </template>
         <v-list-item-title>
-          <LogoutConfirmDialog />
+          <logout-confirm-dialog />
         </v-list-item-title>
       </v-list-item>
     </v-list>
