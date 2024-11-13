@@ -32,7 +32,7 @@ const headers = [
     key: 'index',
     width: 30,
   },
-  { title: 'Tên khoa', key: 'ten', minWidth: 150 },
+  { title: 'Tên giảng viên', key: 'ten', minWidth: 150 },
   { title: 'Mã số', key: 'maso', width: '10%', minWidth: 100 },
   { title: 'Hành động', key: 'action', width: '30%', minWidth: 350, align: 'center' },
 ]
