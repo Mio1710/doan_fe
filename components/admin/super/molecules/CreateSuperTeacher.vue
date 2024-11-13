@@ -20,11 +20,11 @@ const form = reactive({
 })
 
 const { $api, $toast } = useNuxtApp()
-const emit = defineEmits(['cancel'])
-const { items } = useGetFaculties()
+const emit = defineEmits(['cancel', 'success'])
 const createFaculty = () => {
   $api.admin.createSuperTeacher(form).then(() => {
     $toast.success('Tạo cán bộ khoa thành công')
+    emit('success')
     emit('cancel')
   })
 }

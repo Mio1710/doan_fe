@@ -11,6 +11,7 @@ import { ResultsAPI } from '~/api/results'
 import { TeacherApi } from '~/api/teacher'
 import { TeacherGroupAPI } from '~/api/teacher-group'
 import { AuthApi } from '~/api/auth'
+import { SuperAdminApi } from '~/api/super-admin'
 export class Api {
   public readonly semester: SemesterAPI
   public readonly teacher: TeacherApi
@@ -24,6 +25,7 @@ export class Api {
   public readonly admin: AdminApi
   public readonly teacherGroup: TeacherGroupAPI
   public readonly auth: AuthApi
+  public readonly superAdmin: SuperAdminApi
 
   constructor(axios: AxiosInstance) {
     this.semester = new SemesterAPI(axios)
@@ -38,5 +40,6 @@ export class Api {
     this.admin = new AdminApi(axios)
     this.teacherGroup = new TeacherGroupAPI(axios)
     this.auth = new AuthApi(axios)
+    this.superAdmin = new SuperAdminApi(axios)
   }
 }
