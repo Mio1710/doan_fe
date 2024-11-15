@@ -11,4 +11,8 @@ export class TeacherApi extends BaseApi {
   updateStudentResultLOs(data) {
     return this.put('/teachers/student-results-lo', data)
   }
+
+  changePassword(data) {
+    return this.put('/teachers/change-password', data)
+  }
 }

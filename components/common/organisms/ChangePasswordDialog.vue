@@ -15,8 +15,11 @@ const form = ref({
 })
 
 const { $api, $toast } = useNuxtApp()
-const updatePassword = () => {
-  console.log(form.value)
+const updatePassword = (isActive) => {
+  $api.auth.changePassword(form.value).then(() => {
+    $toast.success('Đổi mật khẩu thành công')
+    isActive.value = false
+  })
 }
 </script>
 
@@ -33,7 +36,7 @@ const updatePassword = () => {
         cancel-text="Hủy"
         title="Đổi mật khẩu"
         @cancel="isActive.value = false"
-        @submit="updatePassword"
+        @submit="updatePassword(isActive)"
       >
         <app-password v-model="form.old_password" label="Mật khẩu cũ" name="oldPassword" rules="required" />
         <app-password v-model="form.new_password" label="Mật khẩu mới" name="newPassword" rules="required" />

@@ -3,16 +3,19 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   devServer: {
-    host: process.env.BASE_URL,
-    port: 4000,  
+    // host: process.env.BASE_URL,
+    port: 4000,
   },
+
   devtools: { enabled: true },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.BASE_API_URL,
       baseUrl: process.env.BASE_URL,
     },
   },
+
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -23,21 +26,27 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     '@vee-validate/nuxt',
   ],
+
   plugins: ['~/plugins/axios.ts'],
+
   veeValidate: {
     // disable or enable auto imports
     autoImports: true,
   },
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   css: ['~/assets/css/main.css'],
+
   build: {
     transpile: ['vuetify'],
   },
+
   vite: {
     vue: {
       template: {
@@ -45,6 +54,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   auth: {
     isEnabled: true,
     globalAppMiddleware: true,
@@ -69,6 +79,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   vuetify: {
     /* vuetify options */
     vuetifyOptions: {
@@ -81,4 +92,6 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  compatibilityDate: '2024-11-11',
 })

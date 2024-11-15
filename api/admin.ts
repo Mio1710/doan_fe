@@ -35,4 +35,8 @@ export class AdminApi extends BaseApi {
   getStudentTopics(params) {
     return this.get('/admin/teachers/student-topic', { params })
   }
+
+  resetPassword(id) {
+    return this.put(`/admin/teachers/${id}/reset-password`)
+  }
 }
