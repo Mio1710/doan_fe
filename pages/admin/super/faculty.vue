@@ -40,7 +40,7 @@ const queryClient = useQueryClient()
 const deleteFaculty = (item) => {
   $api.faculty.deleteFaculty(item.id).then(() => {
     $toast.success('Xóa khoa thành công')
-    queryClient.invalidateQueries('faculty')
+    queryClient.invalidateQueries('faculty-admins')
   })
 }
 

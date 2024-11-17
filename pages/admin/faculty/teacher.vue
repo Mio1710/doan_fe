@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
-import { format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
-import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
 import ImportTeacher from '~/components/admin/super/molecules/ImportTeacher.vue'
 import useGetTeachers from '~/composables/admin/use-get-teachers'
 import UpdateTeacher from '~/components/teacher/topic/molecules/UpdateTeacher.vue'
+import CreateTeacher from "~/components/teacher/topic/molecules/CreateTeacher.vue";
 
 definePageMeta({
   layout: 'auth',
@@ -82,6 +80,19 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
           placeholder="Tên/Mã số giảng viên"
           prepend-inner-icon="mdi-magnify"
         />
+        <v-spacer />
+        <v-dialog min-width="400" width="40%">
+          <template #activator="{ props: activatorProps }">
+            <v-btn color="success" size="small" v-bind="activatorProps">
+              <v-icon>mdi-plus</v-icon>
+              <span>Thêm giảng viên</span>
+            </v-btn>
+          </template>
+          <template #default="{ isActive }">
+            <create-teacher @cancel="isActive.value = false" @success="refetch" />
+          </template>
+        </v-dialog>
+        <v-btn icon="mdi-refresh" variant="plain" @click="refetch" />
       </div>
       <div class="mt-2 h-[calc(100%_-_45px)] overflow-y-hidden">
         <v-data-table-virtual
