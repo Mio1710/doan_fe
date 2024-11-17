@@ -16,6 +16,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  label: {
+    type: String,
+    default: '',
+  },
 })
 const value = defineModel()
 </script>
@@ -27,16 +31,17 @@ const value = defineModel()
         v-if="props.type === 'textarea'"
         v-model="value"
         :error-messages="errorMessage"
-        :label="props.name"
+        :label="props.label"
         :name="props.name"
         :placeholder="props.placeholder"
         :type="props.type"
       />
       <v-text-field
         v-else
+        v-bind="$attrs"
         v-model="value"
         :error-messages="errorMessage"
-        :label="props.name"
+        :label="props.label"
         :name="props.name"
         :placeholder="props.placeholder"
         :type="props.type"

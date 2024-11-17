@@ -6,14 +6,16 @@ import ImportStudentTopic from '~/components/admin/student-topic/molecules/Impor
 import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
 import ImportTeacher from '~/components/admin/super/molecules/ImportTeacher.vue'
 import useGetTeachers from '~/composables/admin/use-get-teachers'
-import UpdateTeacher from "~/components/teacher/topic/molecules/UpdateTeacher.vue";
+import UpdateTeacher from '~/components/teacher/topic/molecules/UpdateTeacher.vue'
 
 definePageMeta({
   layout: 'auth',
   middleware: ['is-admin'],
 })
-const isCreate = ref(false)
-const semester = ref('')
+
+const filters = ref({
+  q: '',
+})
 const headers = [
   {
     title: 'STT',
@@ -36,6 +38,7 @@ const serverOptions = ref({
 })
 const queryBuilder = computed(() => ({
   ...serverOptions.value,
+  filters: filters.value,
 }))
 
 const { $api, $toast } = useNuxtApp()
@@ -47,19 +50,6 @@ const handleActive = (item, role) => {
     $api.admin.activeTeacher(item.id, roles).then(() => {
       queryClient.invalidateQueries('teacher')
       $toast.success('Đã cập nhật quyền thành công')
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-const createSemester = () => {
-  try {
-    $api.semester.createSemester({ ten: semester.value }).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Tạo mới thành công')
-      isCreate.value = false
-      semester.value = ''
     })
   } catch (error) {
     console.log(error)
@@ -85,6 +75,13 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
             <import-teacher @cancel="isActive.value = false" @success="refetch" />
           </template>
         </v-dialog>
+        <app-text-field
+          v-model="filters.q"
+          class="h-[24px] w-[250px] ml-2"
+          clearable
+          placeholder="Tên/Mã số giảng viên"
+          prepend-inner-icon="mdi-magnify"
+        />
       </div>
       <div class="mt-2 h-[calc(100%_-_45px)] overflow-y-hidden">
         <v-data-table-virtual
