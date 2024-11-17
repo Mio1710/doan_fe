@@ -40,7 +40,7 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetAllStudentGr
   <div class="d-flex">
     <v-dialog min-width="400" width="40%">
       <template #activator="{ props: activatorProps }">
-        <v-btn color="success" size="small" v-bind="activatorProps">
+        <v-btn color="success" size="small" v-bind="activatorProps" class="mt-2">
           <v-icon>mdi-plus</v-icon>
           <span>Phân giảng viên phản biện</span>
         </v-btn>

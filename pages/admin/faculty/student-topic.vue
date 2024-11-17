@@ -42,7 +42,7 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Quản lý sinh viên khóa luận</div>
-    <v-card class="pa-3 h-full" color="white" variant="flat">
+    <v-card class="px-3 py-2 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
         <v-dialog min-width="400" width="40%">
           <template #activator="{ props: activatorProps }">
