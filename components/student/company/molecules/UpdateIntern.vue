@@ -27,7 +27,7 @@ const importStudentIntern = () => {
 </script>
 
 <template>
-    <form-card can-cancel cancel-text="Hủy" title="Đăng ký thưc tập" @cancel="emit('cancel')" @submit="createStudentIntern">
+    <form-card can-cancel cancel-text="Hủy" title="Đăng ký thưc tập" @cancel="emit('cancel')" @submit="importStudentIntern">
       <app-text-field v-model="form.company_name" name="Tên công ty" rules="required" />
       <app-text-field v-model="form.company_email" name="Emai công ty" type="textarea" />
       <app-text-field v-model="form.company_phone" name="SĐT công ty" />

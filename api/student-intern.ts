@@ -28,4 +28,7 @@ export class StudentInternAPI extends BaseApi {
     return this.post('/student-intern/import', data)
   }
 
+  updateIntern(data) {
+    return this.post('/student-intern/intern', data)
+  }
 }

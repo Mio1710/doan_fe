@@ -2,6 +2,8 @@
 import { useQueryClient } from 'vue-query'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
+// import TeacherAutocomplete from "~/components/common/atoms/TeacherAutocomplete.vue";
+// import { useGetTeachers } from '~/composables/student/use-get-teachers'
 
 const form = reactive({
     company_name: '',
@@ -11,6 +13,7 @@ const form = reactive({
     supervisor_name: '',
     supervisor_phone: '',
     supervisor_email: '',
+    // teacher_ids: [],
 })
 
 const { $api, $toast } = useNuxtApp()
@@ -28,6 +31,8 @@ const createStudentIntern= () => {
 const preview = () => {
   console.log('Preview')
 }
+
+// const { teachers, isLoading } = useGetTeachers()
 </script>
 
 <template>
@@ -39,5 +44,6 @@ const preview = () => {
     <app-text-field v-model="form.supervisor_name" name="Tên người hướng dẫn" />
     <app-text-field v-model="form.supervisor_phone" name="Số điện thoại người hướng dẫn" />
     <app-text-field v-model="form.supervisor_email" name="Email người hướng dẫn" />
+    <!-- <teacher-autocomplete v-model="form.teacher_ids" name="Giảng viên" rules="required" /> -->
   </form-card>
 </template>
