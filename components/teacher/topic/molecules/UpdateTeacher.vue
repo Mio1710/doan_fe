@@ -30,7 +30,7 @@ const updateTeacher = () => {
     <app-text-field v-model="form.hodem" label="Họ đệm" name="Họ đệm" rules="required" />
     <app-text-field v-model="form.ten" label="Tên giảng viên" name="Tên giảng viên" rules="required" />
     <app-text-field v-model="form.email" label="Email" name="Email" rules="required|email" />
-    <app-text-field v-model="form.maso" label="Mã số" name="Mã số" />
+    <app-text-field v-model="form.maso" label="Mã số" name="Mã số" rules="required" />
     <div class="d-flex">
       <v-switch color="success" hide-details label="Cán bộ môn" :model-value="form.roles" value="super_teacher" />
       <v-spacer />

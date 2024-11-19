@@ -5,6 +5,7 @@ import ImportTeacher from '~/components/admin/super/molecules/ImportTeacher.vue'
 import useGetTeachers from '~/composables/admin/use-get-teachers'
 import UpdateTeacher from '~/components/teacher/topic/molecules/UpdateTeacher.vue'
 import CreateTeacher from "~/components/teacher/topic/molecules/CreateTeacher.vue";
+import DeleteTeacherConfirmDialog from "~/components/admin/teacher/molecules/DeleteTeacherConfirmDialog.vue";
 
 definePageMeta({
   layout: 'auth',
@@ -26,7 +27,7 @@ const headers = [
   { title: 'Mã số', key: 'maso', minWidth: 200 },
   { title: 'Cán bộ môn', key: 'is_super_teacher', width: '15%', minWidth: 100, align: 'center' },
   { title: 'Cán bộ khoa', key: 'is_admin', width: '15%', minWidth: 100, align: 'center' },
-  { title: '', key: 'action', width: 30 },
+  { title: '', key: 'action', width: 100 },
 ]
 const serverOptions = ref({
   page: 1,
@@ -138,6 +139,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
                 <update-teacher :teacher="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
+            <delete-teacher-confirm-dialog :teacher="item" @success="refetch" />
           </template>
         </v-data-table-virtual>
       </div>
