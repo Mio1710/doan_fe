@@ -21,7 +21,7 @@ const headers = [
   { title: 'Tên sinh viên', key: 'ten' },
   { title: 'Lớp', key: 'lop', width: '15%', minWidth: 150 },
 //   { title: 'Nhóm', key: 'nhom', width: '5%', minWidth: 50 },
-  // { title: 'Giảng viên hướng dẫn', key: 'gv', width: '20%', minWidth: 200 },
+  { title: 'Giảng viên hướng dẫn', key: 'gv', width: '20%', minWidth: 200 },
   { title: '', key: 'action', width: 30 },
 ]
 const serverOptions = ref({

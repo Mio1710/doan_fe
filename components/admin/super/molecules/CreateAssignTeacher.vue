@@ -2,10 +2,13 @@
 import { useQueryClient } from 'vue-query'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import StudentTeacherAutocomplete from "~/components/common/atoms/StudentTeacherAutocomplete.vue";
-// import { useGetTeachers } from '~/composables/student/use-get-teachers'
+import TeacherAutocomplete from "~/components/common/atoms/TeacherAutocomplete.vue";
 
-const form = reactive({
+const props = defineProps({
+  intern: {
+    type: Object,
+    required: true,
+    teacher_id: [],
     company_name: '',
     address: '',
     company_phone: '',
@@ -13,28 +16,26 @@ const form = reactive({
     supervisor_name: '',
     supervisor_phone: '',
     supervisor_email: '',
-    teacher_id: [],
+    }
 })
+
+const form = ref({ ...props.intern })
 
 const { $api, $toast } = useNuxtApp()
 const emit = defineEmits(['cancel'])
 const queryClient = useQueryClient()
 
-const createStudentIntern= () => {
-  $api.intern.createIntern(form).then(() => {
-    $toast.success('Đăng ký thực tập thành công')
+const importStudentIntern = () => {
+  $api.intern.updateIntern(form.value.id, form.value).then(() => {
+    $toast.success('Phân công thành công')
     queryClient.invalidateQueries('intern')
     emit('cancel')
   })
 }
-
-const preview = () => {
-  console.log('Preview')
-}
 </script>
 
 <template>
-  <form-card can-cancel cancel-text="Hủy" title="Đăng ký thưc tập" @cancel="emit('cancel')" @submit="createStudentIntern">
+  <form-card can-cancel cancel-text="Hủy" title="Lưu" @cancel="emit('cancel')" @submit="importStudentIntern">
     <app-text-field v-model="form.company_name" name="Tên công ty" rules="required" />
     <app-text-field v-model="form.company_email" name="Emai công ty" type="textarea" />
     <app-text-field v-model="form.company_phone" name="SĐT công ty" />
@@ -42,6 +43,6 @@ const preview = () => {
     <app-text-field v-model="form.supervisor_name" name="Tên người hướng dẫn" />
     <app-text-field v-model="form.supervisor_phone" name="Số điện thoại người hướng dẫn" />
     <app-text-field v-model="form.supervisor_email" name="Email người hướng dẫn" />
-    <student-teacher-autocomplete v-model="form.teacher_id" name="Giảng viên" rules="required" />
+    <teacher-autocomplete v-model="form.teacher_id" name="Giảng viên" rules="required" />
   </form-card>
 </template>
