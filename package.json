@@ -28,7 +28,8 @@
     "vue": "^3.4.32",
     "vue-demi": "^0.14.10",
     "vue-query": "^1.26.0",
-    "vue3-toastify": "^0.2.2"
+    "vue3-toastify": "^0.2.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@nuxtjs/date-fns": "^1.5.0",

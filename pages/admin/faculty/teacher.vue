@@ -63,7 +63,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
     <div class="text-lg font-bold text-uppercase">Quản lý giảng viên</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
-        <v-dialog min-width="400" width="40%">
+        <v-dialog min-width="600" width="60%">
           <template #activator="{ props: activatorProps }">
             <v-btn color="success" size="small" v-bind="activatorProps">
               <v-icon>mdi-plus</v-icon>
