@@ -2,7 +2,7 @@
 import { useQueryClient } from 'vue-query'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import TeacherAutocomplete from "~/components/common/atoms/TeacherAutocomplete.vue";
+import TeacherInternAutocomplete from "~/components/common/atoms/TeacherInternAutocomplete.vue";
 
 const props = defineProps({
   intern: {
@@ -43,6 +43,6 @@ const importStudentIntern = () => {
     <app-text-field v-model="form.supervisor_name" name="Tên người hướng dẫn" />
     <app-text-field v-model="form.supervisor_phone" name="Số điện thoại người hướng dẫn" />
     <app-text-field v-model="form.supervisor_email" name="Email người hướng dẫn" />
-    <teacher-autocomplete v-model="form.teacher_id" name="Giảng viên" rules="required" />
+    <teacher-intern-autocomplete v-model="form.teacher_id" name="Giảng viên" rules="required" />
   </form-card>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useGetTeachers from '~/composables/student/use-get-student-teachers'
+import useGetTeachers from '~/composables/admin/use-get-teachers'
 
 const model = defineModel()
 const search = ref('')
@@ -13,19 +13,7 @@ const queryBuilder = computed(() => ({
   ...serverOptions.value,
 }))
 
-// const model = defineModel()
-// const serverOptions = ref({
-//   page: 1,
-//   rowsPerPage: 100,
-//   sortBy: '-created_at',
-//   sortType: 'asc',
-// })
-// const queryBuilder = computed(() => ({
-//   ...serverOptions.value,
-// }))
-
-
-const getFullName = (item) => `${item.hodem} ${item.ten}`
+const getFullName = (item) => `${item.maso} - ${item.hodem} ${item.ten}`
 const { items, isLoading } = useGetTeachers(queryBuilder)
 </script>
 
@@ -40,7 +28,6 @@ const { items, isLoading } = useGetTeachers(queryBuilder)
       :items="items"
       label="Giảng viên hướng dẫn"
       :loading="isLoading"
-
     />
   </div>
 </template>

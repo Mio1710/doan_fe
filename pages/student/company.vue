@@ -19,14 +19,14 @@ const headers = [
   //   key: 'index',
   //   width: 50,
   // },
-  { title: 'Tên công ty', key: 'company_name', width: '20%', minWidth: 200 },
-  { title: 'Địa chỉ', key: 'address', width: '20%', minWidth: 200 },
-  { title: 'Email công ty', key: 'company_email', width: '15%', minWidth: 150 },
-  { title: 'SĐT công ty', key: 'company_phone', width: '10%', minWidth: 150 },
+  { title: 'Tên công ty', key: 'company_name', width: '15%', minWidth: 150 },
+  { title: 'Địa chỉ', key: 'address', width: '15%', minWidth: 150 },
+  { title: 'Email công ty', key: 'company_email', width: '10%', minWidth: 100 },
+  { title: 'SĐT công ty', key: 'company_phone', width: '10%', minWidth: 100 },
   { title: 'Tên người hướng dẫn', key: 'supervisor_name', width: '10%', minWidth: 150 },
-  { title: 'SĐT người hướng dẫn', key: 'supervisor_phone', width: '10%', minWidth: 150 },
+  { title: 'SĐT người hướng dẫn', key: 'supervisor_phone', width: '10%', minWidth: 100 },
   { title: 'Email người hướng dẫn', key: 'supervisor_email', width: '15%', minWidth: 150 },
-  // { title: 'GVHD', key: 'gv', width: '10%', minWidth: 100 },
+  { title: 'GVHD', key: 'teacher', width: '10%', minWidth: 100 },
   { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100, align: 'center' },
   { title: '', key: 'action', width: 30 },
 ]
@@ -75,6 +75,9 @@ const { items, totalItems, isLoading, refetch } = useGetIntern(queryBuilder)
         <v-data-table-virtual class="h-full" fixed-header :headers="headers" :items="items">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
+          </template>
+          <template #item.teacher="{ item }">
+            <span>{{ item.teacher?.hodem }} {{ item.teacher?.ten }}</span>
           </template>
           <template #item.status="{ item }">
             <v-chip :color="internStatus.statusColor(item.status)" size="small" variant="flat">
