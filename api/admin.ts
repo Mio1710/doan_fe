@@ -25,7 +25,9 @@ export class AdminApi extends BaseApi {
   }
 
   importUser(data) {
-    return this.post('/admin/teachers/import', data)
+    return this.post('/admin/teachers/import', data, {
+      responseType: 'blob',
+    })
   }
 
   createSuperTeacher(data) {

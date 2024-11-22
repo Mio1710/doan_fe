@@ -2,6 +2,7 @@
 import { serialize } from 'object-to-formdata'
 import { useQueryClient } from 'vue-query'
 import * as XLSX from 'xlsx'
+import { addDays, format } from 'date-fns'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 
@@ -9,6 +10,7 @@ const file = ref(null)
 const { $api, $toast } = useNuxtApp()
 const emit = defineEmits(['cancel', 'success'])
 const queryClient = useQueryClient()
+const loading = ref(false)
 
 const headers = [
   {
@@ -21,17 +23,34 @@ const headers = [
   { title: 'Giảng viên', key: 'ten', width: '20%', minWidth: 200 },
   { title: 'Mã số', key: 'maso', minWidth: 100 },
   { title: 'Email', key: 'email', minWidth: 100 },
+  { title: 'Ngày sinh', key: 'ngay_sinh', minWidth: 100 },
   { title: 'Cán bộ môn', key: 'is_super_teacher', width: '15%', minWidth: 100, align: 'center' },
   { title: 'Cán bộ khoa', key: 'is_admin', width: '15%', minWidth: 100, align: 'center' },
 ]
 
 const importTeacher = () => {
-  $api.admin.importUser(serialize({ file: file.value })).then(() => {
-    $toast.success('Import giảng viên thành công')
-    queryClient.invalidateQueries('student-topic')
-    emit('cancel')
-    emit('success')
-  })
+  loading.value = true
+  $api.admin
+    .importUser(serialize({ file: file.value }))
+    .then((res) => {
+      if (!res.status) {
+        $toast.error('Dữ liệu không hợp lệ, vui lòng kiểm tra lại!')
+        const url = URL.createObjectURL(new Blob([res]))
+        const link = document.createElement('a')
+        link.href = url
+        link.setAttribute('download', 'teacher.xlsx')
+        document.body.appendChild(link)
+        link.click()
+      } else {
+        $toast.success('Import giảng viên thành công')
+      }
+      queryClient.invalidateQueries('student-topic')
+      emit('cancel')
+      emit('success')
+    })
+    .finally(() => {
+      loading.value = false
+    })
 }
 
 const allowSubmit = ref(false)
@@ -41,9 +60,13 @@ const items = ref([])
 const preview = () => {
   const reader = new FileReader()
   if (file.value) {
+    if(file.value.size > 5 * 1024 * 1024) {
+      $toast.error('File phải nhỏ hơn 5MB')
+      return
+    }
     reader.onload = (event) => {
       if (event.target?.result) {
-        const data = XLSX.read(event.target.result, { type: 'binary' })
+        const data = XLSX.read(event.target.result, { type: 'binary', cellDates: true })
         const sheet = data.Sheets[data.SheetNames[0]]
         const headersRow = XLSX.utils.sheet_to_json(sheet, { header: 1 })[0]
         console.log('Headers:', headersRow)
@@ -60,6 +83,12 @@ const preview = () => {
     reader.readAsBinaryString(file.value)
   }
 }
+
+const getFileExtension = (fileName) => {
+  if (!fileName) return 'unknown'
+  const parts = fileName.split('.')
+  return parts.length > 1 ? parts.pop().toLowerCase() : null
+}
 </script>
 
 <template>
@@ -67,13 +96,14 @@ const preview = () => {
     can-cancel
     cancel-text="Hủy"
     :hide-submit="!allowSubmit"
+    :loading="loading"
     title="Import giảng viên"
     @cancel="emit('cancel')"
     @submit="importTeacher"
   >
     <div v-if="allowSubmit">
       <div class="d-flex items-center">
-        <v-icon color="error" class="ma-2">mdi-alert-circle</v-icon>
+        <v-icon class="ma-2" color="error">mdi-alert-circle</v-icon>
         <span>Dữ liệu không hợp lệ có thể không được lưu!</span>
       </div>
       <v-data-table-virtual :headers="headers" height="400" item-value="name" :items="items">
@@ -92,16 +122,25 @@ const preview = () => {
           <span v-if="item.email">{{ item.email }}</span>
           <span v-else><v-icon color="error">mdi-alert-circle</v-icon></span>
         </template>
+
+        <template #item.ngay_sinh="{ item }">
+          <span v-if="item.ngay_sinh">{{ format(addDays(new Date(item?.ngay_sinh), 1), 'dd/MM/yyyy') }}</span>
+          <span v-else><v-icon color="error">mdi-alert-circle</v-icon></span>
+        </template>
       </v-data-table-virtual>
     </div>
     <div v-else>
+      <div class="d-flex align-center">
+        <v-icon class="mr-1" color="warning">mdi-alert</v-icon>
+        <span>File phải nhỏ hơn 5MB. Định dạng xlsx</span>
+      </div>
       <div class="mt-5">
         Tải xuống mẫu import dữ liệu:
         <a download href="/files/teacher_template.xlsx" target="_blank">download</a>
       </div>
       <div class="mt-4">
         <div class="max-w-[520px] ma-auto d-flex">
-          <v-file-input v-model="file" accept=".xlsx" class="w-full mr-4" label="File dữ liệu" variant="outlined" />
+          <v-file-input show-size v-model="file" accept=".xlsx" class="w-full mr-4" label="File dữ liệu" variant="outlined" />
           <div class="d-none">
             <app-text-field v-model="file" rules="required" />
           </div>
