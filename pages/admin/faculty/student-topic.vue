@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
 import CreateStudentTopic from '~/components/admin/student-topic/molecules/CreateStudentTopic.vue'
@@ -51,7 +52,7 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
     <div class="text-lg font-bold text-uppercase">Quản lý sinh viên khóa luận</div>
     <v-card class="px-3 py-2 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
-        <v-dialog min-width="400" width="40%">
+        <v-dialog min-width="600" width="60%">
           <template #activator="{ props: activatorProps }">
             <v-btn color="success" size="small" v-bind="activatorProps">
               <v-icon>mdi-plus</v-icon>
@@ -67,7 +68,7 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
           class="h-[24px] w-[250px] ml-2"
           clearable
           density="compact"
-          placeholder="Tên/Mã số giảng viên"
+          placeholder="Tên/Mã số sinh viên"
           prepend-inner-icon="mdi-magnify"
           variant="plain"
         />
@@ -108,6 +109,9 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
           </template>
           <template #item.ten="{ item }">
             <span>{{ item.hodem + ' ' + item.ten }}</span>
+          </template>
+          <template #item.ngay_sinh="{ item }">
+            <span>{{ format(new Date(item.ngay_sinh), 'dd/MM/yyyy') }}</span>
           </template>
           <template #item.action="{ item }">
             <v-dialog min-width="400" width="40%">

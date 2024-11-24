@@ -133,7 +133,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
             <span>{{ item.hodem + ' ' + item.ten }}</span>
           </template>
           <template #item.ngay_sinh="{ item }">
-            <span v-if="item.ngay_sinh">{{ format(addDays(new Date(item?.ngay_sinh), 1), 'dd/MM/yyyy') }}</span>
+            <span v-if="item.ngay_sinh">{{ format(new Date(item?.ngay_sinh), 'dd/MM/yyyy') }}</span>
           </template>
           <template #item.action="{ item }">
             <v-dialog min-width="400" width="40%">

@@ -8,6 +8,7 @@ const form = ref({
   ten: '',
   email: '',
   maso: '',
+  ngay_sinh: '',
   roles: [],
 })
 
@@ -31,10 +32,11 @@ const createTeacher = () => {
     <app-text-field v-model="form.ten" label="Tên giảng viên" name="Tên giảng viên" rules="required" />
     <app-text-field v-model="form.email" label="Email" name="Email" rules="required|email" />
     <app-text-field v-model="form.maso" label="Mã số" name="Mã số" rules="required" />
+    <app-text-field v-model="form.ngay_sinh" label="Ngày sinh" name="Ngày sinh" />
     <div class="d-flex">
-      <v-switch color="success" hide-details label="Cán bộ môn" :model-value="form.roles" value="super_teacher" />
+      <v-switch color="success" hide-details label="Cán bộ môn" v-model="form.roles" value="super_teacher" />
       <v-spacer />
-      <v-switch color="success" hide-details label="Cán bộ khoa" :model-value="form.roles" value="admin" />
+      <v-switch color="success" hide-details label="Cán bộ khoa" v-model="form.roles" value="admin" />
     </div>
   </form-card>
 </template>

@@ -44,7 +44,7 @@ const importTeacher = () => {
       } else {
         $toast.success('Import giảng viên thành công')
       }
-      queryClient.invalidateQueries('student-topic')
+      queryClient.invalidateQueries('teacher')
       emit('cancel')
       emit('success')
     })
@@ -83,12 +83,6 @@ const preview = () => {
     reader.readAsBinaryString(file.value)
   }
 }
-
-const getFileExtension = (fileName) => {
-  if (!fileName) return 'unknown'
-  const parts = fileName.split('.')
-  return parts.length > 1 ? parts.pop().toLowerCase() : null
-}
 </script>
 
 <template>
@@ -124,7 +118,7 @@ const getFileExtension = (fileName) => {
         </template>
 
         <template #item.ngay_sinh="{ item }">
-          <span v-if="item.ngay_sinh">{{ format(addDays(new Date(item?.ngay_sinh), 1), 'dd/MM/yyyy') }}</span>
+          <span v-if="item.ngay_sinh">{{ item.ngay_sinh }}</span>
           <span v-else><v-icon color="error">mdi-alert-circle</v-icon></span>
         </template>
       </v-data-table-virtual>
