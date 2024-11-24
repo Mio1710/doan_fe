@@ -48,6 +48,9 @@ const { $api, $toast } = useNuxtApp()
 const { data } = useAuth()
 
 const { items, totalItems, isLoading, refetch } = useGetIntern(queryBuilder)
+const hasRegistered = computed(() => {
+  return items.value.some(item => item.student.id === data.value.id)
+})
 </script>
 
 <template>
@@ -57,7 +60,7 @@ const { items, totalItems, isLoading, refetch } = useGetIntern(queryBuilder)
       <div class="d-flex items-center">
         <v-dialog min-width="400" width="40%">
           <template #activator="{ props: activatorProps }">
-            <v-btn color="success" size="small" v-bind="activatorProps">
+            <v-btn v-if="!hasRegistered" color="success" size="small" v-bind="activatorProps">
               <v-icon>mdi-plus</v-icon>
               <span>Đăng ký thực tập</span>
             </v-btn>
@@ -67,7 +70,7 @@ const { items, totalItems, isLoading, refetch } = useGetIntern(queryBuilder)
           </template>
         </v-dialog>
         <v-spacer />
-        <v-checkbox v-model="filters.viewAll" density="compact" hide-details label="Xem tất cả" />
+        <!-- <v-checkbox v-model="filters.viewAll" density="compact" hide-details label="Xem tất cả" /> -->
       </div>
 
       <!--Hiển thị thông tin thực tập của sinh viên-->

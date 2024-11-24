@@ -168,7 +168,7 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetIntern(query
         <template #item.action="{ item }">
         <v-dialog min-width="400" width="40%">
           <template #activator="{ props: activatorProps }">
-            <v-btn color="success" size="small" v-bind="activatorProps">
+            <v-btn v-if ="!item.teacher" color="success" size="small" v-bind="activatorProps">
               <span>Phân công</span>
             </v-btn>
           </template>

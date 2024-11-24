@@ -20,8 +20,8 @@ export class StudentInternAPI extends BaseApi {
     return this.delete(`/student-intern/${id}`)
   }
 
-  registerIntern(topic_id) {
-    return this.post('/student-intern/register', { topic_id })
+  registerIntern(intern_id) {
+    return this.post('/student-intern/register', { intern_id })
   }
 
   importStudentIntern(data) {

@@ -133,6 +133,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeacherIntern(queryBuild
           <template #item.maso="{ item }">
             <span>{{ item.student?.maso }}</span>
           </template>
+          <!--
           <template #item.status="{ item }">
             <div class="ma-2 text-center">
               <v-chip
@@ -158,6 +159,18 @@ const { items, totalItems, isLoading, refetch } = useGetTeacherIntern(queryBuild
               </v-chip>
               <v-chip
                 v-if="item.status != 'pending'"
+                :color="internStatus.statusColor(item.status)"
+                size="small"
+                variant="flat"
+              >
+                <span>{{ internStatus.statusType(item.status) }}</span>
+              </v-chip>
+            </div>
+          </template>
+          -->
+          <template #item.status="{ item }">
+            <div class="ma-2 text-center">
+              <v-chip
                 :color="internStatus.statusColor(item.status)"
                 size="small"
                 variant="flat"
