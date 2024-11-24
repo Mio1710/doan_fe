@@ -22,6 +22,7 @@ const props = defineProps({
   },
 })
 const value = defineModel()
+const isRequired = computed(() => props.rules.includes('required'))
 </script>
 
 <template>
@@ -31,7 +32,7 @@ const value = defineModel()
         v-if="props.type === 'textarea'"
         v-model="value"
         :error-messages="errorMessage"
-        :label="props.label"
+        :label="`${props.label}${isRequired ? '*' : ''}`"
         :name="props.name"
         :placeholder="props.placeholder"
         :type="props.type"
@@ -41,7 +42,7 @@ const value = defineModel()
         v-bind="$attrs"
         v-model="value"
         :error-messages="errorMessage"
-        :label="props.label"
+        :label="`${props.label}${isRequired ? '*' : ''}`"
         :name="props.name"
         :placeholder="props.placeholder"
         :type="props.type"

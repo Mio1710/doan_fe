@@ -41,4 +41,16 @@ export class AdminApi extends BaseApi {
   resetPassword(id) {
     return this.put(`/admin/teachers/${id}/reset-password`)
   }
+
+  createStudentTopic(data) {
+    return this.post('/admin/student-topic', data)
+  }
+
+  updateStudentTopic(id, data) {
+    return this.put(`/admin/student-topic/${id}/info`, data)
+  }
+
+  deleteStudentTopic(id) {
+    return this.delete(`/admin/student-topic/${id}`)
+  }
 }

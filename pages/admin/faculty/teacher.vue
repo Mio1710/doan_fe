@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
+import { addDays, format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import ImportTeacher from '~/components/admin/super/molecules/ImportTeacher.vue'
 import useGetTeachers from '~/composables/admin/use-get-teachers'
 import UpdateTeacher from '~/components/teacher/topic/molecules/UpdateTeacher.vue'
-import CreateTeacher from "~/components/teacher/topic/molecules/CreateTeacher.vue";
-import DeleteTeacherConfirmDialog from "~/components/admin/teacher/molecules/DeleteTeacherConfirmDialog.vue";
+import CreateTeacher from '~/components/teacher/topic/molecules/CreateTeacher.vue'
+import DeleteTeacherConfirmDialog from '~/components/admin/teacher/molecules/DeleteTeacherConfirmDialog.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -25,6 +26,7 @@ const headers = [
   },
   { title: 'Giảng viên', key: 'ten', width: '20%', minWidth: 200 },
   { title: 'Mã số', key: 'maso', minWidth: 200 },
+  { title: 'Ngày sinh', key: 'ngay_sinh', minWidth: 100 },
   { title: 'Cán bộ môn', key: 'is_super_teacher', width: '15%', minWidth: 100, align: 'center' },
   { title: 'Cán bộ khoa', key: 'is_admin', width: '15%', minWidth: 100, align: 'center' },
   { title: '', key: 'action', width: 100 },
@@ -78,8 +80,10 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
           v-model="filters.q"
           class="h-[24px] w-[250px] ml-2"
           clearable
+          density="compact"
           placeholder="Tên/Mã số giảng viên"
           prepend-inner-icon="mdi-magnify"
+          variant="plain"
         />
         <v-spacer />
         <v-dialog min-width="400" width="40%">
@@ -127,6 +131,9 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
           </template>
           <template #item.ten="{ item }">
             <span>{{ item.hodem + ' ' + item.ten }}</span>
+          </template>
+          <template #item.ngay_sinh="{ item }">
+            <span v-if="item.ngay_sinh">{{ format(addDays(new Date(item?.ngay_sinh), 1), 'dd/MM/yyyy') }}</span>
           </template>
           <template #item.action="{ item }">
             <v-dialog min-width="400" width="40%">
