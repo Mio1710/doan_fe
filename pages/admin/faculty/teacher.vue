@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
-import { format } from 'date-fns'
+import { addDays, format } from 'date-fns'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
-import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
 import ImportTeacher from '~/components/admin/super/molecules/ImportTeacher.vue'
 import useGetTeachers from '~/composables/admin/use-get-teachers'
-import UpdateTeacher from "~/components/teacher/topic/molecules/UpdateTeacher.vue";
+import UpdateTeacher from '~/components/teacher/topic/molecules/UpdateTeacher.vue'
+import CreateTeacher from '~/components/teacher/topic/molecules/CreateTeacher.vue'
+import DeleteTeacherConfirmDialog from '~/components/admin/teacher/molecules/DeleteTeacherConfirmDialog.vue'
 
 definePageMeta({
   layout: 'auth',
   middleware: ['is-admin'],
 })
-const isCreate = ref(false)
-const semester = ref('')
+
+const filters = ref({
+  q: '',
+})
 const headers = [
   {
     title: 'STT',
@@ -24,9 +26,10 @@ const headers = [
   },
   { title: 'Giảng viên', key: 'ten', width: '20%', minWidth: 200 },
   { title: 'Mã số', key: 'maso', minWidth: 200 },
+  { title: 'Ngày sinh', key: 'ngay_sinh', minWidth: 100 },
   { title: 'Cán bộ môn', key: 'is_super_teacher', width: '15%', minWidth: 100, align: 'center' },
   { title: 'Cán bộ khoa', key: 'is_admin', width: '15%', minWidth: 100, align: 'center' },
-  { title: '', key: 'action', width: 30 },
+  { title: '', key: 'action', width: 100 },
 ]
 const serverOptions = ref({
   page: 1,
@@ -36,6 +39,7 @@ const serverOptions = ref({
 })
 const queryBuilder = computed(() => ({
   ...serverOptions.value,
+  filters: filters.value,
 }))
 
 const { $api, $toast } = useNuxtApp()
@@ -53,19 +57,6 @@ const handleActive = (item, role) => {
   }
 }
 
-const createSemester = () => {
-  try {
-    $api.semester.createSemester({ ten: semester.value }).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Tạo mới thành công')
-      isCreate.value = false
-      semester.value = ''
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
 </script>
 
@@ -74,7 +65,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
     <div class="text-lg font-bold text-uppercase">Quản lý giảng viên</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
-        <v-dialog min-width="400" width="40%">
+        <v-dialog min-width="600" width="60%">
           <template #activator="{ props: activatorProps }">
             <v-btn color="success" size="small" v-bind="activatorProps">
               <v-icon>mdi-plus</v-icon>
@@ -85,6 +76,28 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
             <import-teacher @cancel="isActive.value = false" @success="refetch" />
           </template>
         </v-dialog>
+        <app-text-field
+          v-model="filters.q"
+          class="h-[24px] w-[250px] ml-2"
+          clearable
+          density="compact"
+          placeholder="Tên/Mã số giảng viên"
+          prepend-inner-icon="mdi-magnify"
+          variant="plain"
+        />
+        <v-spacer />
+        <v-dialog min-width="400" width="40%">
+          <template #activator="{ props: activatorProps }">
+            <v-btn color="success" size="small" v-bind="activatorProps">
+              <v-icon>mdi-plus</v-icon>
+              <span>Thêm giảng viên</span>
+            </v-btn>
+          </template>
+          <template #default="{ isActive }">
+            <create-teacher @cancel="isActive.value = false" @success="refetch" />
+          </template>
+        </v-dialog>
+        <v-btn icon="mdi-refresh" variant="plain" @click="refetch" />
       </div>
       <div class="mt-2 h-[calc(100%_-_45px)] overflow-y-hidden">
         <v-data-table-virtual
@@ -119,6 +132,9 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
           <template #item.ten="{ item }">
             <span>{{ item.hodem + ' ' + item.ten }}</span>
           </template>
+          <template #item.ngay_sinh="{ item }">
+            <span v-if="item.ngay_sinh">{{ format(new Date(item?.ngay_sinh), 'dd/MM/yyyy') }}</span>
+          </template>
           <template #item.action="{ item }">
             <v-dialog min-width="400" width="40%">
               <template #activator="{ props: activatorProps }">
@@ -130,6 +146,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeachers(queryBuilder)
                 <update-teacher :teacher="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
+            <delete-teacher-confirm-dialog :teacher="item" @success="refetch" />
           </template>
         </v-data-table-virtual>
       </div>

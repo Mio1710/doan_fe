@@ -25,7 +25,9 @@ export class StudentTopicAPI extends BaseApi {
   }
 
   importStudentTopic(data) {
-    return this.post('/student-topic/import', data)
+    return this.post('/student-topic/import', data, {
+      responseType: 'blob',
+    })
   }
 
   getRegistedTopic() {
