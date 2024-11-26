@@ -53,4 +53,20 @@ export class AdminApi extends BaseApi {
   deleteStudentTopic(id) {
     return this.delete(`/admin/student-topic/${id}`)
   }
+
+  getStudentInterns(params) {
+
+    return this.get('/admin/teachers/student-intern', { params })
+  }
+
+  createStudentIntern(data) {
+    return this.post('/admin/student-intern', data)
+  }
+
+  updateStudentIntern(id, data) {
+    return this.put(`/admin/student-intern/${id}/info`, data)
+  }
+  deleteStudentIntern(id) {
+    return this.delete(`/admin/student-intern/${id}`)
+}
 }

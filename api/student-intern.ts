@@ -25,7 +25,9 @@ export class StudentInternAPI extends BaseApi {
   }
 
   importStudentIntern(data) {
-    return this.post('/student-intern/import', data)
+    return this.post('/student-intern/import', data, {
+      responseType: 'blob',
+    })
   }
 
   updateIntern(data) {

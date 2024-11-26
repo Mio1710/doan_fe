@@ -28,7 +28,7 @@ const queryClient = useQueryClient()
 const importStudentIntern = () => {
   form.value.status = 'pending'
   $api.intern.updateIntern(form.value.id, form.value).then(() => {
-    $toast.success('Đăng ký thành công')
+    $toast.success('Cập nhật thành công')
     queryClient.invalidateQueries('intern')
     emit('cancel')
   })

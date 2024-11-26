@@ -5,6 +5,7 @@ import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import CreateIntern from '~/components/student/company/molecules/CreateIntern.vue'
 import internStatus from '~/plugins/filters/intern-status'
 import UpdateIntern from '~/components/student/company/molecules/UpdateIntern.vue'
+import DeleteIntern from '~/components/student/company/molecules/DeleteIntern.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -47,6 +48,14 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 const { data } = useAuth()
 
+const queryClient = useQueryClient()
+// const deleteIntern = (id) => {
+//   $api.intern.deleteIntern(id).then(() => {
+//     queryClient.invalidateQueries('intern')
+//     $toast.success('Huỷ đăng ký thành công')
+//   })
+// }
+
 const { items, totalItems, isLoading, refetch } = useGetIntern(queryBuilder)
 const hasRegistered = computed(() => {
   return items.value.some(item => item.student.id === data.value.id)
@@ -69,8 +78,18 @@ const hasRegistered = computed(() => {
             <create-intern @cancel="isActive.value = false" />
           </template>
         </v-dialog>
+        <v-dialog min-width="400" width="40%">
+          <template #activator="{ props: activatorProps }">
+            <v-btn v-if="hasRegistered" color="error" size="small" v-bind="activatorProps">
+              <v-icon>mdi-cancel</v-icon>
+              <span>Hủy đăng ký</span>
+            </v-btn>
+          </template>
+          <template #default="{ isActive }">
+            <delete-intern :intern="items" @success="refetch()" />
+          </template>
+        </v-dialog>
         <v-spacer />
-        <!-- <v-checkbox v-model="filters.viewAll" density="compact" hide-details label="Xem tất cả" /> -->
       </div>
 
       <!--Hiển thị thông tin thực tập của sinh viên-->
