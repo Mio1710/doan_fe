@@ -19,4 +19,9 @@ export class ReportReportTopicAPI extends BaseApi {
   deleteReportTopic(id) {
     return this.delete(`/report-topic/${id}`)
   }
+
+  downloadReportTopic(key) {
+    console.log('key', key)
+    return this.get('/report-topic/file', { params: { key }, responseType: 'blob' })
+  }
 }
