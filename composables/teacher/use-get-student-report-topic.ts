@@ -2,14 +2,13 @@ import { computed } from 'vue'
 import { UnwrapRef } from 'vue-demi'
 import { useQuery } from 'vue-query'
 
-export default function useGetMyReportTopics(params?: UnwrapRef<any>, options?: any) {
+export default function useGetStudentReportTopics(params?: UnwrapRef<any>, options?: any) {
   const { $api } = useNuxtApp()
 
   const query = useQuery(
-    ['my-report-topic', params],
+    ['student-report-topic', params],
     () => {
-      console.log('params in useQuery', params)
-      return $api.teacher.getStudentReportTopics(params)
+      return $api.teacher.getStudentReportTopics()
     },
     {
       refetchOnWindowFocus: false,

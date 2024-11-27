@@ -1,9 +1,5 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
-import { format } from 'date-fns'
-import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import ImportStudentTopic from '~/components/admin/student-topic/molecules/ImportStudentTopic.vue'
-import useGetAlStudentTopics from '~/composables/super-teachers/use-get-all-student-topic'
 import useGetAllStudentTopics from '~/composables/super-teachers/use-get-all-student-topic'
 
 definePageMeta({
