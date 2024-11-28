@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
-import { format } from 'date-fns'
 import topicStatus from '../../../plugins/filters/topic-status'
-import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import CreateTopic from '~/components/teacher/topic/molecules/CreateTopic.vue'
 
 definePageMeta({
   layout: 'auth',

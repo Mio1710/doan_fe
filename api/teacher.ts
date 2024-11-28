@@ -17,6 +17,11 @@ export class TeacherApi extends BaseApi {
   }
 
   getStudentReportTopics(params) {
+    console.log('params in getStudentReportTopics', params)
     return this.get('/teachers/student-topic/report', { params })
+  }
+
+  commentStudentReportTopic(id, data) {
+    return this.put(`/teachers/student-topic/report/${id}/comment`, data)
   }
 }
