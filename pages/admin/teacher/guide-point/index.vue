@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
-import internStatus from '../../../plugins/filters/topic-status'
+import internStatus from '../../../../plugins/filters/topic-status'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import CreateIntern from '~/components/student/company/molecules/CreateIntern.vue'
+import useTeacherGetStudentInterns from '~/composables/teacher/use-teacher-get-student-intern'
 
 definePageMeta({
   layout: 'auth',
@@ -13,6 +14,10 @@ definePageMeta({
 //   layout: 'auth',
 //   middleware: ['is-admin'],
 // })
+
+const redirect = (id) => {
+  navigateTo(`guide-point/${id}`)
+}
 
 const isCreate = ref(false)
 const semester = ref('')
@@ -34,8 +39,8 @@ const headers = [
   { title: 'SĐT người hướng dẫn', key: 'supervisor_phone', width: '10%', minWidth: 100 },
   { title: 'Email người hướng dẫn', key: 'supervisor_email', width: '10%', minWidth: 150 },
   { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100, align: 'center' },
-  { title: 'Chi tiết', key: '', width: '10%', minWidth: 100 },
-  { title: '', key: 'action', width: 30 },
+  { title: 'Chi tiết', key: 'action', width: '10%', minWidth: 100, sortable: false, align: 'center' },
+  // { title: '', key: 'action', width: 30 },
 ]
 const serverOptions = ref({
   page: 1,
@@ -55,6 +60,17 @@ const queryBuilder = computed(() => ({
 
 const { $api, $toast } = useNuxtApp()
 const { data } = useAuth()
+
+const handleActive = (item) => {
+  try {
+    $api.semester.activeSemester(item.id).then(() => {
+      queryClient.invalidateQueries('semester')
+      $toast.success('Đã cập nhật trạng thái thành công')
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 // const { items, totalItems, isLoading, refetch } = useQuery(['interns', 'teacher'], () =>
 //   $api.intern.getInternsByTeacher()
@@ -78,7 +94,7 @@ const { items, totalItems, isLoading, refetch } = useGetTeacherIntern(queryBuild
 
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
-    <div class="text-lg font-bold text-uppercase">Duyệt đăng ký thực tập</div>
+    <div class="text-lg font-bold text-uppercase">Danh sách thực tập</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex">
         <div class="d-flex">
@@ -178,6 +194,21 @@ const { items, totalItems, isLoading, refetch } = useGetTeacherIntern(queryBuild
                 <span>{{ internStatus.statusType(item.status) }}</span>
               </v-chip>
             </div>
+          </template>
+          <template #item.action="{ item }">
+            <v-btn rounded variant="text" @click="redirect(item.id)">
+              <v-icon color="success">mdi-eye</v-icon>
+            </v-btn>
+            <v-dialog min-width="800" width="80%">
+              <!-- <template #activator="{ props: activatorProps }">
+                <v-btn rounded variant="text" v-bind="activatorProps">
+                  <v-icon color="success">mdi-pencil</v-icon>
+                </v-btn>
+              </template> -->
+              <template #default="{ isActive }">
+                <result-detail :item="item" @cancel="isActive.value = false" @success="refetch" />
+              </template>
+            </v-dialog>
           </template>
         </v-data-table>
       </div>

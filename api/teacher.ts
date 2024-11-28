@@ -19,4 +19,8 @@ export class TeacherApi extends BaseApi {
   getStudentReportTopics(params) {
     return this.get('/teachers/student-topic/report', { params })
   }
+
+  getStudentReportInterns(params) {
+    return this.get('/teachers/student-intern/report', { params })
+  }
 }

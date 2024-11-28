@@ -13,7 +13,7 @@ export class ReportReportInternAPI extends BaseApi {
   }
 
   updateReportIntern(id, data) {
-    return this.put(`/report-intenr/${id}`, data)
+    return this.put(`/report-intern/${id}`, data)
   }
 
   deleteReportIntern(id) {

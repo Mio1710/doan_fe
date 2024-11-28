@@ -5,7 +5,8 @@ import { format } from 'date-fns'
 import AppForm from '~/components/common/molecules/AppForm.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import useGetMyReportInterns from '~/composables/student/use-get-my-report-intern'
-import UpdateReportIntern from '~/components/student/company/molecules/UpdateReportIntern.vue'
+import UpdateReportIntern from '~/components/student/company/molecules/UpdateReportIntern.vue' 
+import useGetStudentReportInterns from "~/composables/teacher/use-get-student-report-intern";
 
 definePageMeta({
   layout: 'auth',
@@ -48,7 +49,10 @@ const downloadFile = (item) => {
   })
 }
 const panel = ref([])
-const { items, totalItems, isLoading, refetch } = useGetMyReportInterns()
+const route = useRoute()
+
+const studentId = route.params.id
+const { items, totalItems, isLoading, refetch } = useGetStudentReportInterns(studentId, { enabled: !!studentId })
 const onUpdate = (item) => {
   itemUpdate.value = item
   isUpdate.value = true
@@ -59,39 +63,6 @@ const onUpdate = (item) => {
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Báo cáo tiến độ thực tập</div>
     <v-card class="pa-3 h-full overflow-y-scroll" color="white" variant="flat">
-      <update-report-intern v-if="isUpdate" :item="itemUpdate" @success="isUpdate = false" />
-      <app-form v-else v-slot="{ handleSubmit }">
-        <app-text-field
-          v-model="form.week"
-          class="mb-5"
-          label="Tuần số"
-          name="Tuần số"
-          rules="required"
-          type="number"
-        />
-        <v-file-input
-          v-model="form.file"
-          accept=".doc,.docx,.pdf"
-          clearable
-          label="File báo cáo"
-          name="File báo cáo"
-          :prepend-icon="false"
-          prepend-inner-icon="mdi-paperclip"
-          show-size
-          variant="outlined"
-        />
-        <app-text-field
-          v-model="form.description"
-          class="mb-4"
-          label="Mô tả"
-          name="Mô tả"
-          rules="required"
-          type="textarea"
-        />
-        <div class="w-full text-center mb-4">
-          <v-btn color="success" :loading="loading" size="small" @click="handleSubmit(onSubmit)">Nộp báo cáo</v-btn>
-        </div>
-      </app-form>
       <div v-if="items">
         <v-expansion-panels v-model="panel" multiple>
           <v-expansion-panel v-for="(item, index) in items" :key="index">
