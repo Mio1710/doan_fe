@@ -7,8 +7,9 @@ definePageMeta({
   layout: 'auth',
   middleware: ['is-admin'],
 })
-const isCreate = ref(false)
-const semester = ref('')
+const redirect = (id) => {
+  navigateTo(`review-point/${id}`)
+}
 const headers = [
   {
     title: 'STT',
@@ -22,7 +23,7 @@ const headers = [
   { title: 'Lớp', key: 'lop', width: '15%', minWidth: 150 },
   { title: 'Nhóm', key: 'nhom', width: '5%', minWidth: 50 },
   { title: 'Đề tài', key: 'topic' },
-  { title: 'Nhập điểm', key: 'action', width: 100, sortable: false, align: 'center' },
+  { title: 'Nhập điểm', key: 'action', width: 150, sortable: false, align: 'center' },
 ]
 const serverOptions = ref({
   page: 1,
@@ -79,6 +80,9 @@ const { items, totalItems, isLoading, refetch } = useTeacherGetStudentTopics(que
           </template>
 
           <template #item.action="{ item }">
+            <v-btn rounded variant="text" @click="redirect(item.id)">
+              <v-icon color="success">mdi-eye</v-icon>
+            </v-btn>
             <v-dialog min-width="800" width="80%">
               <template #activator="{ props: activatorProps }">
                 <v-btn rounded variant="text" v-bind="activatorProps">

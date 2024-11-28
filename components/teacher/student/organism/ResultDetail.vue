@@ -12,9 +12,6 @@ const { $api, $toast } = useNuxtApp()
 const studentId = ref(props.item.id)
 const { items, isLoading, error, refetch } = useGetStudentResultTopicLOs(
   { studentId: studentId.value },
-  {
-    enabled: !!studentId.value,
-  },
 )
 const headers = [
   {
@@ -64,11 +61,12 @@ const submit = () => {
 <template>
   <form-card
     can-cancel
-    @cancel="emit('cancel')"
     cancel-text="Đóng"
     :title="`Điểm quá trình của sinh viên: ${item?.hodem} ${item?.ten}`"
+    @cancel="emit('cancel')"
     @submit="submit"
   >
+<!--    <v-data-table :headers="headers" hide-default-footer :items="itemsClone" :loading="isLoading" />-->
     <v-table class="elevation-1">
       <thead>
         <tr>
@@ -83,18 +81,13 @@ const submit = () => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in itemsClone" :key="item.id">
+        <tr class="v-data-table__tr" v-for="(lo, index) in items" :key="index">
           <td class="text-center">{{ index + 1 }}</td>
-          <td>{{ item.main_criteria }}</td>
-          <td>{{ item.sub_criteria }}</td>
-          <td class="text-center">{{ item.cof }}</td>
+          <td>{{ lo.main_criteria }}</td>
+          <td>{{ lo.sub_criteria }}</td>
+          <td class="text-center">{{ lo.cof }}</td>
           <td class="text-center">
-            <v-text-field
-              v-model="item.score"
-              type="number"
-              variant="plain"
-              @change="handleInvalidScore(item, index)"
-            />
+            <v-text-field v-model="lo.score" type="number" variant="plain" @change="handleInvalidScore(lo, index)" />
           </td>
         </tr>
       </tbody>

@@ -15,4 +15,8 @@ export class TeacherApi extends BaseApi {
   changePassword(data) {
     return this.put('/teachers/change-password', data)
   }
+
+  getStudentReportTopics(params) {
+    return this.get('/teachers/student-topic/report', { params })
+  }
 }
