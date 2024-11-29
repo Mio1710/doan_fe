@@ -1,7 +1,7 @@
 import { BaseApi } from '~/api/base'
 export class AdminApi extends BaseApi {
   getTeachers(params) {
-    return this.get('/admin/teachers', { params })
+    return this.get('/public/teachers', { params })
   }
 
   getTeacher(id) {

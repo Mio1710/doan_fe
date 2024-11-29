@@ -2,7 +2,7 @@
 import { useQueryClient } from 'vue-query'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import TeacherAutocomplete from "~/components/common/atoms/TeacherAutocomplete.vue";
+import TeacherAutocomplete from '~/components/common/atoms/TeacherAutocomplete.vue'
 
 const form = reactive({
   name: '',
@@ -25,6 +25,6 @@ const createFaculty = () => {
 <template>
   <form-card can-cancel cancel-text="Hủy" title="Tạo nhóm" @cancel="emit('cancel')" @submit="createFaculty">
     <app-text-field v-model="form.name" name="Tên nhóm" rules="required" />
-    <teacher-autocomplete v-model="form.teacher_ids" name="Giảng viên" rules="required" />
+    <teacher-autocomplete v-model="form.teacher_ids" :multiple="true" name="Giảng viên" rules="required" />
   </form-card>
 </template>

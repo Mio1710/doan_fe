@@ -31,6 +31,6 @@ const updateTeacherGroup = () => {
 <template>
   <form-card can-cancel cancel-text="Hủy" title="Tạo nhóm" @cancel="emit('cancel')" @submit="updateTeacherGroup">
     <app-text-field v-model="form.name" name="Tên nhóm" rules="required" />
-    <teacher-autocomplete v-model="form.teacher_ids" name="Giảng viên" rules="required" />
+    <teacher-autocomplete v-model="form.teacher_ids" :multiple="true" name="Giảng viên" rules="required" />
   </form-card>
 </template>
