@@ -13,13 +13,6 @@ definePageMeta({
 const isCreate = ref(false)
 const semester = ref('')
 const headers = [
-  // {
-  //   title: 'STT',
-  //   align: 'center',
-  //   sortable: false,
-  //   key: 'index',
-  //   width: 50,
-  // },
   { title: 'Tên công ty', key: 'company_name', width: '15%', minWidth: 150 },
   { title: 'Địa chỉ', key: 'address', width: '15%', minWidth: 150 },
   { title: 'Email công ty', key: 'company_email', width: '10%', minWidth: 100 },
@@ -78,7 +71,7 @@ const hasRegistered = computed(() => {
             <create-intern @cancel="isActive.value = false" />
           </template>
         </v-dialog>
-        <v-dialog min-width="400" width="40%">
+        <!-- <v-dialog min-width="400" width="40%">
           <template #activator="{ props: activatorProps }">
             <v-btn v-if="hasRegistered" color="error" size="small" v-bind="activatorProps">
               <v-icon>mdi-cancel</v-icon>
@@ -88,7 +81,7 @@ const hasRegistered = computed(() => {
           <template #default="{ isActive }">
             <delete-intern :intern="items" @success="refetch()" />
           </template>
-        </v-dialog>
+        </v-dialog> -->
         <v-spacer />
       </div>
 
@@ -125,6 +118,7 @@ const hasRegistered = computed(() => {
                 <update-intern :intern="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
+            <delete-intern v-if="item.status == 'pending'" :intern="item" @success="refetch" />
           </template>
         </v-data-table-virtual>
       </div>
