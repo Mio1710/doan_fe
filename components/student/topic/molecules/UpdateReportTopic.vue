@@ -12,7 +12,7 @@ const props = defineProps({
 })
 
 const loading = ref(false)
-const form = ref({ ...props.item })
+const form = ref(props.item)
 const { $api, $toast } = useNuxtApp()
 const queryClient = useQueryClient()
 const emit = defineEmits(['success'])

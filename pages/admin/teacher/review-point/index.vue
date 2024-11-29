@@ -2,6 +2,7 @@
 import { useQueryClient } from 'vue-query'
 import useTeacherGetStudentTopics from '~/composables/teacher/use-teacher-get-student-topic'
 import ResultDetail from '~/components/teacher/student/organism/ResultDetail.vue'
+import ReportDetail from '~/components/teacher/student/organism/ReportDetail.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -80,9 +81,16 @@ const { items, totalItems, isLoading, refetch } = useTeacherGetStudentTopics(que
           </template>
 
           <template #item.action="{ item }">
-            <v-btn rounded variant="text" @click="redirect(item.id)">
-              <v-icon color="success">mdi-eye</v-icon>
-            </v-btn>
+            <v-dialog min-width="800" width="80%">
+              <template #activator="{ props: activatorProps }">
+                <v-btn rounded variant="text" v-bind="activatorProps">
+                  <v-icon color="success">mdi-eye</v-icon>
+                </v-btn>
+              </template>
+              <template #default="{ isActive }">
+                <report-detail :item="item" @cancel="isActive.value = false" @success="refetch" />
+              </template>
+            </v-dialog>
             <v-dialog min-width="800" width="80%">
               <template #activator="{ props: activatorProps }">
                 <v-btn rounded variant="text" v-bind="activatorProps">

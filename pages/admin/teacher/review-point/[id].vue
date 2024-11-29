@@ -2,10 +2,6 @@
 import { serialize } from 'object-to-formdata'
 import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
-import AppForm from '~/components/common/molecules/AppForm.vue'
-import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import useGetMyReportTopics from '~/composables/student/use-get-my-report-topic'
-import UpdateReportTopic from '~/components/student/topic/molecules/UpdateReportTopic.vue'
 import useGetStudentReportTopics from "~/composables/teacher/use-get-student-report-topic";
 
 definePageMeta({
@@ -52,7 +48,8 @@ const panel = ref([])
 const route = useRoute()
 
 const studentId = route.params.id
-const { items, totalItems, isLoading, refetch } = useGetStudentReportTopics(studentId, { enabled: !!studentId })
+console.log('studentId', studentId)
+const { items, totalItems, isLoading, refetch } = useGetStudentReportTopics(studentId)
 const onUpdate = (item) => {
   itemUpdate.value = item
   isUpdate.value = true

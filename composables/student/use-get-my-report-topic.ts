@@ -8,8 +8,7 @@ export default function useGetMyReportTopics(params?: UnwrapRef<any>, options?: 
   const query = useQuery(
     ['my-report-topic', params],
     () => {
-      console.log('params in useQuery', params)
-      return $api.teacher.getStudentReportTopics(params)
+      return $api.reportTopic.getReportTopics()
     },
     {
       refetchOnWindowFocus: false,

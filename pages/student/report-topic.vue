@@ -51,6 +51,7 @@ const panel = ref([])
 const { items, totalItems, isLoading, refetch } = useGetMyReportTopics()
 const onUpdate = (item) => {
   itemUpdate.value = item
+  console.log('itemUpdate', itemUpdate.value, item)
   isUpdate.value = true
 }
 </script>
@@ -105,8 +106,8 @@ const onUpdate = (item) => {
             <v-expansion-panel-text>
               <div class="d-flex items-center">
                 <div>
-                  File báo cáo:
-                  <span class="cursor-pointer underline text-blue-400" @click="downloadFile(item)">
+                  <span class="font-weight-bold">File báo cáo:</span>
+                  <span class="cursor-pointer underline text-blue-400 ml-2" @click="downloadFile(item)">
                     {{ item.file_name }}
                   </span>
                 </div>
@@ -121,8 +122,11 @@ const onUpdate = (item) => {
                 />
               </div>
               <div>
-                <div>Mô tả: {{ item.description }}</div>
-                <div>Nhận xét của giảng viên:</div>
+                <div>
+                  <span class="font-weight-bold">Mô tả:</span>
+                  {{ item.description }}
+                </div>
+                <div class="font-weight-bold">Nhận xét của giảng viên:</div>
                 <div>{{ item.comment }}</div>
               </div>
             </v-expansion-panel-text>
