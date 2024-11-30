@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import useGetTeachers from '~/composables/admin/use-get-teachers'
-
+const props = defineProps({
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+})
 const model = defineModel()
-const search = ref('')
 const serverOptions = ref({
   page: 1,
   rowsPerPage: 100,
@@ -28,7 +32,7 @@ const { items, isLoading } = useGetTeachers(queryBuilder)
       :items="items"
       label="Giảng viên"
       :loading="isLoading"
-      multiple
+      :multiple="multiple"
     />
   </div>
 </template>
