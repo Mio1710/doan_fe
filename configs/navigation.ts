@@ -80,6 +80,11 @@ export const TeacherMenu: menu = {
       to: '/admin/teacher',
     },
     {
+      title: 'Đề tài đề xuất',
+      icon: 'mdi-account',
+      to: '/admin/teacher/recommend-topic',
+    },
+    {
       title: 'Sinh viên thực tập',
       icon: 'mdi-view-dashboard',
       to: '/admin/teacher/guide-point',

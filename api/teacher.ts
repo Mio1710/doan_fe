@@ -24,4 +24,8 @@ export class TeacherApi extends BaseApi {
   commentStudentReportTopic(id, data) {
     return this.put(`/teachers/student-topic/report/${id}/comment`, data)
   }
+
+  getStudentRecommendTopic() {
+    return this.get('/teachers/student-topic/recommend-topics')
+  }
 }

@@ -27,4 +27,13 @@ export class TopicAPI extends BaseApi {
   resetTopic() {
     return this.put('/super-teacher/reset-topic')
   }
+
+  createRecommendTopic(data) {
+    return this.post('/recommend-topics', data)
+  }
+
+  getMyRecommendTopic() {
+    return this.get('/recommend-topics')
+  }
+
 }

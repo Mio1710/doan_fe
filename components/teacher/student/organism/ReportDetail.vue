@@ -30,7 +30,7 @@ const downloadFile = (item) => {
 const panel = ref([])
 const studentTopicId = props.item.id
 const queryBuilder = computed(() => ({
-  filters: { studentTopicId },
+  filters: { studentId: studentTopicId },
 }))
 
 const { items, totalItems, isLoading, refetch } = useGetStudentReportTopics(queryBuilder, {

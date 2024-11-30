@@ -5,8 +5,12 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  rules: {
+    type: String,
+    default: '',
+  },
 })
-const model = defineModel()
+const value = defineModel()
 const serverOptions = ref({
   page: 1,
   rowsPerPage: 100,
@@ -19,21 +23,26 @@ const queryBuilder = computed(() => ({
 
 const getFullName = (item) => `${item.maso} - ${item.hodem} ${item.ten}`
 const { items, isLoading } = useGetTeachers(queryBuilder)
+const isRequired = computed(() => props.rules.includes('required'))
+
 </script>
 
 <template>
   <div>
-    <v-autocomplete
-      v-model="model"
-      chips
-      closable-chips
-      :item-title="getFullName"
-      item-value="id"
-      :items="items"
-      label="Giảng viên"
-      :loading="isLoading"
-      :multiple="multiple"
-    />
+    <VeeField v-slot="{ errorMessage }" v-model="value" name="Giảng viên" :rules="props.rules">
+      <v-autocomplete
+        v-model="value"
+        chips
+        closable-chips
+        :error-messages="errorMessage"
+        :item-title="getFullName"
+        item-value="id"
+        :items="items"
+        :label="`Giảng viên${isRequired ? '*' : ''}`"
+        :loading="isLoading"
+        :multiple="multiple"
+      />
+    </VeeField>
   </div>
 </template>
 
