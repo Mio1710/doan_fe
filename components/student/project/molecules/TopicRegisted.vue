@@ -53,7 +53,7 @@ const headers = [
     <template #item.name="{ item }">
       <span v-html="item.name" />
     </template>
-    <template #item.gvhd="{ item }">{{ item?.createdBy.hodem }} {{ item?.createdBy.ten }}</template>
+    <template #item.gvhd="{ item }">{{ item?.createdBy?.hodem }} {{ item?.createdBy?.ten }}</template>
   </v-data-table>
 </template>
 

@@ -53,7 +53,7 @@ const registerTopic = (item) => {
     </template>
 
     <template #item.gv="{ item }">
-      <span>{{ item?.createdBy.hodem }} {{ item?.createdBy.ten }}</span>
+      <span>{{ item?.createdBy?.hodem }} {{ item?.createdBy?.ten }}</span>
     </template>
     <template #item.action="{ item }">
       <v-btn v-if="item.id == topicId" color="primary" size="x-small" @click="emit('viewAll')">Xem</v-btn>
