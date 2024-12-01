@@ -28,9 +28,9 @@ const downloadFile = (item) => {
   })
 }
 const panel = ref([])
-const studentInternId = props.item.id
+const studentInternId = props.item.student.id
 const queryBuilder = computed(() => ({
-  filters: { studentInternId },
+  filters: {studentId: studentInternId },
 }))
 
 const { items, totalItems, isLoading, refetch } = useGetStudentReportInterns(queryBuilder, {
@@ -51,7 +51,7 @@ const onUpdate = (item) => {
     can-cancel
     cancel-text="Đóng"
     hide-submit
-    :title="`Điểm quá trình của sinh viên: ${item?.hodem} ${item?.ten}`"
+    :title="`Báo cáo quá trình thực tập của sinh viên:`"
     @cancel="emit('cancel')"
   >
     <div v-if="items">

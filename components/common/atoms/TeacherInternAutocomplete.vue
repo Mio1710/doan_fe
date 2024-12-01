@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useGetTeachers from '~/composables/admin/use-get-teachers'
+import useGetTeacherss from '~/composables/admin/use-get-teacherss'
 
 const model = defineModel()
 const search = ref('')
@@ -14,7 +14,7 @@ const queryBuilder = computed(() => ({
 }))
 
 const getFullName = (item) => `${item.maso} - ${item.hodem} ${item.ten}`
-const { items, isLoading } = useGetTeachers(queryBuilder)
+const { items, isLoading } = useGetTeacherss(queryBuilder)
 </script>
 
 <template>

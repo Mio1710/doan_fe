@@ -5,18 +5,14 @@ import internStatus from '../../../../plugins/filters/topic-status'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import CreateIntern from '~/components/student/company/molecules/CreateIntern.vue'
 import useTeacherGetStudentInterns from '~/composables/teacher/use-teacher-get-student-intern'
-
+import ReportInternDetail from '~/components/teacher/student/organism/ReportInternDetail.vue'
 definePageMeta({
   layout: 'auth',
   middleware: ['is-teacher'],
 })
-// definePageMeta({
-//   layout: 'auth',
-//   middleware: ['is-admin'],
-// })
 
-const redirect = (id) => {
-  navigateTo(`guide-point/${id}`)
+const redirect = (studentId) => {
+  navigateTo(`guide-point/${studentId}`)
 }
 
 const isCreate = ref(false)
@@ -32,7 +28,7 @@ const headers = [
   { title: 'Tên sinh viên', key: 'student', width: '10%', minWidth: 150 },
   { title: 'MSSV', key: 'maso', width: '5%', minWidth: 100 },
   { title: 'Tên công ty', key: 'company_name', width: '15%', minWidth: 150 },
-  { title: 'Địa chỉ', key: 'address', width: '20%', minWidth: 200 },
+  { title: 'Địa chỉ', key: 'address', width: '20%', minWidth: 150 },
   // { title: 'Email công ty', key: 'company_email', width: '10%', minWidth: 150 },
   // { title: 'SĐT công ty', key: 'company_phone', width: '10%', minWidth: 100 },
   { title: 'Tên người hướng dẫn', key: 'supervisor_name', width: '10%', minWidth: 150 },
@@ -50,7 +46,7 @@ const serverOptions = ref({
 })
 
 const filters = ref({
-  status: [],
+  status: ['pending', 'approved'],
 })
 
 const queryBuilder = computed(() => ({
@@ -149,41 +145,6 @@ const { items, totalItems, isLoading, refetch } = useGetTeacherIntern(queryBuild
           <template #item.maso="{ item }">
             <span>{{ item.student?.maso }}</span>
           </template>
-          <!--
-          <template #item.status="{ item }">
-            <div class="ma-2 text-center">
-              <v-chip
-                v-if="item.status == 'pending'"
-                class="mb-2"
-                color="success"
-                size="small"
-                variant="outlined"
-                @click="handleCheck(item, 'approved')"
-              >
-                <v-icon>mdi-check</v-icon>
-                <span>Duyệt</span>
-              </v-chip>
-              <v-chip
-                v-if="item.status == 'pending'"
-                color="error"
-                size="small"
-                variant="outlined"
-                @click="handleCheck(item, 'rejected')"
-              >
-                <v-icon>mdi-close</v-icon>
-                <span>Từ chối</span>
-              </v-chip>
-              <v-chip
-                v-if="item.status != 'pending'"
-                :color="internStatus.statusColor(item.status)"
-                size="small"
-                variant="flat"
-              >
-                <span>{{ internStatus.statusType(item.status) }}</span>
-              </v-chip>
-            </div>
-          </template>
-          -->
           <template #item.status="{ item }">
             <div class="ma-2 text-center">
               <v-chip
@@ -196,17 +157,17 @@ const { items, totalItems, isLoading, refetch } = useGetTeacherIntern(queryBuild
             </div>
           </template>
           <template #item.action="{ item }">
-            <v-btn rounded variant="text" @click="redirect(item.id)">
+            <!-- <v-btn rounded variant="text" @click="redirect(item.student.id)">
               <v-icon color="success">mdi-eye</v-icon>
-            </v-btn>
-            <v-dialog min-width="800" width="80%">
-              <!-- <template #activator="{ props: activatorProps }">
+            </v-btn> -->
+            <v-dialog min-width="80" width="80%">
+              <template #activator="{ props: activatorProps }">
                 <v-btn rounded variant="text" v-bind="activatorProps">
-                  <v-icon color="success">mdi-pencil</v-icon>
+                  <v-icon color="success">mdi-eye</v-icon>
                 </v-btn>
-              </template> -->
+              </template>
               <template #default="{ isActive }">
-                <result-detail :item="item" @cancel="isActive.value = false" @success="refetch" />
+                <report-intern-detail :item="item" @cancel="isActive.value = false" @success="refetch" />
               </template>
             </v-dialog>
           </template>
@@ -217,4 +178,3 @@ const { items, totalItems, isLoading, refetch } = useGetTeacherIntern(queryBuild
 </template>
 
 <style scoped></style>
-

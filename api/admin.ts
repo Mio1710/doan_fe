@@ -4,6 +4,11 @@ export class AdminApi extends BaseApi {
     return this.get('/public/teachers', { params })
   }
 
+  getTeacherss(params) {
+    return this.get('/admin/teachers', { params })
+  }
+
+
   getTeacher(id) {
     return this.get(`/admin/teachers/${id}`)
   }

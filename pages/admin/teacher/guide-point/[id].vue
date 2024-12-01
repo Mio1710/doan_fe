@@ -52,7 +52,7 @@ const panel = ref([])
 const route = useRoute()
 
 const studentId = route.params.id
-const { items, totalItems, isLoading, refetch } = useGetStudentReportInterns(studentId, { enabled: !!studentId })
+const { items, totalItems, isLoading, refetch } = useGetStudentReportInterns(studentId)
 const onUpdate = (item) => {
   itemUpdate.value = item
   isUpdate.value = true
