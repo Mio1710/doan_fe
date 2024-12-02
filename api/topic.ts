@@ -32,6 +32,10 @@ export class TopicAPI extends BaseApi {
     return this.post('/recommend-topics', data)
   }
 
+  updateRecommendTopic(id, data) {
+    return this.put(`/recommend-topics/${id}`, data)
+  }
+
   getMyRecommendTopic() {
     return this.get('/recommend-topics')
   }

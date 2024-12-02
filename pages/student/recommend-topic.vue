@@ -5,6 +5,7 @@ import AppForm from '~/components/common/molecules/AppForm.vue'
 import TeacherAutocomplete from '~/components/common/atoms/TeacherAutocomplete.vue'
 import useGetMyReportTopics from '~/composables/student/use-get-my-report-topic'
 import useGetMyRecommendTopics from '~/composables/student/use-get-my-recommend-topic'
+import {useQueryClient} from "vue-query";
 
 definePageMeta({
   layout: 'auth',
@@ -19,10 +20,36 @@ const form = reactive({
 })
 const { $api, $toast } = useNuxtApp()
 const loading = ref(false)
+const queryClient = useQueryClient()
 const onSubmit = () => {
+  loading.value = true
+  if (isUpdate.value) {
+    $api.topic
+      .updateRecommendTopic(items.value.id, form)
+      .then(() => {
+        $toast.success('Cập nhật đề tài thành công')
+        queryClient.invalidateQueries('my-recommend-topic')
+        isUpdate.value = false
+      })
+      .finally(() => {
+        loading.value = false
+      })
+    return
+  }
   $api.topic.createRecommendTopic(form).then(() => {
     $toast.success('Đăng ký đề tài thành công')
+    queryClient.invalidateQueries('my-recommend-topic')
   })
+}
+
+const isUpdate = ref(false)
+
+const onUpdate = () => {
+  isUpdate.value = true
+  form.ten = items.value.ten
+  form.description = items.value.description
+  form.teacher_id = items.value.teacher_id
+  form.knowledge = items.value.knowledge
 }
 
 const { items, isLoading, refetch } = useGetMyRecommendTopics()
@@ -32,7 +59,7 @@ const { items, isLoading, refetch } = useGetMyRecommendTopics()
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Đề xuất đề tài đồ án</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
-      <app-form v-if="!items" v-slot="{ handleSubmit }">
+      <app-form v-if="!items || isUpdate" v-slot="{ handleSubmit }">
         <app-text-field v-model="form.ten" label="Tên đề tài" name="Tên đề tài" rules="required" />
         <app-text-field v-model="form.description" label="Mô tả" name="Mô tả" rules="required" type="textarea" />
         <teacher-autocomplete v-model="form.teacher_id" class="mb-4" name="Giảng viên" rules="required" />
@@ -49,7 +76,7 @@ const { items, isLoading, refetch } = useGetMyRecommendTopics()
             <span>{{ topicStatus.statusType(items.status) }}</span>
           </v-chip>
           <v-spacer />
-          <v-btn color="success" icon size="x-small" variant="text">
+          <v-btn v-if="items.status != 'approved'" color="success" icon size="x-small" variant="text" @click="onUpdate">
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
         </div>

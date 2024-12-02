@@ -25,7 +25,7 @@ const headers = [
 ]
 const serverOptions = ref({
   page: 1,
-  rowsPerPage: 25,
+  rowsPerPage: 100,
   sortBy: '-created_at',
   sortType: 'asc',
 })
@@ -103,6 +103,7 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetTopic(queryB
           hide-default-footer
           :items="items"
           :loading="isFetching"
+          :items-per-page="serverOptions.rowsPerPage"
         >
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
