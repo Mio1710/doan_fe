@@ -7,7 +7,6 @@ const logout = () => {
   signOut()
   navigateTo('/login')
 }
-
 </script>
 
 <template>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import topicStatus from '~/plugins/filters/topic-status'
 import useGetStudentRecommendTopics from '~/composables/teacher/use-get-student-recommend-topic'
+import CreateTopic from '~/components/teacher/topic/molecules/CreateTopic.vue'
+import {useQueryClient} from "vue-query";
 
 definePageMeta({
   layout: 'auth',
@@ -18,8 +20,7 @@ const headers = [
   { title: 'Mô tả', key: 'description', width: '30%', minWidth: 350 },
   { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 150 },
   { title: 'Sinh viên', key: 'sv', width: '10%', minWidth: 100 },
-  { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100, align: 'center' },
-  { title: '', key: 'action', width: 30 },
+  { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 180, align: 'center' },
 ]
 const serverOptions = ref({
   page: 1,
@@ -32,10 +33,25 @@ const queryBuilder = computed(() => ({
   ...serverOptions.value,
 }))
 
-const { $api, $toast } = useNuxtApp()
-const { data } = useAuth()
+const queryClient = useQueryClient()
 
-const { items, totalItems, isLoading, refetch } = useGetStudentRecommendTopics(queryBuilder)
+const { $api, $toast } = useNuxtApp()
+
+const { items, isLoading, refetch } = useGetStudentRecommendTopics(queryBuilder)
+
+const onReject = (item) => {
+  $api.teacher.updateRecommendTopic(item.id, { status: 'rejected' }).then(() => {
+    $toast.success('Đã từ chối đề tài')
+    queryClient.invalidateQueries('student-recommend-topic')
+  })
+}
+
+const onSuccess = (item) => {
+  $api.teacher.updateRecommendTopic(item.id, { status: 'approved' }).then(() => {
+    $toast.success('Đã chấp nhận đề tài')
+    queryClient.invalidateQueries('student-recommend-topic')
+  })
+}
 </script>
 
 <template>
@@ -60,9 +76,23 @@ const { items, totalItems, isLoading, refetch } = useGetStudentRecommendTopics(q
             <span>{{ item.student?.hodem }} {{ item.student?.ten }}</span>
           </template>
           <template #item.status="{ item }">
-            <v-chip :color="topicStatus.statusColor(item.status)" size="small" variant="flat">
-              {{ topicStatus.statusType(item.status) }}
-            </v-chip>
+            <div v-if="item.status == 'pending'" class="d-flex">
+              <v-dialog min-width="500" width="50%">
+                <template #activator="{ props: activatorProps }">
+                  <v-chip color="info" size="small" variant="flat" v-bind="activatorProps">Chờ duyệt</v-chip>
+                </template>
+                <template #default="{ isActive }">
+                  <create-topic :item="item" @cancel="isActive.value = false" @success="onSuccess(item)" />
+                </template>
+              </v-dialog>
+              <v-spacer />
+              <v-chip color="error" size="small" variant="flat" @click="onReject(item)">Từ chối</v-chip>
+            </div>
+            <div v-else>
+              <v-chip :color="topicStatus.statusColor(item.status)" size="small" variant="flat">
+                {{ topicStatus.statusType(item.status) }}
+              </v-chip>
+            </div>
           </template>
         </v-data-table-virtual>
       </div>
