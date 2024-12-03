@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { useQueryClient } from 'vue-query'
 import topicStatus from '~/plugins/filters/topic-status'
 import useGetStudentRecommendTopics from '~/composables/teacher/use-get-student-recommend-topic'
 import CreateTopic from '~/components/teacher/topic/molecules/CreateTopic.vue'
-import {useQueryClient} from "vue-query";
+import RejectRecommendTopic from '~/components/teacher/topic/molecules/RejectRecommendTopic.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -86,7 +87,14 @@ const onSuccess = (item) => {
                 </template>
               </v-dialog>
               <v-spacer />
-              <v-chip color="error" size="small" variant="flat" @click="onReject(item)">Từ chối</v-chip>
+              <v-dialog min-width="500" width="50%">
+                <template #activator="{ props: activatorProps }">
+                  <v-chip color="error" size="small" variant="flat" v-bind="activatorProps">Từ chối</v-chip>
+                </template>
+                <template #default="{ isActive }">
+                  <reject-recommend-topic :item="item" @cancel="isActive.value = false" @success="refetch" />
+                </template>
+              </v-dialog>
             </div>
             <div v-else>
               <v-chip :color="topicStatus.statusColor(item.status)" size="small" variant="flat">

@@ -96,6 +96,10 @@ const { items, isLoading, refetch } = useGetMyRecommendTopics()
           <span class="font-weight-bold mr-2">Công nghệ sử dụng:</span>
           <span>{{ items.knowledge }}</span>
         </div>
+        <div v-if="items.status == 'rejected'">
+          <span class="font-weight-bold mr-2">Lý do từ chối đề tài:</span>
+          <span>{{ items.reject_reason }}</span>
+        </div>
       </div>
     </v-card>
   </div>
