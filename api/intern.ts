@@ -1,28 +1,27 @@
 import { BaseApi } from '~/api/base'
 export class InternAPI extends BaseApi {
+  getInterns(params) {
+    return this.get('/interns', { params })
+  }
 
-    getInterns(params) {
-        return this.get('/interns', { params })
-    }
+  getIntern(id) {
+    return this.get(`/interns/${id}`)
+  }
 
-    getIntern(id) {
-        return this.get(`/interns/${id}`)
-    }
+  createIntern(data) {
+    return this.post('/interns', data)
+  }
 
-    createIntern(data) {
-        return this.post('/interns', data)
-    }
+  updateIntern(id, data) {
+    console.log('darta', data)
+    return this.put(`/interns/${id}`, data)
+  }
 
-    updateIntern(id, data) {
-        console.log('darta', data)
-        return this.put(`/interns/${id}`, data)
-    }
+  deleteIntern(id) {
+    return this.delete(`/interns/${id}`)
+  }
 
-    deleteIntern(id) {
-        return this.delete(`/interns/${id}`)
-    }
-
-    checkIntern(id, status) {
-        return this.post(`/interns/${id}/${status}`)
-    }
+  checkIntern(id, status) {
+    return this.post(`/interns/${id}/${status}`)
+  }
 }

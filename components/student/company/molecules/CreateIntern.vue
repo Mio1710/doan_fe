@@ -2,8 +2,6 @@
 import { useQueryClient } from 'vue-query'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-import StudentTeacherAutocomplete from "~/components/common/atoms/StudentTeacherAutocomplete.vue";
-// import { useGetTeachers } from '~/composables/student/use-get-teachers'
 
 const form = reactive({
     company_name: '',
@@ -13,7 +11,6 @@ const form = reactive({
     supervisor_name: '',
     supervisor_phone: '',
     supervisor_email: '',
-    teacher_id: [],
 })
 
 const { $api, $toast } = useNuxtApp()
@@ -34,14 +31,13 @@ const preview = () => {
 </script>
 
 <template>
-  <form-card can-cancel cancel-text="Hủy" title="Đăng ký thực tập" @cancel="emit('cancel')" @submit="createStudentIntern">
+  <form-card can-cancel cancel-text="Hủy" title="Đăng ký thưc tập" @cancel="emit('cancel')" @submit="createStudentIntern">
     <app-text-field v-model="form.company_name" name="Tên công ty" rules="required" />
-    <app-text-field v-model="form.company_email" name="Email công ty" rules="required" />
+    <app-text-field v-model="form.company_email" name="Emai công ty" type="textarea" />
     <app-text-field v-model="form.company_phone" name="SĐT công ty" />
     <app-text-field v-model="form.address" name= "Địa chỉ công ty" />
     <app-text-field v-model="form.supervisor_name" name="Tên người hướng dẫn" />
     <app-text-field v-model="form.supervisor_phone" name="Số điện thoại người hướng dẫn" />
     <app-text-field v-model="form.supervisor_email" name="Email người hướng dẫn" />
-    <student-teacher-autocomplete v-model="form.teacher_id" name="Giảng viên" rules="required" />
   </form-card>
 </template>

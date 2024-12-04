@@ -5,7 +5,6 @@ import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import CreateIntern from '~/components/student/company/molecules/CreateIntern.vue'
 import internStatus from '~/plugins/filters/intern-status'
 import UpdateIntern from '~/components/student/company/molecules/UpdateIntern.vue'
-import DeleteIntern from '~/components/student/company/molecules/DeleteIntern.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -13,14 +12,21 @@ definePageMeta({
 const isCreate = ref(false)
 const semester = ref('')
 const headers = [
-  { title: 'Tên công ty', key: 'company_name', width: '15%', minWidth: 150 },
-  { title: 'Địa chỉ', key: 'address', width: '15%', minWidth: 150 },
-  { title: 'Email công ty', key: 'company_email', width: '10%', minWidth: 100 },
-  { title: 'SĐT công ty', key: 'company_phone', width: '10%', minWidth: 100 },
-  { title: 'Tên người hướng dẫn', key: 'supervisor_name', width: '10%', minWidth: 150 },
-  { title: 'SĐT người hướng dẫn', key: 'supervisor_phone', width: '10%', minWidth: 100 },
+  {
+    title: 'STT',
+    align: 'center',
+    sortable: false,
+    key: 'index',
+    width: 50,
+  },
+  { title: 'Tên công ty', key: 'company_name', width: '20%', minWidth: 250 },
+  { title: 'Địa chỉ', key: 'address', width: '30%', minWidth: 350 },
+  { title: 'Email công ty', key: 'company_email', width: '15%', minWidth: 150 },
+  { title: 'SĐT công ty', key: 'company_phone', width: '15%', minWidth: 150 },
+  { title: 'Tên người hướng dẫn', key: 'supervisor_name', width: '15%', minWidth: 150 },
+  { title: 'SĐT người hướng dẫn', key: 'supervisor_phone', width: '15%', minWidth: 150 },
   { title: 'Email người hướng dẫn', key: 'supervisor_email', width: '15%', minWidth: 150 },
-  { title: 'GVHD', key: 'teacher', width: '10%', minWidth: 100 },
+  { title: 'GVHD', key: 'gv', width: '10%', minWidth: 100 },
   { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100, align: 'center' },
   { title: '', key: 'action', width: 30 },
 ]
@@ -41,18 +47,7 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 const { data } = useAuth()
 
-const queryClient = useQueryClient()
-// const deleteIntern = (id) => {
-//   $api.intern.deleteIntern(id).then(() => {
-//     queryClient.invalidateQueries('intern')
-//     $toast.success('Huỷ đăng ký thành công')
-//   })
-// }
-
 const { items, totalItems, isLoading, refetch } = useGetIntern(queryBuilder)
-const hasRegistered = computed(() => {
-  return items.value.some(item => item.student.id === data.value.id)
-})
 </script>
 
 <template>
@@ -62,7 +57,7 @@ const hasRegistered = computed(() => {
       <div class="d-flex items-center">
         <v-dialog min-width="400" width="40%">
           <template #activator="{ props: activatorProps }">
-            <v-btn v-if="!hasRegistered" color="success" size="small" v-bind="activatorProps">
+            <v-btn color="success" size="small" v-bind="activatorProps">
               <v-icon>mdi-plus</v-icon>
               <span>Đăng ký thực tập</span>
             </v-btn>
@@ -71,27 +66,15 @@ const hasRegistered = computed(() => {
             <create-intern @cancel="isActive.value = false" />
           </template>
         </v-dialog>
-        <!-- <v-dialog min-width="400" width="40%">
-          <template #activator="{ props: activatorProps }">
-            <v-btn v-if="hasRegistered" color="error" size="small" v-bind="activatorProps">
-              <v-icon>mdi-cancel</v-icon>
-              <span>Hủy đăng ký</span>
-            </v-btn>
-          </template>
-          <template #default="{ isActive }">
-            <delete-intern :intern="items" @success="refetch()" />
-          </template>
-        </v-dialog> -->
         <v-spacer />
+        <v-checkbox v-model="filters.viewAll" density="compact" hide-details label="Xem tất cả" />
       </div>
-
-      <!--Hiển thị thông tin thực tập của sinh viên-->
-      <div class="mt-2 h-[calc(100%-_45px)] overflow-y-hidden">
+      <div class="mt-2 h-[calc(100%_-_45px)] overflow-y-hidden">
         <v-data-table-virtual class="h-full" fixed-header :headers="headers" :items="items">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>
-          <template #item.teacher="{ item }">
+          <template #item.gv="{ item }">
             <span>{{ item.teacher?.hodem }} {{ item.teacher?.ten }}</span>
           </template>
           <template #item.status="{ item }">
@@ -103,7 +86,7 @@ const hasRegistered = computed(() => {
             <v-dialog min-width="400" width="40%">
               <template #activator="{ props: activatorProps }">
                 <v-btn
-                  v-if="data?.id == item.student.id"
+                  v-if="data?.id == item.teacher.id"
                   v-bind="activatorProps"
                   color="success"
                   :disabled="item.status == 'approved' || !item.status"
@@ -118,7 +101,6 @@ const hasRegistered = computed(() => {
                 <update-intern :intern="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
-            <delete-intern v-if="item.status == 'pending'" :intern="item" @success="refetch" />
           </template>
         </v-data-table-virtual>
       </div>

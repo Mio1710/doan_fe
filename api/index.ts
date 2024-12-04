@@ -56,5 +56,9 @@ export class Api {
     this.superAdmin = new SuperAdminApi(axios)
     this.reportTopic = new ReportReportTopicAPI(axios)
     this.reportIntern = new ReportReportInternAPI(axios)
+    this.auth = new AuthApi(axios)
+    this.superAdmin = new SuperAdminApi(axios)
+    this.reportTopic = new ReportReportTopicAPI(axios)
+    this.intern = new InternAPI(axios)
   }
 }
