@@ -16,4 +16,8 @@ export class SuperTeacherAPI extends BaseApi {
   updateStudentGroupTeacher(data) {
     return this.put('/super-teacher/teacher-group/student', data)
   }
+
+  createTopic(data) {
+    return this.post('/super-teacher/topic', data)
+  }
 }

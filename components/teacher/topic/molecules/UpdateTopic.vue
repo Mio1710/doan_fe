@@ -17,7 +17,9 @@ const emit = defineEmits(['cancel'])
 const queryClient = useQueryClient()
 
 const importStudentTopic = () => {
-  form.value.status = 'pending'
+  if (form.value.status !== 'approved') {
+    form.value.status = 'pending'
+  }
   $api.topic.updateTopic(form.value.id, form.value).then(() => {
     $toast.success('Tạo đề tài thành công')
     queryClient.invalidateQueries('topic')

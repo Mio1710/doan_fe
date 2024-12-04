@@ -5,13 +5,12 @@ import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import CreateTopic from '~/components/teacher/topic/molecules/CreateTopic.vue'
 import topicStatus from '~/plugins/filters/topic-status'
 import UpdateTopic from '~/components/teacher/topic/molecules/UpdateTopic.vue'
+import DeleteTopicConfirmDialog from '~/components/teacher/topic/molecules/DeleteTopicConfirmDialog.vue'
 
 definePageMeta({
   layout: 'auth',
   middleware: ['is-teacher'],
 })
-const isCreate = ref(false)
-const semester = ref('')
 const headers = [
   {
     title: 'STT',
@@ -87,7 +86,6 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
                   v-if="data?.id == item.teacher.id"
                   v-bind="activatorProps"
                   color="success"
-                  :disabled="item.status == 'approved' || !item.status"
                   icon
                   size="small"
                   variant="text"
@@ -99,6 +97,7 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
                 <update-topic :topic="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
+            <delete-topic-confirm-dialog :topic="item" />
           </template>
         </v-data-table-virtual>
       </div>
