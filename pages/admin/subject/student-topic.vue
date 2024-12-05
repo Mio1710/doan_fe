@@ -18,7 +18,7 @@ const headers = [
   },
   { title: 'Tên sinh viên', key: 'ten' },
   { title: 'Lớp', key: 'lop', width: '15%', minWidth: 150 },
-  { title: 'Nhóm', key: 'nhom', width: '5%', minWidth: 50, align: 'center' },
+  { title: 'Nhóm', key: 'studentTopic[0].group_id', width: '5%', minWidth: 50, align: 'center' },
   { title: 'Giảng viên hướng dẫn', key: 'gv', width: '20%', minWidth: 200 },
   { title: 'Đề tài', key: 'detai', width: '30%', minWidth: 300 },
   { title: '', key: 'action', width: 30 },

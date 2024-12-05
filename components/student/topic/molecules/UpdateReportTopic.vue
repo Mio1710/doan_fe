@@ -12,11 +12,13 @@ const props = defineProps({
 })
 
 const loading = ref(false)
-const form = ref(props.item)
+const form = computed(() => ({ ...props.item }))
 const { $api, $toast } = useNuxtApp()
 const queryClient = useQueryClient()
 const emit = defineEmits(['success'])
+const file = ref(null)
 const onSubmit = () => {
+  form.value.file = file.value
   $api.reportTopic
     .updateReportTopic(form.value.id, serialize(form.value))
     .then(() => {
@@ -33,9 +35,12 @@ const onSubmit = () => {
 <template>
   <app-form v-slot="{ handleSubmit }">
     <app-text-field v-model="form.week" class="mb-5" label="Tuần số" name="Tuần số" rules="required" type="number" />
-    <div v-if="form.file_name">* {{ form.file_name }}</div>
+    <div v-if="form.file_name" class="d-flex items-center gap-1 mb-1">
+      <v-icon>mdi-file-chart-outline</v-icon>
+      {{ form.file_name }}
+    </div>
     <v-file-input
-      v-model="form.file"
+      v-model="file"
       accept=".doc,.docx,.pdf"
       clearable
       label="File báo cáo"
