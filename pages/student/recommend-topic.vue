@@ -5,7 +5,7 @@ import AppForm from '~/components/common/molecules/AppForm.vue'
 import TeacherAutocomplete from '~/components/common/atoms/TeacherAutocomplete.vue'
 import useGetMyReportTopics from '~/composables/student/use-get-my-report-topic'
 import useGetMyRecommendTopics from '~/composables/student/use-get-my-recommend-topic'
-import {useQueryClient} from "vue-query";
+import { useQueryClient } from 'vue-query'
 
 definePageMeta({
   layout: 'auth',
@@ -62,7 +62,13 @@ const { items, isLoading, refetch } = useGetMyRecommendTopics()
       <app-form v-if="!items || isUpdate" v-slot="{ handleSubmit }">
         <app-text-field v-model="form.ten" label="Tên đề tài" name="Tên đề tài" rules="required" />
         <app-text-field v-model="form.description" label="Mô tả" name="Mô tả" rules="required" type="textarea" />
-        <teacher-autocomplete v-model="form.teacher_id" class="mb-4" name="Giảng viên" rules="required" />
+        <teacher-autocomplete
+          v-model="form.teacher_id"
+          class="mb-4"
+          label="Giảng viên"
+          name="Giảng viên"
+          rules="required"
+        />
         <app-text-field v-model="form.knowledge" label="Công nghệ sử dụng" name="Công nghệ sử dụng" rules="required" />
         <div class="text-center">
           <v-btn color="success" :loading="loading" size="small" variant="elevated" @click="handleSubmit(onSubmit)">

@@ -24,7 +24,13 @@ const createFaculty = () => {
 
 <template>
   <form-card can-cancel cancel-text="Hủy" title="Tạo nhóm" @cancel="emit('cancel')" @submit="createFaculty">
-    <app-text-field v-model="form.name" name="Tên nhóm" rules="required" />
-    <teacher-autocomplete v-model="form.teacher_ids" :multiple="true" name="Giảng viên" rules="required" />
+    <app-text-field v-model="form.name" label="Tên nhóm" name="Tên nhóm" rules="required" />
+    <teacher-autocomplete
+      v-model="form.teacher_ids"
+      label="Giảng viên"
+      :multiple="true"
+      name="Giảng viên"
+      rules="required"
+    />
   </form-card>
 </template>

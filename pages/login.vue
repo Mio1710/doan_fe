@@ -29,8 +29,8 @@ const onSubmit = () => {
     <app-form v-slot="{ handleSubmit }">
       <app-text-field v-model="form.maso" class="mb-5" label="Mã số" name="Mã số" rules="required" />
 
-      <app-password v-model="form.matkhau" name="Mật khẩu" rules="required" type="password" />
-      <v-checkbox v-model="form.type" label="Bạn là giáo viên" value="teacher" />
+      <app-password v-model="form.matkhau" label="Mật khẩu" name="Mật khẩu" rules="required" type="password" />
+      <v-checkbox v-model="form.type" label="Bạn là giáo viên" name="Bạn là giáo viên" value="teacher" />
       <v-btn block color="success" :loading="loading" size="large" variant="elevated" @click="handleSubmit(onSubmit)">
         Sign In
       </v-btn>

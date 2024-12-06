@@ -30,9 +30,9 @@ const importStudentTopic = () => {
 
 <template>
   <form-card can-cancel cancel-text="Hủy" title="Cập nhật đề tài" @cancel="emit('cancel')" @submit="importStudentTopic">
-    <app-text-field v-model="form.ten" name="Tên đề tài" rules="required" />
-    <app-text-field v-model="form.description" name="Mô tả" type="textarea" />
-    <app-text-field v-model="form.requirement" name="Yêu cầu" />
-    <app-text-field v-model="form.knowledge" name="Kiến thức kỹ năng " />
+    <app-text-field v-model="form.ten" label="Tên đề tài" name="Tên đề tài" rules="required" />
+    <app-text-field v-model="form.description" label="Mô tả" name="Mô tả" type="textarea" />
+    <app-text-field v-model="form.requirement" label="Yêu cầu" name="Yêu cầu" />
+    <app-text-field v-model="form.knowledge" label="Kiến thức kỹ năng" name="Kiến thức kỹ năng" />
   </form-card>
 </template>

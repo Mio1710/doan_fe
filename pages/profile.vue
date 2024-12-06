@@ -57,7 +57,14 @@ const onSubmit = async () => {
         <div class="w-[200px]">Số điện thoại liên hệ:</div>
         <div class="d-flex items-center">
           <div v-if="!isUpdatePhone" class="mr-2">{{ data.phone }}</div>
-          <app-text-field v-else v-model="form.std" class="w-[200px] mr-2" name="Số điện thoại" type="number" />
+          <app-text-field
+            v-else
+            v-model="form.std"
+            class="w-[200px] mr-2"
+            label="Số điện thoại"
+            name="Số điện thoại"
+            type="number"
+          />
           <v-btn
             v-if="!isUpdatePhone"
             color="success"

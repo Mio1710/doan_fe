@@ -38,9 +38,9 @@ const createFaculty = () => {
     @cancel="emit('cancel')"
     @submit="createFaculty"
   >
-    <app-text-field v-model="form.hodem" name="Họ đệm" rules="required" />
-    <app-text-field v-model="form.ten" name="Tên" rules="required" />
-    <app-text-field v-model="form.email" name="Email" rules="required|email" />
-    <app-text-field v-model="form.maso" name="Mã số" rules="required" />
+    <app-text-field v-model="form.hodem" label="Họ đệm" name="Họ đệm" rules="required" />
+    <app-text-field v-model="form.ten" label="Tên" name="Tên" rules="required" />
+    <app-text-field v-model="form.email" label="Email" name="Email" rules="required|email" />
+    <app-text-field v-model="form.maso" label="Mã số" name="Mã số" rules="required" />
   </form-card>
 </template>

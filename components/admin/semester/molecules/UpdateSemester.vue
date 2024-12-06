@@ -37,8 +37,8 @@ const updateSemester = () => {
     @cancel="emit('cancel')"
     @submit="updateSemester"
   >
-    <app-text-field v-model="form.ten" name="Tên kỳ đăng ký" rules="required" />
-    <app-text-field v-model="form.note" name="Ghi chú" />
+    <app-text-field v-model="form.ten" label="Tên kỳ đăng ký" name="Tên kỳ đăng ký" rules="required" />
+    <app-text-field v-model="form.note" label="Ghi chú" name="Ghi chú" />
   </form-card>
 </template>
 
