@@ -27,7 +27,7 @@ const updateFaculty = () => {
 
 <template>
   <form-card can-cancel cancel-text="Hủy" title="Tạo đề tài" @cancel="emit('cancel')" @submit="updateFaculty">
-    <app-text-field v-model="form.ten" name="Tên khoa" rules="required" />
-    <app-text-field v-model="form.ma_khoa" name="Mã khoa" />
+    <app-text-field v-model="form.ten" label="Tên khoa" name="Tên khoa" rules="required" />
+    <app-text-field v-model="form.ma_khoa" label="Mã khoa" name="Mã khoa" />
   </form-card>
 </template>

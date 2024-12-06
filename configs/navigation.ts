@@ -27,19 +27,14 @@ export const StudentMenu: menu[] = [
         to: '/student/company',
       },
       {
-        title: 'Kết quả chấm từ GVHD',
-        icon: 'mdi-book',
-        to: '/student/result',
-      },
-      {
         title: 'Xem ghi chú từ GVHD',
         icon: 'mdi-clipboard-list',
         to: '/student/note',
       },
       {
-        title: 'Xem lịch sử làm K.luận',
+        title: 'Xem điểm khóa luận',
         icon: 'mdi-clock-edit-outline',
-        to: '/student/history',
+        to: '/student/result',
       },
       {
         title: 'Đề xuất đề tài',

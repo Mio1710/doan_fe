@@ -75,7 +75,7 @@ const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
           <span>Tạo mới</span>
         </v-btn>
         <div v-if="isCreate" class="d-flex w-full px-4 gap-4 items-center">
-          <app-text-field v-model="semester" class="min-w-[250px]" name="Tên đợt đăng ký" />
+          <app-text-field v-model="semester" class="min-w-[250px]" label="Tên đợt đăng ký" name="Tên đợt đăng ký" />
           <v-btn color="success" :disabled="!semester" size="small" @click="createSemester" class="mb-4">
             <v-icon>mdi-check</v-icon>
             <span>Lưu</span>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
 import topicStatus from '../../../plugins/filters/topic-status'
+import CreateTopic from "~/components/teacher/topic/molecules/CreateTopic.vue";
+import CreateTopicBySuperTeacher from "~/components/teacher/topic/molecules/CreateTopicBySuperTeacher.vue";
+import DeleteTopicConfirmDialog from "~/components/teacher/topic/molecules/DeleteTopicConfirmDialog.vue";
 
 definePageMeta({
   layout: 'auth',
@@ -22,6 +25,7 @@ const headers = [
   { title: 'Yêu cầu', key: 'requirement', width: '20%', minWidth: 200 },
   { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 150 },
   { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100 },
+  { title: '', key: 'action', width: 20 },
 ]
 const serverOptions = ref({
   page: 1,
@@ -91,7 +95,18 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetTopic(queryB
           />
         </div>
         <v-spacer />
-        <v-btn color="success" :loading="isFetching" size="small" @click="refetch">
+        <v-dialog min-width="400" width="40%">
+          <template #activator="{ props: activatorProps }">
+            <v-btn color="success" size="small" v-bind="activatorProps">
+              <v-icon>mdi-plus</v-icon>
+              <span>Thêm mới đề tài</span>
+            </v-btn>
+          </template>
+          <template #default="{ isActive }">
+            <create-topic-by-super-teacher @cancel="isActive.value = false" />
+          </template>
+        </v-dialog>
+        <v-btn class="ml-2" color="success" :loading="isFetching" size="small" @click="refetch">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
       </div>
@@ -143,6 +158,9 @@ const { items, totalItems, isLoading, refetch, isFetching } = useGetTopic(queryB
                 <span>{{ topicStatus.statusType(item.status) }}</span>
               </v-chip>
             </div>
+          </template>
+          <template #item.action="{ item }">
+            <delete-topic-confirm-dialog :topic="item" />
           </template>
         </v-data-table>
       </div>
