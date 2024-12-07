@@ -26,7 +26,7 @@ const headers = [
 ]
 const serverOptions = ref({
   page: 1,
-  rowsPerPage: 25,
+  rowsPerPage: 100,
   sortBy: '-created_at',
   sortType: 'asc',
 })
@@ -90,7 +90,7 @@ const { items, totalItems, isLoading, refetch } = useGetStudentIntern(queryBuild
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
           </template>
-         
+
           <!-- <template #item.gv="{ item }">
             <span>
               {{ item.studentIntern[0]?.intern.teacher.hodem }} {{ item.studentIntern[0]?.topic.teacher.ten }}

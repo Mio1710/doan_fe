@@ -24,6 +24,7 @@ const headers = [
   { title: 'Yêu cầu', key: 'requirement', width: '15%', minWidth: 150 },
   { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 150 },
   { title: 'GVHD', key: 'gv', width: '10%', minWidth: 100 },
+  { title: 'Số lượng', key: 'numberStudent', align: 'center' },
   { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100, align: 'center' },
   { title: '', key: 'action', width: 30 },
 ]
@@ -74,10 +75,8 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
           <template #item.gv="{ item }">
             <span>{{ item.teacher?.hodem }} {{ item.teacher?.ten }}</span>
           </template>
-          <template #item.status="{ item }">
-            <v-chip :color="topicStatus.statusColor(item.status)" size="small" variant="flat">
-              {{ topicStatus.statusType(item.status) }}
-            </v-chip>
+          <template #item.numberStudent="{ item }">
+<!--            <span>{{}}</span>-->
           </template>
           <template #item.action="{ item }">
             <v-dialog min-width="400" width="40%">

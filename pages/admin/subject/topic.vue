@@ -25,6 +25,7 @@ const headers = [
   { title: 'Yêu cầu', key: 'requirement', width: '20%', minWidth: 200 },
   { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 150 },
   { title: 'Trạng thái', key: 'status', width: '10%', minWidth: 100 },
+  { title: 'Số lượng', key: 'numberStudent', align: 'center' },
   { title: '', key: 'action', width: 20 },
 ]
 const serverOptions = ref({

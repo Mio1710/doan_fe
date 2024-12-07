@@ -143,11 +143,6 @@ export const AdminMenu: menu = {
       to: '/admin/faculty/student-topic',
     },
     {
-      title: 'Xuất file excel',
-      icon: 'mdi-account',
-      to: '/admin/faculty/excel',
-    },
-    {
       title: 'Tạo đợt đăng ký mới',
       icon: 'mdi-book',
       to: '/admin/faculty/semester',
@@ -161,11 +156,6 @@ export const AdminMenu: menu = {
       title: 'Reset đề tài',
       icon: 'mdi-clock-edit-outline',
       to: '/admin/faculty/reset-topic',
-    },
-    {
-      title: 'Reset công ty',
-      icon: 'mdi-clock-end',
-      to: '/admin/faculty/reset-company',
     },
     {
       title: 'Chỉnh sửa LO',
