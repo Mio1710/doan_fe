@@ -76,13 +76,18 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
             <span>{{ item.teacher?.hodem }} {{ item.teacher?.ten }}</span>
           </template>
           <template #item.numberStudent="{ item }">
-<!--            <span>{{}}</span>-->
+            <!--            <span>{{}}</span>-->
+          </template>
+          <template #item.status="{ item }">
+            <v-chip :color="topicStatus.statusColor(item.status)" size="small" variant="flat">
+              <span>{{ topicStatus.statusType(item.status) }}</span>
+            </v-chip>
           </template>
           <template #item.action="{ item }">
             <v-dialog min-width="400" width="40%">
               <template #activator="{ props: activatorProps }">
                 <v-btn
-                  v-if="data?.id == item.teacher.id"
+                  v-if="data?.id == item?.teacher?.id"
                   v-bind="activatorProps"
                   color="success"
                   icon

@@ -15,7 +15,7 @@ const { activeSemester } = useGetActiveSemester()
 <template>
   <v-card>
     <v-layout>
-      <v-app-bar color="#91DDCF" flat height="50" title="Trung tâm quản trị">
+      <v-app-bar color="#08387f" flat height="40" title="Trung tâm quản trị">
         <div class="text-uppercase font-weight-bold">{{ activeSemester?.ten }}</div>
         <v-spacer />
         <toolbar-user />
