@@ -3,7 +3,7 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   devServer: {
-    host: process.env.BASE_URL,
+    // host: process.env.BASE_URL,
     port: 4000,
   },
 

@@ -1,1 +1,0 @@
-const r={statusColor(e){switch(e){case"pending":return"info";case"approved":return"success";case"rejected":return"error";default:return"#ccc"}},statusType(e){switch(e){case"pending":return"Chờ duyệt";case"approved":return"Đã duyệt";case"rejected":return"Từ chối";default:return"Chờ duyệt"}}};export{r as f};
