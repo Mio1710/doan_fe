@@ -5,7 +5,7 @@ const form = defineModel()
 </script>
 
 <template>
-  <app-text-field
+    <app-text-field
     v-model="form.main_criteria"
     label="Tiêu chí đánh giá"
     name="Tiêu chí đánh giá"
