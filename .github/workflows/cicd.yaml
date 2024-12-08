@@ -25,4 +25,4 @@ jobs:
       run: yarn install
 
     - name: Buidl
-      run: npm build
+      run: npm run build
