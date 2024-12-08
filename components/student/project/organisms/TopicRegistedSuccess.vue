@@ -18,6 +18,7 @@ const emit = defineEmits(['refetch', 'viewAll'])
     :partner="items.partner"
     @refetch="emit('refetch')"
     @view-all="emit('viewAll')"
+    :numberStudent="items?.students.length"
   />
   <partner-registed
     v-if="items.partner?.length > 1"

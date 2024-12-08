@@ -11,6 +11,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  numberStudent: {
+    type: Number,
+    default: 0,
+  },
 })
 
 const { $api, $toast } = useNuxtApp()
@@ -29,6 +33,7 @@ const headers = [
   { title: 'Yêu cầu', key: 'requirement', width: '20%', minWidth: 200 },
   { title: 'Kiến thức kỹ năng', key: 'knowledge', width: '15%', minWidth: 100 },
   { title: 'Giảng viên HD', key: 'gvhd', width: '10%', minWidth: 100 },
+  { title: 'Số lượng', key: 'numberStudent', align: 'center' },
 ]
 </script>
 
@@ -41,7 +46,7 @@ const headers = [
         <v-btn color="error" size="small" v-bind="activatorProps">Hủy đề tài</v-btn>
       </template>
       <template #default="{ isActive }">
-        <cancel-topic @cancel="isActive.value = false" @success="emit('refetch')" :partner />
+        <cancel-topic :partner @cancel="isActive.value = false" @success="emit('refetch')" />
       </template>
     </v-dialog>
     <v-btn class="ml-2" color="primary" size="small" @click="emit('viewAll')">Xem tất cả đề tài</v-btn>
@@ -53,7 +58,8 @@ const headers = [
     <template #item.name="{ item }">
       <span v-html="item.name" />
     </template>
-    <template #item.gvhd="{ item }">{{ item?.createdBy?.hodem }} {{ item?.createdBy?.ten }}</template>
+    <template #item.gvhd="{ item }">{{ item?.teacher?.hodem }} {{ item?.teacher?.ten }}</template>
+    <template #item.numberStudent="{ item }">{{ numberStudent }}/{{ item.numberStudent }}</template>
   </v-data-table>
 </template>
 

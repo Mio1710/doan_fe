@@ -10,6 +10,7 @@ const form = reactive({
   requirement: '',
   knowledge: '',
   teacher_id: null,
+  numberStudent: 4,
 })
 
 const { $api, $toast } = useNuxtApp()
@@ -39,5 +40,11 @@ const createStudentTopic = () => {
     <app-text-field v-model="form.description" label="Mô tả" name="Mô tả" type="textarea" />
     <app-text-field v-model="form.requirement" label="Yêu cầu" name="Yêu cầu" />
     <app-text-field v-model="form.knowledge" label="Kiến thức kỹ năng" name="Kiến thức kỹ năng" />
+    <app-text-field
+      v-model="form.numberStudent"
+      label="Số lượng sinh viên"
+      name="Số lượng sinh viên"
+      rules="required"
+    />
   </form-card>
 </template>

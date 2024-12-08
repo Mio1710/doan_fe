@@ -7,7 +7,7 @@ const props = defineProps({
 })
 const serverOptions = ref({
   page: 1,
-  rowsPerPage: 25,
+  rowsPerPage: 100,
   sortBy: '-created_at',
   sortType: 'asc',
 })
@@ -44,7 +44,7 @@ const registerTopic = (item) => {
 </script>
 
 <template>
-  <v-data-table class="h-full" fixed-header :headers="headers" hide-default-footer :items="items">
+  <v-data-table class="h-full" fixed-header :headers="headers" hide-default-footer :items="items" :items-per-page="serverOptions.rowsPerPage">
     <template #item.index="{ index }">
       <span>{{ index + 1 }}</span>
     </template>
@@ -53,7 +53,7 @@ const registerTopic = (item) => {
     </template>
 
     <template #item.gv="{ item }">
-      <span>{{ item?.createdBy?.hodem }} {{ item?.createdBy?.ten }}</span>
+      <span>{{ item?.teacher?.hodem }} {{ item?.teacher?.ten }}</span>
     </template>
     <template #item.action="{ item }">
       <v-btn v-if="item.id == topicId" color="primary" size="x-small" @click="emit('viewAll')">Xem</v-btn>

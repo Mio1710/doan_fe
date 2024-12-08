@@ -10,7 +10,7 @@ const { data } = useAuth()
     <template #activator="{ props }">
       <div v-bind="props" class="cursor-pointer d-flex items-center">
         <v-badge bordered color="success" dot>
-          <v-avatar size="40">
+          <v-avatar size="30">
             <v-img alt="John" src="/images/avatars/default.png" />
           </v-avatar>
         </v-badge>

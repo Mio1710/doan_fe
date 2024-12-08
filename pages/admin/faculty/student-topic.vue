@@ -34,7 +34,7 @@ const filters = ref({
 })
 const serverOptions = ref({
   page: 1,
-  rowsPerPage: 25,
+  rowsPerPage: 100,
   sortBy: '-created_at',
   sortType: 'asc',
 })

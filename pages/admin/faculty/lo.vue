@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useGetListLOs from '~/composables/super-teachers/use-get-list-lo-topic'
-import UpdateLO from "~/components/admin/organisms/UpdateLO.vue";
+import UpdateLO from '~/components/admin/organisms/UpdateLO.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -21,7 +21,7 @@ const headers = [
 ]
 const serverOptions = ref({
   page: 1,
-  rowsPerPage: 25,
+  rowsPerPage: 100,
   sortBy: '-created_at',
   sortType: 'asc',
 })
@@ -62,8 +62,8 @@ const { items, totalItems, isLoading, refetch, isRefetching } = useGetListLOs(qu
           :headers="headers"
           hide-default-footer
           :items="items"
-          :loading="isLoading || isRefetching"
           :items-per-page="100"
+          :loading="isLoading || isRefetching"
         >
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
@@ -76,11 +76,7 @@ const { items, totalItems, isLoading, refetch, isRefetching } = useGetListLOs(qu
                 </v-btn>
               </template>
               <template #default="{ isActive }">
-                <update-l-o
-                  :lo="item"
-                  @cancel="isActive.value = false"
-                  @success="refetch"
-                />
+                <update-l-o :lo="item" @cancel="isActive.value = false" @success="refetch" />
               </template>
             </v-dialog>
           </template>
