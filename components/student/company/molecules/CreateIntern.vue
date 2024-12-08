@@ -2,7 +2,7 @@
 import { useQueryClient } from 'vue-query'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
-
+import StudentTeacherAutocomplete from '~/components/common/atoms/StudentTeacherAutocomplete.vue'
 const form = reactive({
   company_name: '',
   address: '',
@@ -11,6 +11,7 @@ const form = reactive({
   supervisor_name: '',
   supervisor_phone: '',
   supervisor_email: '',
+  teacher_id: [],
 })
 
 const { $api, $toast } = useNuxtApp()
@@ -49,5 +50,6 @@ const preview = () => {
       name="Số điện thoại người hướng dẫn"
     />
     <app-text-field v-model="form.supervisor_email" label="Email người hướng dẫn" name="Email người hướng dẫn" />
+    <student-teacher-autocomplete v-model="form.teacher_id" name="Giảng viên" rules="required" />
   </form-card>
 </template>
