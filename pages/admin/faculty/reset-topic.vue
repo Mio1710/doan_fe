@@ -5,7 +5,7 @@ import ResetTopicAlert from "~/components/admin/super/molecules/ResetTopicAlert.
 
 definePageMeta({
   layout: 'auth',
-  middleware: ['is-super-teacher'],
+  middleware: ['is-admin'],
 })
 const isCreate = ref(false)
 const semester = ref('')

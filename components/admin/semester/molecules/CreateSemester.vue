@@ -1,37 +1,44 @@
 <script setup lang="ts">
+import { useQueryClient } from 'vue-query'
 import FormCard from '~/components/common/molecules/FormCard.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import AppDatePicker from '~/components/common/atoms/AppDatePicker.vue'
 
-const props = defineProps({
-  semester: {
-    type: Object,
-    required: true,
-  },
+const form = ref({
+  ten: '',
+  note: '',
+  start_date: '',
+  end_date: '',
+  start_register_group: '',
+  end_register_group: '',
+  start_publish_topic: '',
+  end_publish_topic: '',
+  start_register_topic: '',
+  end_register_topic: '',
+  start_defense: '',
+  end_defense: '',
+  start_report_topic: '',
+  end_report_topic: '',
+  public_result: '',
 })
-
-const form = ref({ ...props.semester })
 const emit = defineEmits(['cancel', 'update'])
 const { $api, $toast } = useNuxtApp()
-const date = ref('2024-12-12T18:53')
-const updateSemester = () => {
-  $api.semester.updateSemester(form.value.id, form.value).then(() => {
-    // close dialog
-    emit('update')
-    emit('cancel')
-    $toast.success('Cập nhật đợt đăng ký thành công')
-  })
+const queryClient = useQueryClient()
+
+const create = () => {
+  try {
+    $api.semester.createSemester(form.value).then(() => {
+      queryClient.invalidateQueries('semester')
+      $toast.success('Tạo mới thành công')
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>
 
 <template>
-  <form-card
-    can-cancel
-    cancel-text="Hủy"
-    title="Chỉnh sửa đợt đăng ký"
-    @cancel="emit('cancel')"
-    @submit="updateSemester"
-  >
+  <form-card can-cancel cancel-text="Hủy" title="Tạo đợt đăng ký" @cancel="emit('cancel')" @submit="create">
     <app-text-field v-model="form.ten" label="Tên kỳ đăng ký" name="Tên kỳ đăng ký" rules="required" />
     <app-text-field v-model="form.note" label="Ghi chú" name="Ghi chú" />
     <v-divider class="mb-4" />
