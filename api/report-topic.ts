@@ -21,7 +21,6 @@ export class ReportReportTopicAPI extends BaseApi {
   }
 
   downloadReportTopic(key) {
-    console.log('key', key)
     return this.get('/report-topic/file', { params: { key }, responseType: 'blob' })
   }
 }

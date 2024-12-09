@@ -13,7 +13,6 @@ export class InternAPI extends BaseApi {
   }
 
   updateIntern(id, data) {
-    console.log('darta', data)
     return this.put(`/interns/${id}`, data)
   }
 

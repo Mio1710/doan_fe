@@ -2230,7 +2230,6 @@ class InternAPI extends BaseApi {
     return this.post("/interns", data);
   }
   updateIntern(id, data) {
-    console.log("darta", data);
     return this.put(`/interns/${id}`, data);
   }
   deleteIntern(id) {
@@ -2310,7 +2309,6 @@ class ReportReportTopicAPI extends BaseApi {
     return this.delete(`/report-topic/${id}`);
   }
   downloadReportTopic(key) {
-    console.log("key", key);
     return this.get("/report-topic/file", { params: { key }, responseType: "blob" });
   }
 }
