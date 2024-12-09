@@ -749,7 +749,7 @@ const _routes = [
     name: "admin-faculty-lo",
     path: "/admin/faculty/lo",
     meta: __nuxt_page_meta$z || {},
-    component: () => import('./lo-BFQW4Wwt.mjs')
+    component: () => import('./lo-BhL0Oho-.mjs')
   },
   {
     name: "admin-faculty-permission",
@@ -785,7 +785,7 @@ const _routes = [
     name: "admin-faculty-student-topic",
     path: "/admin/faculty/student-topic",
     meta: __nuxt_page_meta$t || {},
-    component: () => import('./student-topic-B6KgiZE5.mjs')
+    component: () => import('./student-topic-CO7bTCMI.mjs')
   },
   {
     name: "admin-faculty-student",

@@ -31,7 +31,7 @@ const importStudentTopic = () => {
   $api.studentTopic
     .importStudentTopic(serialize({ file: file.value }))
     .then((res) => {
-      if (!res.status) {
+      if (res.size > 2106) {
         $toast.error('Dữ liệu không hợp lệ, vui lòng kiểm tra lại!')
         const url = URL.createObjectURL(new Blob([res]))
         const link = document.createElement('a')
