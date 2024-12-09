@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
-import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import UpdateSemester from '~/components/admin/semester/molecules/UpdateSemester.vue'
+import CreateSemester from '~/components/admin/semester/molecules/CreateSemester.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -13,13 +13,19 @@ const semester = ref('')
 const headers = [
   {
     title: 'STT',
-    align: 'start',
+    align: 'center',
     sortable: false,
     key: 'index',
     width: 50,
   },
   { title: 'Tên kỳ đăng ký', key: 'ten', width: '35%', minWidth: 250 },
   { title: 'Trạng thái', key: 'status', width: '15%', minWidth: 150 },
+  { title: 'Thời gian mở', key: 'date', width: '15%', minWidth: 150 },
+  { title: 'Công bố đề tài', key: 'public-topic', width: '15%', minWidth: 150 },
+  { title: 'Đăng ký đề tài', key: 'register-topic', width: '15%', minWidth: 150 },
+  { title: 'Đăng ký nhóm', key: 'register-group', width: '15%', minWidth: 150 },
+  { title: 'Bảo vệ', key: 'defense', width: '15%', minWidth: 150 },
+  { title: 'Kết quả', key: 'result', width: '15%', minWidth: 150 },
   { title: 'Ghi chú', key: 'note', width: '25%', minWidth: 200 },
   { title: 'Người tạo', key: 'name', width: '20%', minWidth: 200 },
   { title: 'Ngày tạo', key: 'created_at', width: '15%', minWidth: 100 },
@@ -49,19 +55,6 @@ const handleActive = (item) => {
   }
 }
 
-const createSemester = () => {
-  try {
-    $api.semester.createSemester({ ten: semester.value }).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Tạo mới thành công')
-      isCreate.value = false
-      semester.value = ''
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
 </script>
 
@@ -70,17 +63,17 @@ const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
     <div class="text-lg font-bold text-uppercase">Tạo đợt đăng ký mới</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
-        <v-btn color="success" size="small" @click="isCreate = true" class="mb-4">
-          <v-icon>mdi-plus</v-icon>
-          <span>Tạo mới</span>
-        </v-btn>
-        <div v-if="isCreate" class="d-flex w-full px-4 gap-4 items-center">
-          <app-text-field v-model="semester" class="min-w-[250px]" label="Tên đợt đăng ký" name="Tên đợt đăng ký" />
-          <v-btn color="success" :disabled="!semester" size="small" @click="createSemester" class="mb-4">
-            <v-icon>mdi-check</v-icon>
-            <span>Lưu</span>
-          </v-btn>
-        </div>
+        <v-dialog width="600">
+          <template #activator="{ props: activatorProps }">
+            <v-btn color="success" size="small" v-bind="activatorProps">
+              <v-icon>mdi-plus</v-icon>
+              <span>Thêm học kỳ</span>
+            </v-btn>
+          </template>
+          <template #default="{ isActive }">
+            <create-semester @cancel="isActive.value = false" />
+          </template>
+        </v-dialog>
       </div>
       <div class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items">
@@ -95,6 +88,35 @@ const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
           </template>
           <template #item.name="{ item }">
             <span>{{ item.createdBy?.hodem + ' ' + item.createdBy?.ten }}</span>
+          </template>
+          <template #item.date="{ item }">
+            <div v-if="item.start_date">{{ format(new Date(item?.start_date), 'dd/MM/yyyy HH:mm') }}</div>
+            <div class="text-center">-</div>
+            <div v-if="item.end_date">{{ format(new Date(item?.end_date), 'dd/MM/yyyy HH:mm') }}</div>
+          </template>
+          <template #item.public-topic="{ item }">
+            <div v-if="item.start_publish_topic">{{ format(new Date(item?.start_publish_topic), 'dd/MM/yyyy HH:mm') }}</div>
+            <div class="text-center">-</div>
+            <div v-if="item.end_publish_topic">{{ format(new Date(item?.end_publish_topic), 'dd/MM/yyyy HH:mm') }}</div>
+          </template>
+
+          <template #item.register-topic="{ item }">
+            <div v-if="item.start_register_topic">{{ format(new Date(item?.start_register_topic), 'dd/MM/yyyy HH:mm') }}</div>
+            <div class="text-center">-</div>
+            <div v-if="item.end_register_topic">{{ format(new Date(item?.end_register_topic), 'dd/MM/yyyy HH:mm') }}</div>
+          </template>
+          <template #item.register-group="{ item }">
+            <div v-if="item.start_register_group">{{ format(new Date(item?.start_register_group), 'dd/MM/yyyy HH:mm') }}</div>
+            <div class="text-center">-</div>
+            <div v-if="item.end_register_group">{{ format(new Date(item?.end_register_group), 'dd/MM/yyyy HH:mm') }}</div>
+          </template>
+          <template #item.defense="{ item }">
+            <div v-if="item.start_defense">{{ format(new Date(item?.start_defense), 'dd/MM/yyyy HH:mm') }}</div>
+            <div class="text-center">-</div>
+            <div v-if="item.end_defense">{{ format(new Date(item?.end_defense), 'dd/MM/yyyy HH:mm') }}</div>
+          </template>
+          <template #item.result="{ item }">
+            <div v-if="item.public_result">{{ format(new Date(item?.public_result), 'dd/MM/yyyy HH:mm') }}</div>
           </template>
           <template #item.action="{ item }">
             <v-dialog min-width="400" width="40%">

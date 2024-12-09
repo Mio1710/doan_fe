@@ -1,9 +1,9 @@
-@import 'variables';
+@use 'variables';
 
-@import './global';
+@use './global';
 
-@import './layouts/sidebar';
+@use './layouts/sidebar';
 
-@import './components/VTable';
-@import './components/VInput';
-@import './components/VExpansionpanel';
+@use './components/_VTable';
+@use './components/_VInput';
+//@use './components/_VExpansionpanel';
