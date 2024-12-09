@@ -28,4 +28,4 @@ jobs:
 #    - name: Build project
 #      run: yarn build
     - name: restart server
-      run: pm2 restart doan_fe
+      run: pm2 restart doan_fe --update-env
