@@ -4,6 +4,10 @@ export class TeacherApi extends BaseApi {
     return this.get('/admin/teachers/student-topic', { params })
   }
 
+  getStudentInterns(params) {
+    return this.get('/admin/teachers/student-intern', { params })
+  }
+
   getStudentResultLOs(params) {
     return this.get('/teachers/student-results-lo', { params })
   }
@@ -21,8 +25,18 @@ export class TeacherApi extends BaseApi {
     return this.get('/teachers/student-topic/report', { params })
   }
 
+  getStudentReportInterns(params) {
+    return this.get('/teachers/student-intern/report', { params })
+  }
+
   commentStudentReportTopic(id, data) {
     return this.put(`/teachers/student-topic/report/${id}/comment`, data)
+
+  }
+
+  commentStudentReportIntern(id, data) {
+    return this.put(`/teachers/student-intern/report/${id}/comment`, data)
+
   }
 
   getStudentRecommendTopic() {

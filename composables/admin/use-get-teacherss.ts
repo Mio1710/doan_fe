@@ -3,8 +3,6 @@ import { UnwrapRef } from 'vue-demi'
 import { useQuery } from 'vue-query'
 import _ from 'lodash'
 import Parser from '~/utils/parser'
-import { sortsParser } from '~/utils/sortParser'
-
 function sortsParser(sortBy: string | [], sortType: string | []) {
   if (!sortBy) {
     return []
@@ -19,11 +17,11 @@ function sortsParser(sortBy: string | [], sortType: string | []) {
   return [sortType === 'desc' ? `-${sortBy}` : sortBy]
 }
 
-export default function useTeacherGetStudentInterns(params?: UnwrapRef<any>, options?: any) {
+export default function useGetTeacherss(params?: UnwrapRef<any>, options?: any) {
   const { $api } = useNuxtApp()
 
   const query = useQuery(
-    ['student-intern', params],
+    ['teacher', params],
     () => {
       const { sortBy, sortType } = params.value
       const sorts = sortsParser(sortBy, sortType)
@@ -40,7 +38,7 @@ export default function useTeacherGetStudentInterns(params?: UnwrapRef<any>, opt
         ...params.value,
       }).query()
 
-      return $api.teacher.getStudentInterns(query)
+      return $api.admin.getTeacherss(query)
     },
     {
       refetchOnWindowFocus: false,
