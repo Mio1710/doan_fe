@@ -21,8 +21,9 @@ jobs:
       with:
         node-version: '20.x'
         cache: 'npm'
-#    - name: Install dependencies by yarn
-#      run: yarn install
+        
+    - name: Install dependencies by yarn
+      run: yarn install
 
     - name: Buidl
       run: yarn build
