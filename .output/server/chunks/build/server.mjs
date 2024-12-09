@@ -779,7 +779,7 @@ const _routes = [
     name: "admin-faculty-student-company",
     path: "/admin/faculty/student-company",
     meta: __nuxt_page_meta$u || {},
-    component: () => import('./student-company-DfTcI5f3.mjs')
+    component: () => import('./student-company-DCDimfZu.mjs')
   },
   {
     name: "admin-faculty-student-topic",
@@ -803,7 +803,7 @@ const _routes = [
     name: "admin-faculty-teacher",
     path: "/admin/faculty/teacher",
     meta: __nuxt_page_meta$q || {},
-    component: () => import('./teacher-Dmy8eteC.mjs')
+    component: () => import('./teacher-BGqPtKw5.mjs')
   },
   {
     name: "admin",
