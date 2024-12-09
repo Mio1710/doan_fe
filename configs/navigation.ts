@@ -117,9 +117,9 @@ export const SuperTeacherMenu: menu = {
       to: '/admin/subject/company',
     },
     {
-      title: 'Chuyển GVHD TTDN',
-      icon: 'mdi-clock-time-nine',
-      to: '/admin/subject/move-teacher',
+      title: 'Chỉnh sửa LO',
+      icon: 'mdi-clock-out',
+      to: '/admin/faculty/lo',
     },
   ],
 }
@@ -156,11 +156,6 @@ export const AdminMenu: menu = {
       title: 'Reset đề tài',
       icon: 'mdi-clock-edit-outline',
       to: '/admin/faculty/reset-topic',
-    },
-    {
-      title: 'Chỉnh sửa LO',
-      icon: 'mdi-clock-out',
-      to: '/admin/faculty/lo',
     },
   ],
 }

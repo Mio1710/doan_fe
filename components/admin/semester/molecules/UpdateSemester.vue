@@ -13,7 +13,7 @@ const props = defineProps({
 const form = ref({ ...props.semester })
 const emit = defineEmits(['cancel', 'update'])
 const { $api, $toast } = useNuxtApp()
-const date = ref('2024-12-12T18:53')
+const date = ref('2024-07-30T05:56:00')
 const updateSemester = () => {
   $api.semester.updateSemester(form.value.id, form.value).then(() => {
     // close dialog
