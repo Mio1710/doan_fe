@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [develop]
 env:
-  PROJECT: 'doan_fe'
+  PROJECT: 'Doan FE'
 
 jobs:
   build:
@@ -28,4 +28,4 @@ jobs:
 #    - name: Build project
 #      run: yarn build
     - name: restart server
-      run: pm2 restart doan_fe --update-env
+      run: pm2 restart 10 --update-env
