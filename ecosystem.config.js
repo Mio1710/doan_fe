@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
   apps: [
     {
       name: 'Doan FE',
@@ -9,5 +9,3 @@ const config = {
     },
   ],
 }
-
-export default config
