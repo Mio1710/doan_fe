@@ -749,7 +749,7 @@ const _routes = [
     name: "admin-faculty-lo",
     path: "/admin/faculty/lo",
     meta: __nuxt_page_meta$z || {},
-    component: () => import('./lo-BhL0Oho-.mjs')
+    component: () => import('./lo-D6Eu7my3.mjs')
   },
   {
     name: "admin-faculty-permission",
@@ -779,13 +779,13 @@ const _routes = [
     name: "admin-faculty-student-company",
     path: "/admin/faculty/student-company",
     meta: __nuxt_page_meta$u || {},
-    component: () => import('./student-company-DCDimfZu.mjs')
+    component: () => import('./student-company-DPiW8sqp.mjs')
   },
   {
     name: "admin-faculty-student-topic",
     path: "/admin/faculty/student-topic",
     meta: __nuxt_page_meta$t || {},
-    component: () => import('./student-topic-CO7bTCMI.mjs')
+    component: () => import('./student-topic-BedU149c.mjs')
   },
   {
     name: "admin-faculty-student",
@@ -803,7 +803,7 @@ const _routes = [
     name: "admin-faculty-teacher",
     path: "/admin/faculty/teacher",
     meta: __nuxt_page_meta$q || {},
-    component: () => import('./teacher-BGqPtKw5.mjs')
+    component: () => import('./teacher-Dcd6-zYj.mjs')
   },
   {
     name: "admin",
@@ -845,7 +845,7 @@ const _routes = [
     name: "admin-super-faculty",
     path: "/admin/super/faculty",
     meta: __nuxt_page_meta$j || {},
-    component: () => import('./faculty-DnQPrEr3.mjs')
+    component: () => import('./faculty-2NTIhA6D.mjs')
   },
   {
     name: "admin-teacher-guide-point-id",
@@ -863,7 +863,7 @@ const _routes = [
     name: "admin-teacher",
     path: "/admin/teacher",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./index-9o3Y5sty.mjs')
+    component: () => import('./index-Dtxymuoh.mjs')
   },
   {
     name: "admin-teacher-recommend-topic",
@@ -881,7 +881,7 @@ const _routes = [
     name: "admin-teacher-review-point",
     path: "/admin/teacher/review-point",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./index-Dw73Y7-L.mjs')
+    component: () => import('./index-Dx-a54UV.mjs')
   },
   {
     name: "index",

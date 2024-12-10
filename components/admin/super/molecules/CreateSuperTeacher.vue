@@ -17,6 +17,7 @@ const form = reactive({
   email: '',
   khoa_id: props.faculty.id,
   type: 'teacher',
+  ngay_sinh: null
 })
 
 const { $api, $toast } = useNuxtApp()
@@ -42,5 +43,6 @@ const createFaculty = () => {
     <app-text-field v-model="form.ten" label="Tên" name="Tên" rules="required" />
     <app-text-field v-model="form.email" label="Email" name="Email" rules="required|email" />
     <app-text-field v-model="form.maso" label="Mã số" name="Mã số" rules="required" />
+    <app-text-field v-model="form.ngay_sinh" label="Ngày sinh" name="Ngày sinh" rules="required" />
   </form-card>
 </template>

@@ -60,7 +60,7 @@ const items = ref([])
 const preview = () => {
   const reader = new FileReader()
   if (file.value) {
-    if(file.value.size > 5 * 1024 * 1024) {
+    if (file.value.size > 5 * 1024 * 1024) {
       $toast.error('File phải nhỏ hơn 5MB')
       return
     }
@@ -69,13 +69,11 @@ const preview = () => {
         const data = XLSX.read(event.target.result, { type: 'binary', cellDates: true })
         const sheet = data.Sheets[data.SheetNames[0]]
         const headersRow = XLSX.utils.sheet_to_json(sheet, { header: 1 })[0]
-        console.log('Headers:', headersRow)
         if (JSON.stringify(headersRow) !== JSON.stringify(requiredHeaders)) {
           $toast.error('File không đúng định dạng')
           return
         }
         const dataJson = XLSX.utils.sheet_to_json(sheet)
-        console.log('Parsed data:', dataJson)
         allowSubmit.value = true
         items.value = dataJson
       }
@@ -134,7 +132,14 @@ const preview = () => {
       </div>
       <div class="mt-4">
         <div class="max-w-[520px] ma-auto d-flex">
-          <v-file-input show-size v-model="file" accept=".xlsx" class="w-full mr-4" label="File dữ liệu" variant="outlined" />
+          <v-file-input
+            v-model="file"
+            accept=".xlsx"
+            class="w-full mr-4"
+            label="File dữ liệu"
+            show-size
+            variant="outlined"
+          />
           <div class="d-none">
             <app-text-field v-model="file" rules="required" />
           </div>

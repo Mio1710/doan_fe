@@ -39,16 +39,6 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 
 const queryClient = useQueryClient()
-const handleActive = (item) => {
-  try {
-    $api.semester.activeSemester(item.id).then(() => {
-      queryClient.invalidateQueries('semester')
-      $toast.success('Đã cập nhật trạng thái thành công')
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const { items, totalItems, isLoading, refetch } = useTeacherGetStudentTopics(queryBuilder)
 </script>

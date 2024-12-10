@@ -56,22 +56,22 @@ const items = ref([])
 const preview = () => {
   const reader = new FileReader()
   if (file.value) {
+    console.log('check file', file, file.value)
     if (file.value.size > 5 * 1024 * 1024) {
       $toast.error('File phải nhỏ hơn 5MB')
       return
     }
     reader.onload = (event) => {
+      console.log('check event', event.target)
       if (event.target?.result) {
         const data = XLSX.read(event.target.result, { type: 'binary', cellDates: true })
         const sheet = data.Sheets[data.SheetNames[0]]
         const headersRow = XLSX.utils.sheet_to_json(sheet, { header: 1 })[0]
-        console.log('Headers:', headersRow)
         if (JSON.stringify(headersRow) !== JSON.stringify(requiredHeaders)) {
           $toast.error('File không đúng định dạng')
           return
         }
         const dataJson = XLSX.utils.sheet_to_json(sheet)
-        console.log('Parsed data:', dataJson)
         allowSubmit.value = true
         items.value = dataJson
       }

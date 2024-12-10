@@ -2,8 +2,10 @@
 import { useQueryClient } from 'vue-query'
 import CreateFaculty from '~/components/admin/super/molecules/CreateFaculty.vue'
 import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
-import useGetFacultyWithAdmin from "~/composables/admin/use-get-faculty-with-admin";
-import ListSuperTeacher from "~/components/admin/super/molecules/ListSuperTeacher.vue";
+import useGetFacultyWithAdmin from '~/composables/admin/use-get-faculty-with-admin'
+import ListSuperTeacher from '~/components/admin/super/molecules/ListSuperTeacher.vue'
+import DeleteFacultyConfirmDialog from '~/components/admin/super/molecules/DeleteFacultyConfirmDialog.vue'
+import DeleteLOConfirmDialog from '~/components/admin/organisms/DeleteLOConfirmDialog.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -34,15 +36,6 @@ const queryBuilder = computed(() => ({
 }))
 
 const { $api, $toast } = useNuxtApp()
-
-const queryClient = useQueryClient()
-
-const deleteFaculty = (item) => {
-  $api.faculty.deleteFaculty(item.id).then(() => {
-    $toast.success('Xóa khoa thành công')
-    queryClient.invalidateQueries('faculty-admins')
-  })
-}
 
 const { items, refetch } = useGetFacultyWithAdmin(queryBuilder)
 </script>
@@ -94,9 +87,7 @@ const { items, refetch } = useGetFacultyWithAdmin(queryBuilder)
                 <update-faculty :topic="item" @cancel="isActive.value = false" />
               </template>
             </v-dialog>
-            <v-btn color="error" icon size="small" variant="text" @click="deleteFaculty(item)">
-              <v-icon>mdi-trash-can</v-icon>
-            </v-btn>
+            <delete-faculty-confirm-dialog :faculty="item" @success="refetch" />
           </template>
         </v-data-table>
       </div>

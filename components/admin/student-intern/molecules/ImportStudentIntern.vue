@@ -65,13 +65,11 @@ const preview = () => {
         const data = XLSX.read(event.target.result, { type: 'binary', cellDates: true })
         const sheet = data.Sheets[data.SheetNames[0]]
         const headersRow = XLSX.utils.sheet_to_json(sheet, { header: 1 })[0]
-        console.log('Headers:', headersRow)
         if (JSON.stringify(headersRow) !== JSON.stringify(requiredHeaders)) {
           $toast.error('File không đúng định dạng')
           return
         }
         const dataJson = XLSX.utils.sheet_to_json(sheet)
-        console.log('Parsed data:', dataJson)
         allowSubmit.value = true
         items.value = dataJson
       }

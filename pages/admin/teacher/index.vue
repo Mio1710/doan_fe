@@ -76,7 +76,7 @@ const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
             <span>{{ item.teacher?.hodem }} {{ item.teacher?.ten }}</span>
           </template>
           <template #item.numberStudent="{ item }">
-            <!--            <span>{{}}</span>-->
+            <span>x/{{ item.numberStudent }}</span>
           </template>
           <template #item.status="{ item }">
             <v-chip :color="topicStatus.statusColor(item.status)" size="small" variant="flat">

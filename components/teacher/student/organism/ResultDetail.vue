@@ -10,9 +10,7 @@ const props = defineProps({
 })
 const { $api, $toast } = useNuxtApp()
 const studentId = ref(props.item.id)
-const { items, isLoading, error, refetch } = useGetStudentResultTopicLOs(
-  { studentId: studentId.value },
-)
+const { items, isLoading, error, refetch } = useGetStudentResultTopicLOs({ studentId: studentId.value })
 const headers = [
   {
     title: 'STT',
@@ -27,7 +25,6 @@ const headers = [
   { title: 'Điểm', value: 'score', width: '7%', minWidth: 50 },
 ]
 
-// clone an array to edit like items score
 const itemsClone = ref(items.value.map((item) => ({ ...item })))
 const emit = defineEmits(['cancel', 'success'])
 watch(
@@ -50,7 +47,6 @@ const submit = () => {
     .then(() => {
       $toast.success('Cập nhật điểm thành công')
       emit('success')
-      refetch()
     })
     .finally(() => {
       emit('cancel')
@@ -66,7 +62,6 @@ const submit = () => {
     @cancel="emit('cancel')"
     @submit="submit"
   >
-<!--    <v-data-table :headers="headers" hide-default-footer :items="itemsClone" :loading="isLoading" />-->
     <v-table class="elevation-1">
       <thead>
         <tr>
@@ -81,7 +76,7 @@ const submit = () => {
         </tr>
       </thead>
       <tbody>
-        <tr class="v-data-table__tr" v-for="(lo, index) in items" :key="index">
+        <tr v-for="(lo, index) in itemsClone" :key="index" class="v-data-table__tr">
           <td class="text-center">{{ index + 1 }}</td>
           <td>{{ lo.main_criteria }}</td>
           <td>{{ lo.sub_criteria }}</td>

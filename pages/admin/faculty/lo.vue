@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import useGetListLOs from '~/composables/super-teachers/use-get-list-lo-topic'
 import UpdateLO from '~/components/admin/organisms/UpdateLO.vue'
+import DeleteLOConfirmDialog from '~/components/admin/organisms/DeleteLOConfirmDialog.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -14,10 +15,10 @@ const headers = [
     key: 'index',
     width: 50,
   },
-  { title: 'Tiêu chí đánh giá', key: 'main_criteria', width: '50%', minWidth: 350 },
+  { title: 'Tiêu chí đánh giá', key: 'main_criteria', width: '45%', minWidth: 350 },
   { title: 'Tiêu chí phụ', key: 'sub_criteria', width: '35%', minWidth: 250 },
   { title: 'Hệ số', key: 'cof', width: '10%', minWidth: 200 },
-  { title: '', key: 'action', width: 30 },
+  { title: '', key: 'action', minWidth: 100 },
 ]
 const serverOptions = ref({
   page: 1,
@@ -71,7 +72,7 @@ const { items, totalItems, isLoading, refetch, isRefetching } = useGetListLOs(qu
           <template #item.action="{ item }">
             <v-dialog min-width="500" width="50%">
               <template #activator="{ props: activatorProps }">
-                <v-btn ref="btn" rounded variant="text" v-bind="activatorProps">
+                <v-btn color="success" icon size="small" variant="text" v-bind="activatorProps">
                   <v-icon color="success">mdi-pencil</v-icon>
                 </v-btn>
               </template>
@@ -79,6 +80,7 @@ const { items, totalItems, isLoading, refetch, isRefetching } = useGetListLOs(qu
                 <update-l-o :lo="item" @cancel="isActive.value = false" @success="refetch" />
               </template>
             </v-dialog>
+            <delete-l-o-confirm-dialog :lo="item" @success="refetch" />
           </template>
         </v-data-table>
       </div>
