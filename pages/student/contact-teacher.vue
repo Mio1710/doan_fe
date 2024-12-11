@@ -10,7 +10,15 @@ definePageMeta({
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Liên hệ giảng viên</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
-     <div>Chức năng sẽ được phát triển trong tương lai</div>
+      <div>
+        <span class="font-weight-bold">Giảng viên hướng dẫn:</span>
+      </div>
+      <div>
+        <span class="font-weight-bold">Giảng viên phản biện:</span>
+      </div>
+      <div>
+        <span class="font-weight-bold">Giảng viên hội đồng/poster:</span>
+      </div>
     </v-card>
   </div>
 </template>

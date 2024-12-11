@@ -52,11 +52,6 @@ export const StudentMenu: menu[] = [
         to: '/student/report-topic',
       },
       {
-        title: 'Đăng ký thực tập',
-        icon: 'mdi-book',
-        to: '/student/register-intern',
-      },
-      {
         title: 'Báo cáo thực tập',
         icon: 'mdi-book',
         to: '/student/report-intern',

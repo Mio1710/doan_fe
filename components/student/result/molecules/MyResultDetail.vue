@@ -23,6 +23,10 @@ const headers = [
   { title: 'Hệ số', value: 'cof', width: '7%', minWidth: 50 },
   { title: 'Điểm', value: 'score', width: '7%', minWidth: 50 },
 ]
+
+const totalScore = computed(() => {
+  return items.value.reduce((acc, item) => acc + item.score * item.cof, 0)
+})
 </script>
 
 <template>
@@ -38,6 +42,6 @@ const headers = [
       </template>
     </v-data-table>
 
-    <div class="text-center font-weight-bold text-error py-2"><span>Điểm tổng:</span></div>
+    <div class="text-center font-weight-bold text-error py-2"><span>Điểm tổng: {{ totalScore/10 }}</span></div>
   </form-card>
 </template>

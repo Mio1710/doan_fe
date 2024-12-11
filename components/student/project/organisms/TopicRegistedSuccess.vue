@@ -15,10 +15,10 @@ const emit = defineEmits(['refetch', 'viewAll'])
 <template>
   <topic-registed
     :items="[items.topic.topic]"
+    :number-student="items?.students.length"
     :partner="items.partner"
     @refetch="emit('refetch')"
     @view-all="emit('viewAll')"
-    :numberStudent="items?.students.length"
   />
   <partner-registed
     v-if="items.partner?.length > 1"

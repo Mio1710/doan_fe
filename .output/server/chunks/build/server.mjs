@@ -921,31 +921,31 @@ const _routes = [
     name: "student-contact-teacher",
     path: "/student/contact-teacher",
     meta: __nuxt_page_meta$8 || {},
-    component: () => import('./contact-teacher-ukqpqOzB.mjs')
+    component: () => import('./contact-teacher-D2RHgWkT.mjs')
   },
   {
     name: "student-history",
     path: "/student/history",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./history-CpQWBwg7.mjs')
+    component: () => import('./history-B8lKXzOY.mjs')
   },
   {
     name: "student",
     path: "/student",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./index-CY1FTsqZ.mjs')
+    component: () => import('./index-ZI8i730z.mjs')
   },
   {
     name: "student-note",
     path: "/student/note",
     meta: __nuxt_page_meta$5 || {},
-    component: () => import('./note-CRh8Zghm.mjs')
+    component: () => import('./note-CzagHBJ_.mjs')
   },
   {
     name: "student-recommend-topic",
     path: "/student/recommend-topic",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./recommend-topic-BhezHpfQ.mjs')
+    component: () => import('./recommend-topic-CsnXGyGd.mjs')
   },
   {
     name: "student-register-intern",
@@ -969,7 +969,7 @@ const _routes = [
     name: "student-result",
     path: "/student/result",
     meta: __nuxt_page_meta || {},
-    component: () => import('./result-BVX6acb0.mjs')
+    component: () => import('./result-DFWBrOIf.mjs')
   }
 ];
 const _wrapIf = (component, props, slots) => {

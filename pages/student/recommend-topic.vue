@@ -17,6 +17,7 @@ const form = reactive({
   requirement: '',
   knowledge: '',
   teacher_id: null,
+  status: 'pending',
 })
 const { $api, $toast } = useNuxtApp()
 const loading = ref(false)
