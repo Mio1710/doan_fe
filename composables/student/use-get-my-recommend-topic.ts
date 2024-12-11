@@ -16,7 +16,7 @@ export default function useGetMyRecommendTopics(params?: UnwrapRef<any>, options
     },
   )
 
-  const items = computed(() => query.data.value?.data || null)
+  const items = computed(() => query.data.value?.data[0] || null)
 
   return {
     ...query,

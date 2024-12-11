@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { StudentMenu, TeacherMenu, SuperTeacherMenu, AdminMenu, SuperAdminMenu } from '~/configs/navigation'
+import {
+  StudentMenu,
+  TeacherMenu,
+  SuperTeacherMenu,
+  AdminMenu,
+  SuperAdminMenu,
+  CurrentSemesterMenu,
+} from '~/configs/navigation'
 import type { menu } from '~/types/config'
 
 const opened = ref<number[]>([])
@@ -30,6 +37,11 @@ onMounted(() => {
 </script>
 <template>
   <v-list v-if="navigation" nav :opened="opened">
+    <v-list-item
+      :prepend-icon="CurrentSemesterMenu.icon"
+      :title="CurrentSemesterMenu.title"
+      :to="CurrentSemesterMenu.to"
+    />
     <v-list-group v-for="group in navigation" :key="group.id" class="navigation" :value="group.id">
       <template #activator="{ props }">
         <v-list-item v-bind="props" :prepend-icon="group.icon" :title="group.title" />

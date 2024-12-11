@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { useQueryClient } from 'vue-query'
 import topicStatus from '../../plugins/filters/topic-status'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import AppForm from '~/components/common/molecules/AppForm.vue'
 import TeacherAutocomplete from '~/components/common/atoms/TeacherAutocomplete.vue'
 import useGetMyReportTopics from '~/composables/student/use-get-my-report-topic'
 import useGetMyRecommendTopics from '~/composables/student/use-get-my-recommend-topic'
-import { useQueryClient } from 'vue-query'
 
 definePageMeta({
   layout: 'auth',
@@ -76,7 +76,7 @@ const { items, isLoading, refetch } = useGetMyRecommendTopics()
           </v-btn>
         </div>
       </app-form>
-      <div v-else class="d-flex flex-column gap-4">
+      <div v-if="items && !isUpdate" class="d-flex flex-column gap-4">
         <div class="d-flex">
           <v-chip :color="topicStatus.statusColor(items.status)" size="small" variant="flat">
             <span>{{ topicStatus.statusType(items.status) }}</span>
@@ -96,7 +96,7 @@ const { items, isLoading, refetch } = useGetMyRecommendTopics()
         </div>
         <div>
           <span class="font-weight-bold mr-2">Giảng viên:</span>
-          <span>{{ items.teacher_id }}</span>
+          <span>{{ items.teacher?.hodem }} {{ items.teacher?.ten }}</span>
         </div>
         <div>
           <span class="font-weight-bold mr-2">Công nghệ sử dụng:</span>

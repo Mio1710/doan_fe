@@ -48,7 +48,7 @@ const downloadFile = (item) => {
   })
 }
 const panel = ref([])
-const { items, totalItems, isLoading, refetch } = useGetMyReportTopics()
+const { items, totalItems, isLoading, refetch } = useGetMyReportTopics(null, { retry: 1 })
 const onUpdate = (item) => {
   itemUpdate.value = item
   console.log('itemUpdate', itemUpdate.value, item)

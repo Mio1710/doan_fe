@@ -10,6 +10,11 @@ export const SuperAdminMenu: menu = {
     },
   ],
 }
+export const CurrentSemesterMenu: menu = {
+  title: 'Học kỳ hiện tại',
+  icon: 'mdi-account',
+  to: '/semester',
+}
 export const StudentMenu: menu[] = [
   {
     id: 1,

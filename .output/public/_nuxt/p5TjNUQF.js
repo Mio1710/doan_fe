@@ -1,0 +1,1 @@
+import{_ as t,t as a,L as r,A as o,x as s,bD as n}from"./CBWJHd0H.js";import{V as c}from"./DUvLFzB5.js";import"./H8-Lumj0.js";const l={};function f(e,_){return a(),r(c,null,{default:o(()=>[s("main",null,[n(e.$slots,"default")])]),_:3})}const m=t(l,[["render",f]]);export{m as default};

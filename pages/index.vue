@@ -1,11 +1,5 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'auth',
+onMounted(() => {
+  navigateTo('/semester')
 })
 </script>
-
-<template>
-  <div>Đây là trang index</div>
-</template>
-
-<style scoped></style>

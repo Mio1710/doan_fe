@@ -886,13 +886,12 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-CK94Ajaw.mjs')
+    component: () => import('./index-D-A4FtKP.mjs')
   },
   {
     name: "invalid-page",
     path: "/invalid-page",
-    meta: __nuxt_page_meta$b || {},
+    meta: __nuxt_page_meta$c || {},
     component: () => import('./invalid-page-sVlkOfw3.mjs')
   },
   {
@@ -903,8 +902,14 @@ const _routes = [
   {
     name: "profile",
     path: "/profile",
-    meta: __nuxt_page_meta$a || {},
+    meta: __nuxt_page_meta$b || {},
     component: () => import('./profile-B9WfGiaZ.mjs')
+  },
+  {
+    name: "semester",
+    path: "/semester",
+    meta: __nuxt_page_meta$a || {},
+    component: () => import('./semester-EVQybgMt.mjs')
   },
   {
     name: "student-company",
@@ -940,7 +945,7 @@ const _routes = [
     name: "student-recommend-topic",
     path: "/student/recommend-topic",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./recommend-topic-BW8Ef27e.mjs')
+    component: () => import('./recommend-topic-BhezHpfQ.mjs')
   },
   {
     name: "student-register-intern",
@@ -958,7 +963,7 @@ const _routes = [
     name: "student-report-topic",
     path: "/student/report-topic",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./report-topic-B69p78dH.mjs')
+    component: () => import('./report-topic-DTDVe8q8.mjs')
   },
   {
     name: "student-result",
@@ -13704,7 +13709,7 @@ const plugins = [
   vuetify_7h9QAQEssH
 ];
 const layouts = {
-  auth: defineAsyncComponent(() => import('./auth-xo-7ckHS.mjs')),
+  auth: defineAsyncComponent(() => import('./auth-DsDEHGkh.mjs')),
   blank: defineAsyncComponent(() => import('./blank-BdRhfNDQ.mjs')),
   default: defineAsyncComponent(() => import('./default-Dnoap0aX.mjs'))
 };
