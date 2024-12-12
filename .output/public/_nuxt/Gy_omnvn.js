@@ -1,1 +1,0 @@
-import{_ as t,t as a,L as r,A as o,x as s,bD as n}from"./CxV_Dxxn.js";import{V as c}from"./lcwzOoJe.js";import"./COYo_GFA.js";const l={};function f(e,_){return a(),r(c,null,{default:o(()=>[s("main",null,[n(e.$slots,"default")])]),_:3})}const m=t(l,[["render",f]]);export{m as default};

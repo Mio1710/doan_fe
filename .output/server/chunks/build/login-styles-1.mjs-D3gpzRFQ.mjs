@@ -1,0 +1,6 @@
+import { p as publicAssetsURL } from '../routes/renderer.mjs';
+
+const login_vue_vue_type_style_index_0_scoped_6a0566f5_lang = ".login-container[data-v-6a0566f5]{display:flex;flex-direction:column;height:100vh}.header[data-v-6a0566f5]{align-items:center;background-color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.1);display:flex;height:12vh;justify-content:center}.logo[data-v-6a0566f5]{height:80%;margin-right:10px}.header-text[data-v-6a0566f5]{text-align:center}.title[data-v-6a0566f5]{color:#0056b3;font-size:1.5rem}.subtitle[data-v-6a0566f5],.title[data-v-6a0566f5]{margin:0;text-shadow:1px 1px 2px rgba(0,0,0,.2)}.subtitle[data-v-6a0566f5]{color:red;font-size:1rem}.background-image[data-v-6a0566f5]{align-items:center;background:url(" + publicAssetsURL("/images/img_login.png") + ") no-repeat 50%;background-size:cover;display:flex;flex:1;justify-content:center}.login-form[data-v-6a0566f5]{background-color:#fff;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,.1)}.form-title[data-v-6a0566f5]{color:#0056b3;font-size:1rem;margin-bottom:16px;text-align:center;text-shadow:1px 1px 2px rgba(0,0,0,.2)}";
+
+export { login_vue_vue_type_style_index_0_scoped_6a0566f5_lang as l };
+//# sourceMappingURL=login-styles-1.mjs-D3gpzRFQ.mjs.map

@@ -767,7 +767,7 @@ const _routes = [
     name: "admin-faculty-reset-topic",
     path: "/admin/faculty/reset-topic",
     meta: __nuxt_page_meta$w || {},
-    component: () => import('./reset-topic-D5ZLc5q5.mjs')
+    component: () => import('./reset-topic-BQQspgXs.mjs')
   },
   {
     name: "admin-faculty-semester",
@@ -839,7 +839,7 @@ const _routes = [
     name: "admin-subject-topic",
     path: "/admin/subject/topic",
     meta: __nuxt_page_meta$k || {},
-    component: () => import('./topic-BQvoNCDA.mjs')
+    component: () => import('./topic-CsY5nKyh.mjs')
   },
   {
     name: "admin-super-faculty",
@@ -863,7 +863,7 @@ const _routes = [
     name: "admin-teacher",
     path: "/admin/teacher",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./index-Dtxymuoh.mjs')
+    component: () => import('./index-BLGbao4M.mjs')
   },
   {
     name: "admin-teacher-recommend-topic",
@@ -897,7 +897,7 @@ const _routes = [
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-D_kiV3Ih.mjs')
+    component: () => import('./login-BRmjXk18.mjs')
   },
   {
     name: "profile",
@@ -933,7 +933,7 @@ const _routes = [
     name: "student",
     path: "/student",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./index-ZI8i730z.mjs')
+    component: () => import('./index-wmxtq-HL.mjs')
   },
   {
     name: "student-note",
