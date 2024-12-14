@@ -41,6 +41,7 @@ const onSubmit = () => {
     $toast.success('Đăng ký đề tài thành công')
     queryClient.invalidateQueries('my-recommend-topic')
   })
+  loading.value = false
 }
 
 const isUpdate = ref(false)

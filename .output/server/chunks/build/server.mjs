@@ -945,7 +945,7 @@ const _routes = [
     name: "student-recommend-topic",
     path: "/student/recommend-topic",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./recommend-topic-CsnXGyGd.mjs')
+    component: () => import('./recommend-topic-B68FQPvu.mjs')
   },
   {
     name: "student-register-intern",
