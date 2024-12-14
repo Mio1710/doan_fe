@@ -59,7 +59,7 @@ const headers = [
       <span v-html="item.name" />
     </template>
     <template #item.gvhd="{ item }">{{ item?.teacher?.hodem }} {{ item?.teacher?.ten }}</template>
-    <template #item.numberStudent="{ item }">{{ numberStudent }}/{{ item.numberStudent }}</template>
+    <template #item.numberStudent="{ item }">{{ numberStudent }}/{{ item?.numberStudent }}</template>
   </v-data-table>
 </template>
 

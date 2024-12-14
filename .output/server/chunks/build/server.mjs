@@ -933,7 +933,7 @@ const _routes = [
     name: "student",
     path: "/student",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./index-BRfLYTQj.mjs')
+    component: () => import('./index-DYFaE5Uz.mjs')
   },
   {
     name: "student-note",
@@ -2040,6 +2040,9 @@ class StudentTopicAPI extends BaseApi {
   }
   updateTopic(data) {
     return this.post("/student-topic/topic", data);
+  }
+  cancelTopic() {
+    return this.post("/student-topic/cancel-topic");
   }
   cancelGroup(user_ids) {
     return this.post("/student-topic/cancel-group");

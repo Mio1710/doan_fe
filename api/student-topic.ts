@@ -38,6 +38,10 @@ export class StudentTopicAPI extends BaseApi {
     return this.post('/student-topic/topic', data)
   }
 
+  cancelTopic() {
+    return this.post('/student-topic/cancel-topic')
+  }
+
   cancelGroup(user_ids) {
     return this.post('/student-topic/cancel-group')
   }

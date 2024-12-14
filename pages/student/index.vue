@@ -22,7 +22,6 @@ const viewAll = ref(false)
         <topic-register
           v-if="!items.topic.topic_id || viewAll"
           :topic-id="items.topic.topic_id"
-          @success="refetch()"
           @view-all="viewAll = false"
         />
         <topic-registed-success v-else :items @refetch="refetch()" @view-all="viewAll = true" />

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useQueryClient } from "vue-query"
+
 const props = defineProps({
   topicId: {
     type: Number,
@@ -16,6 +18,7 @@ const queryBuilder = computed(() => ({
   filters: { viewAll: true },
 }))
 const { $api, $toast } = useNuxtApp()
+const queryClient = useQueryClient()
 
 const { items, totalItems, isLoading, refetch } = useGetTopic(queryBuilder)
 // const items = ref([])
@@ -39,6 +42,7 @@ const emit = defineEmits(['success', 'viewAll'])
 const registerTopic = (item) => {
   $api.studentTopic.registerTopic(item.id).then(() => {
     emit('success')
+    queryClient.invalidateQueries('registed-topic')
     $toast.success('Đăng ký đề tài thành công')
   })
 }
@@ -60,7 +64,7 @@ const registerTopic = (item) => {
       <span v-html="item.name" />
     </template>
     <template #item.numberStudent="{ item }">
-      <span>{{ item.currentNumberStudent }}/{{ item.numberStudent }}</span>
+      <span>{{ item.currentNumberStudent }}/{{ item?.numberStudent }}</span>
     </template>
     <template #item.gv="{ item }">
       <span>{{ item?.teacher?.hodem }} {{ item?.teacher?.ten }}</span>
