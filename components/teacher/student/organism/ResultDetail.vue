@@ -52,6 +52,9 @@ const submit = () => {
       emit('cancel')
     })
 }
+const totalScore = computed(() => {
+  return itemsClone.value.reduce((acc, item) => acc + item.score * item.cof, 0)
+})
 </script>
 
 <template>
@@ -88,6 +91,8 @@ const submit = () => {
       </tbody>
     </v-table>
 
-    <div class="text-center font-weight-bold text-error py-2"><span>Điểm tổng:</span></div>
+    <div class="text-center font-weight-bold text-error py-2">
+      <span>Điểm tổng: {{ (totalScore / 10).toFixed(2) }}</span>
+    </div>
   </form-card>
 </template>

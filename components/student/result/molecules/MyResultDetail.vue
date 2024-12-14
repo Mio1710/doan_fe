@@ -9,7 +9,7 @@ const props = defineProps({
   },
 })
 
-const { items, isLoading, error, refetch } = useGetMyResultTopicLOs()
+const { items, isLoading, error, refetch } = useGetMyResultTopicLOs(null, { retry: 0 })
 const headers = [
   {
     title: 'STT',
@@ -42,6 +42,8 @@ const totalScore = computed(() => {
       </template>
     </v-data-table>
 
-    <div class="text-center font-weight-bold text-error py-2"><span>Điểm tổng: {{ totalScore/10 }}</span></div>
+    <div class="text-center font-weight-bold text-error py-2">
+      <span>Điểm tổng: {{ (totalScore / 10).toFixed(2) }}</span>
+    </div>
   </form-card>
 </template>

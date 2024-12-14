@@ -10,7 +10,7 @@ definePageMeta({
   layout: 'auth',
 })
 
-const { items, isLoading, refetch } = useGetRegistedTopics()
+const { items, isLoading, refetch } = useGetRegistedTopics(null, { retry: 0 })
 const viewAll = ref(false)
 </script>
 

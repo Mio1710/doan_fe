@@ -48,7 +48,7 @@ const downloadFile = (item) => {
   })
 }
 const panel = ref([])
-const { items, totalItems, isLoading, refetch } = useGetMyReportInterns()
+const { items, totalItems, isLoading, refetch } = useGetMyReportInterns(null, { retry: 0 })
 const onUpdate = (item) => {
   itemUpdate.value = item
   isUpdate.value = true

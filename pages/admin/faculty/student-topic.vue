@@ -40,6 +40,7 @@ const serverOptions = ref({
 })
 const queryBuilder = computed(() => ({
   ...serverOptions.value,
+  filters: filters.value,
 }))
 
 const { $api, $toast } = useNuxtApp()
@@ -73,6 +74,22 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
           variant="plain"
         />
         <v-spacer />
+        <v-btn
+          class="mr-2"
+          :disabled="serverOptions.page <= 1"
+          icon="mdi-chevron-left"
+          size="x-small"
+          variant="outlined"
+          @click="serverOptions.page--"
+        />
+        <v-btn
+          class="mr-2"
+          :disabled="items.length < 100"
+          icon="mdi-chevron-right"
+          size="x-small"
+          variant="outlined"
+          @click="serverOptions.page++"
+        />
         <v-dialog min-width="400" width="40%">
           <template #activator="{ props: activatorProps }">
             <v-btn color="success" size="small" v-bind="activatorProps">
@@ -99,7 +116,7 @@ const { items, totalItems, isLoading, refetch } = useGetStudentTopic(queryBuilde
           :loading="isLoading"
         >
           <template #item.index="{ index }">
-            <span>{{ index + 1 }}</span>
+            <span>{{ (serverOptions.page - 1) * 100 + index + 1 }}</span>
           </template>
           <template #item.nhom="{ item }">
             <span>{{ item.studentTopic[0]?.group_id }}</span>
